@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 // const passport = require('passport')
+const path = require('path');
 
 const products = require('./routes/api/products');
 
@@ -26,8 +27,15 @@ mongoose
 // Use Routes
 app.use('/api/products', products);
 
-// Passport Middleware
-// require('./config/passport')(passport);
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+  // Any routes that gets hit here(above), we're loading into react html file
+  app.get('*', (req, res) => {
+    res.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 const port = process.env.PORT || 5000;
 
