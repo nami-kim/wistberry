@@ -1,0 +1,36 @@
+flex-container {
+  display: flex;
+
+  flex-direction: row;
+  /* row-reverse | column | column-reverse */
+  flex-wrap: wrap;
+  /* wrap-reverse */
+  justify-content: flex-start;
+  /* flex-end | center | space-between | space-around | space-evenly | (MAIN AXIS) */ 
+  align-items: stretch;
+  /* flex-start | flex-end | center | baseline | (CROSS AXIS) */
+  align-content: stretch;
+  /* flex-start | flex-end | center | space-between | space-around (MULTIPLE ROWS) */
+}
+flex-item {
+  display: flex;
+
+  align-self: auto;
+  /* stretch | flex-start | flex-end | center | baseline */
+  order: 0;
+
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  flex: 0 1 auto;
+  /* short-form of three above */
+}
+
+css-grid {
+  display: grid;
+  
+}
+
+
+
