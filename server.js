@@ -34,8 +34,8 @@ app.use('/api/order', order);
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
-  app.use(express.static('client/build'));
-  // app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+  // app.use(express.static('client/build'));
+  app.use(express.static(path.resolve(__dirname, 'client', 'build')))
   // Any routes that gets hit here(above), we're loading into react html file
   app.get('*', (req, res) => {
     res.send(path.resolve(__dirname, 'client', 'build', 'index.html'))
