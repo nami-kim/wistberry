@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
       }
       res.json(products.data);
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(400).json(err));
 });
 
 module.exports = router;

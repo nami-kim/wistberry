@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Collection extends Component {
+class AllCollections extends Component {
   render() {
     return (
       <div>
-        <h1>Collection</h1>
+        <h1>All Collections</h1>
       </div>
     );
   }
 }
 
-export default Collection;
+export default AllCollections;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import productReducer from '../reducers/productReducer';
 import { connect } from 'react-redux';
-import ProductItem from './ProductItem';
+import Header from './Header'
+import ProductItem from './products/ProductItem';
 
 class HomePage extends Component {
   render() {
@@ -23,6 +24,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>HomePage</h1>
+        <Header />
         {productItems}
       </div>
     );

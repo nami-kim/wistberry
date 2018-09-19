@@ -7,13 +7,22 @@ import HomePage from '../components/HomePage';
 import AboutPage from '../components/AboutPage';
 import Contact from '../components/Contact';
 import Login from '../components/Login';
+import Cart from '../components/Cart';
 import Checkout from '../components/Checkout';
-import Collection from '../components/plants/Collection';
-import EasyCarePlants from '../components/plants/EasyCarePlants';
-import LowLightPlants from '../components/plants/LowLightPlants';
-import MediumBrightPlants from '../components/plants/MediumBrightPlants';
-import AllPlantProducts from '../components/plants/AllPlantProducts';
-import BestSellingPlants from '../components/plants/BestSellingPlants';
+
+// Collections
+import AllCollections from '../components/collections/AllCollections';
+import AllPlants from '../components/collections/AllPlants';
+import BestSellingPlants from '../components/collections/BestSellingPlants';
+import EasyCarePlants from '../components/collections/EasyCarePlants';
+import LowLightPlants from '../components/collections/LowLightPlants';
+import MediumBrightPlants from '../components/collections/MediumBrightPlants';
+import PerfectForGifts from '../components/collections/PerfectForGifts';
+import PetFriendlyPlants from '../components/collections/PetFriendlyPlants';
+
+// Product
+
+
 import NotFoundPage from '../components/NotFoundPage';
 
 export const history = createHistory();
@@ -26,29 +35,18 @@ const AppRouter = () => (
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={Contact} />
         <Route exact path="/account/login" component={Login} />
+        <Route exact path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
-        <Route exact path="/plants/all-products" component={AllPlantProducts} />
-        <Route exact path="/plants/collection" component={Collection} />
-        <Route
-          exact
-          path="/plants/collection/easy-care-plants"
-          component={EasyCarePlants}
-        />
-        <Route
-          exact
-          path="/plants/collection/low-light-plants"
-          component={LowLightPlants}
-        />
-        <Route
-          exact
-          path="/plants/collection/medium-bright-plants"
-          component={MediumBrightPlants}
-        />
-        <Route
-          exact
-          path="/plants/collection/best-selling-plants"
-          component={BestSellingPlants}
-        />
+
+        <Route exact path="/collection/all-collections" component={AllCollections} />
+        <Route exact path="/collection/all-plants" component={AllPlants} />
+        <Route exact path="/collection/best-selling-plants" component={BestSellingPlants} />
+        <Route exact path="/collection/easy-care-plants" component={EasyCarePlants} />
+        <Route exact path="/collection/easy-care-plants" component={LowLightPlants} />
+        <Route exact path="/collection/easy-care-plants" component={MediumBrightPlants} />
+        <Route exact path="/collection/perfect-for-gits" component={PerfectForGifts} />
+        <Route exact path="/collection/pet-friendly-plants" component={PetFriendlyPlants} />
+
         <Route component={NotFoundPage} />
       </Switch>
     </div>

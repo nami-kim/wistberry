@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const products = require('./routes/api/products');
+const billing = require('./routes/api/billing');
+const order = require('./routes/api/order');
 
 const app = express();
 
@@ -26,6 +28,8 @@ mongoose
 
 // Use Routes
 app.use('/api/products', products);
+app.use('/api/billing', billing);
+app.use('/api/order', order);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

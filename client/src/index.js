@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App, store } from './App';
 import registerServiceWorker from './registerServiceWorker';
-// import Spinner from './components/common/Spinner';
-import { getAllProducts } from './actions/productActions';
+import Spinner from './components/common/Spinner';
 
-// let hasRendered = false;
+
+let hasRendered = false;
+
+ReactDOM.render(<Spinner />, document.getElementById('root'));
+
 const renderApp = () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
-  registerServiceWorker();
+  if (!hasRendered) {
+    ReactDOM.render(<App />, document.getElementById('root'));
+    registerServiceWorker();
+    hasRendered = true;
+  }
 };
 
-// ReactDOM.render(<Spinner />, document.getElementById('root'));
-const promise = new Promise((resolve, reject) => {
-  resolve(store.dispatch(getAllProducts()))
-})
-  
-
-promise.then(() => renderApp());
+renderApp()

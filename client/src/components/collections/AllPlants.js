@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 import { getAllProducts } from '../../actions/productActions'
 
 class AllPlantProducts extends Component {
-  componentDidMount() {
-    this.props.getAllProducts();
-  }
+ 
   render() {
     return (
-      
+
       <div>
         <h1>AllPlantProducts</h1>
-        
+
       </div>
     );
   }

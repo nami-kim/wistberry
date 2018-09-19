@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class PlantItem extends Component {
+class PerfectForGifts extends Component {
   render() {
     return (
       <div>
-        <h1>PlantItem</h1>
+        <h1>Pots</h1>
       </div>
     );
   }
 }
 
-export default PlantItem;
+export default PerfectForGifts;

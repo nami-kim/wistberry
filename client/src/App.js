@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
+import { getAllProducts } from './actions/productActions';
 
 import './App.css';
 
 const store = configureStore();
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(getAllProducts());
+  }
   render() {
     let hasRendered = false;
     return (
