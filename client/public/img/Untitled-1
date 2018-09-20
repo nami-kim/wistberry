@@ -1,0 +1,25 @@
+.homepage-hero-carousel__slide--1 .homepage-hero-carousel__slide-content {
+      background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_3_mobile.png');
+    }
+
+    @media only screen and (min-width: 768px) {
+      .homepage-hero-carousel__slide--1 .homepage-hero-carousel__slide-content {
+        background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_3.png');
+      }
+    }.homepage-hero-carousel__slide--2 .homepage-hero-carousel__slide-content {
+      background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_1_mobile.png');
+    }
+
+    @media only screen and (min-width: 768px) {
+      .homepage-hero-carousel__slide--2 .homepage-hero-carousel__slide-content {
+        background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_1.png');
+      }
+    }.homepage-hero-carousel__slide--3 .homepage-hero-carousel__slide-content {
+      background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_2_mobile.png');
+    }
+
+    @media only screen and (min-width: 768px) {
+      .homepage-hero-carousel__slide--3 .homepage-hero-carousel__slide-content {
+        background-image: url('http://cdn.allbirds.com/image/upload/f_auto,q_auto/v1534313056/homepage/08.14.18/Homepage_Header_2.png');
+      }
+    }
