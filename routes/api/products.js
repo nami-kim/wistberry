@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const stripeKey = require('../../config/keys').stripeSecretKey;
+const stripeKey = require('../../configkeys/keys').stripeSecretKey;
 const stripe = require('stripe')(stripeKey);
 
 // @route   GET api/products/test
