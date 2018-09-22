@@ -23,7 +23,6 @@ class HomePage extends Component {
 
     return (
       <div>
-        <h1 className="header">Hello</h1>
         <Header />
         {productItems}
       </div>

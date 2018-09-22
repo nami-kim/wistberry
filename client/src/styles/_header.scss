@@ -1,0 +1,121 @@
+.header {
+  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 1.6rem;
+  font-weight: 400;
+  height: 8rem;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  
+  > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      &:link,
+      &:visited {
+        padding: 0 3rem;
+        color: black;
+        transition: all 0.2s;
+      }
+
+      &:hover {
+        border-bottom: 1px;
+      }
+    }
+  }
+  &__middle {
+    font-size: 2.5rem;
+    font-style: italic;
+  }
+  
+}
+
+// .btn {
+//   &:link,
+//   &:visited {
+//     /* initial state setting */
+//     text-transform: uppercase;
+//     text-decoration: none;
+//     padding: 1.5rem 4rem;
+//     display: inline-block;
+//     border-radius: 10rem;
+//     transition: all 0.2s;
+//     /* transition property has to be in initial state */
+//     /* specify which element we want to animate - all */
+//     position: relative;
+//     font-size: $default-font-size;
+//   }
+
+//   &:hover {
+//     transform: translateY(-0.3rem);
+//     /* move up */
+//     box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+//     /* 1st: x-direction, 2n: y-direction, 3rd: blur, 4th: color - we did black with 20% opacity */
+
+//     &::after {
+//       transform: scaleX(1.4) scaleY(1.6);
+//       opacity: 0;
+//     }
+//   }
+
+//   &:active {
+//     transform: translateY(-0.1rem);
+//     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+//   }
+
+//   &--white {
+//     background-color: $color-white;
+//     color: $color-grey-dark;
+
+//     &::after {
+//       background-color: $color-white;
+//     }
+//   }
+
+//   &::after {
+//     content: '';
+//     display: inline-block;
+//     /* have to specify content & display property */
+//     height: 100%;
+//     width: 100%;
+//     /* this is height and width of the btn */
+//     border-radius: 10rem;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     z-index: -1;
+//     /* behind the btn element */
+//     transition: all 0.4s;
+//   }
+
+//   &--animated {
+//     animation: moveInBottom 0.5s ease-out 0.75s;
+//     animation-fill-mode: backwards;
+//   }
+// }
+
+// .btn-text {
+//   &:link,
+//   &:visited {
+//     font-size: $default-font-size;
+//     color: $color-primary;
+//     display: inline-block;
+//     text-decoration: none;
+//     border-bottom: 1px solid $color-primary;
+//     padding: 3px;
+//     transition: all .2s;
+//   }
+//   &:hover {
+//     background-color: $color-primary;
+//     color: $color-white;
+//     box-shadow: 0 1rem 2rem rgba($color-black, .15);
+//     transform: translateY(-2px);
+//   }
+//   &:active {
+//     box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+//     transform: translateY(0);
+//   }
+// }
