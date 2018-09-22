@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header';
 
 class MediumBrightPlants extends Component {
   render() {

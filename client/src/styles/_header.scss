@@ -1,12 +1,16 @@
 .header {
+  width: 100%;
+  background-color: $color-white;
+  position: fixed;
   align-content: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  font-size: 1.6rem;
+  font-size: $font-xs;
   font-weight: 400;
-  height: 8rem;
+  height: 10rem;
   text-transform: uppercase;
   letter-spacing: .2rem;
+  box-shadow: $shadow-light;
   
   > * {
     display: flex;
@@ -16,22 +20,35 @@
     a {
       &:link,
       &:visited {
-        padding: 0 3rem;
+        text-decoration: none;
+        display: inline-block;
+        padding: 1rem 1rem;
+        margin: 1rem;
         color: black;
-        transition: all 0.2s;
+        border-bottom: 2px solid transparent;
+        transition: all 0.5s ease-out;
       }
 
       &:hover {
-        border-bottom: 1px;
+        border-bottom: 2px solid black;
       }
     }
   }
   &__middle {
     font-size: 2.5rem;
     font-style: italic;
+    a:hover {
+      border-bottom: 2px solid transparent;
+    }
   }
   
 }
+
+.logo {
+  max-height: 8rem;
+  min-height: 5.5rem;
+}
+
 
 // .btn {
 //   &:link,
