@@ -186,7 +186,7 @@ module.exports = {
                       },
                     },
                     {
-                      loader: require.resolve('style-loader')
+                      loader: require.resolve('sass-loader')
                     },
                     {
                       loader: require.resolve('postcss-loader'),
