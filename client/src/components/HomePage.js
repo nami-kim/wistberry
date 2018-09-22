@@ -23,7 +23,7 @@ class HomePage extends Component {
 
     return (
       <div>
-        <h1>HomePage</h1>
+      
         <Header />
         {productItems}
       </div>
