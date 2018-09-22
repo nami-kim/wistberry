@@ -4,8 +4,6 @@ import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { getAllProducts } from './actions/productActions';
 
-import './App.css';
-
 const store = configureStore();
 
 class App extends Component {
