@@ -9,10 +9,10 @@ const stripe = require('stripe')(stripeKey);
 // @access  Public
 router.get('/test', (req, res) => res.json({ msg: 'Products Works' }));
 
-router.get('/', (req, res) => {
+router.get('/stripe', (req, res) => {
   const errors = {};
   stripe.products
-    .list()
+    .list({limit: 100})
     .then(products => {
       if (!products) {
         errors.noproduct = 'There is no product';
@@ -22,5 +22,6 @@ router.get('/', (req, res) => {
     })
     .catch(err => res.status(400).json(err));
 });
+
 
 module.exports = router;

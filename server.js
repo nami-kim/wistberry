@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const products = require('./routes/api/products');
+const skus = require('./routes/api/skus');
 const billing = require('./routes/api/billing');
 const order = require('./routes/api/order');
 
@@ -28,6 +29,7 @@ mongoose
 
 // Use Routes
 app.use('/api/products', products);
+app.use('/api/skus', skus);
 app.use('/api/billing', billing);
 app.use('/api/order', order);
 

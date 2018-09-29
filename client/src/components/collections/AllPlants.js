@@ -7,7 +7,7 @@ import Spinner from '../common/Spinner';
 
 class AllPlants extends Component {
   render() {
-    const { products } = this.props.product;
+    const { products } = this.props;
     let productItems;
 
     if (products === null) {
@@ -25,13 +25,16 @@ class AllPlants extends Component {
     return (
       <div>
         <Header />
-        <CollectionContainer>{productItems}</CollectionContainer>
+        <h1>All Plants</h1>
+        <CollectionContainer>
+        {productItems}
+        </CollectionContainer>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  product: state.product
+  products: state.product.products
 });
 export default connect(mapStateToProps)(AllPlants);

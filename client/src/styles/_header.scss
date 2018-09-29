@@ -1,54 +1,92 @@
 .header {
   width: 100%;
-  background-color: $color-white;
+  height: 11.5rem;
   position: fixed;
-  align-content: center;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  font-size: $font-xs;
+  align-items: center;
+  align-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-size: 13px;
   font-weight: 400;
-  height: 10rem;
   text-transform: uppercase;
-  letter-spacing: .2rem;
-  box-shadow: $shadow-light;
-  
-  > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  letter-spacing: 0.2rem;
+  opacity: 0%;
+ 
 
+  &:hover {
+    background: $color-white;
+    color: $color-black;
+     transition: all .2s ease-in;
     a {
       &:link,
       &:visited {
+        color: $color-black;
+      }
+    }
+
+  }
+
+  > * {
+    display: flex;
+    a {
+      &:link,
+      &:visited {
+        padding: $font-xxs;
+        margin: 0 $font-xxs;
         text-decoration: none;
         display: inline-block;
-        padding: 1rem 1rem;
-        margin: 1rem;
-        color: black;
+        color: $color-white;
         border-bottom: 2px solid transparent;
-        transition: all 0.5s ease-out;
+        transition: all 0.3s ease-out;
+        font-weight: 500;
       }
-
       &:hover {
         border-bottom: 2px solid black;
       }
     }
   }
+
+  &__left {
+    justify-content: flex-start;
+    margin-left: 2.5rem;
+  }
+
   &__middle {
-    font-size: 2.5rem;
-    font-style: italic;
     a:hover {
       border-bottom: 2px solid transparent;
     }
+    justify-content: center;
   }
-  
+
+  &__right {
+    justify-content: flex-end;
+    margin-right: 2.5rem;
+  }
 }
 
-.logo {
-  max-height: 8rem;
+.header-logo {
+  max-height: 8.5rem;
   min-height: 5.5rem;
+  color: $color-white;
 }
 
+.reducedHeaderOnScroll {
+  background-color: $color-white;
+  color: $color-black;
+  height: 8rem;
+  box-shadow: $shadow-light;
+  transition: all 0.25s ease-in;
+  a {
+    &:link,
+    &:visited {
+      color: $color-black;
+    }
+  }
+  .header-logo {
+    max-height: 6.5rem;
+    min-height: 5.5rem;
+  }
+}
 
 // .btn {
 //   &:link,

@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { GET_ALL_PRODUCTS } from './types';
+import { GET_ALL_PRODUCTS, PRODUCT_LOADING, GET_PRODUCT } from './types';
 
 export const getAllProducts = () => dispatch => {
+  dispatch(setProductLoading());
   axios
-    .get('/api/products')
+    .get('/api/products/stripe')
     .then(res =>
       dispatch({
         type: GET_ALL_PRODUCTS,
@@ -16,4 +17,11 @@ export const getAllProducts = () => dispatch => {
         payload: null
       })
     );
+};
+
+// Product loading
+export const setProductLoading = () => {
+  return {
+    type: PRODUCT_LOADING
+  };
 };

@@ -1,3 +1,21 @@
-.block {
-  display: block;
+.hover {
+  position: relative;
+
+  &:hover &__no-hover {
+    opacity: 0;
+  }
+
+  &:hover &__hover {
+    opacity: 1;
+  }
+
+  &__hover {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+  }
+
+  &__no-hover {
+    opacity: 1;
+  }
 }

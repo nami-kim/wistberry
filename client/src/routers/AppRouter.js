@@ -5,23 +5,20 @@ import createHistory from 'history/createBrowserHistory';
 // import PublicRoute from './PublicRoute';
 import HomePage from '../components/HomePage';
 import AboutPage from '../components/AboutPage';
+import Quiz from '../components/Quiz';
 import Contact from '../components/Contact';
-import Login from '../components/Login';
+import Signup from '../components/Signup';
 import Cart from '../components/Cart';
 import Checkout from '../components/Checkout';
 
 // Collections
-import AllCollections from '../components/collections/AllCollections';
-import AllPlants from '../components/collections/AllPlants';
-import BestSellingPlants from '../components/collections/BestSellingPlants';
-import EasyCarePlants from '../components/collections/EasyCarePlants';
-import LowLightPlants from '../components/collections/LowLightPlants';
-import MediumBrightPlants from '../components/collections/MediumBrightPlants';
-import PerfectForGifts from '../components/collections/PerfectForGifts';
-import PetFriendlyPlants from '../components/collections/PetFriendlyPlants';
+
+import CollectionPage from '../components/collections/CollectionPage';
+import AsyncRoute from './AsyncRoute';
+
 
 // Product
-
+import ProductDetailPage from '../components/products/ProductDetailPage';
 
 import NotFoundPage from '../components/NotFoundPage';
 
@@ -31,21 +28,20 @@ const AppRouter = () => (
   <Router history={history}>
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <AsyncRoute exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={Contact} />
-        <Route exact path="/account/login" component={Login} />
+        <Route path="/quiz" component={Quiz} />
+        <Route exact path="/account/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
 
-        <Route exact path="/collection/all-collections" component={AllCollections} />
-        <Route exact path="/collection/all-plants" component={AllPlants} />
-        <Route exact path="/collection/best-selling-plants" component={BestSellingPlants} />
-        <Route exact path="/collection/easy-care-plants" component={EasyCarePlants} />
-        <Route exact path="/collection/easy-care-plants" component={LowLightPlants} />
-        <Route exact path="/collection/easy-care-plants" component={MediumBrightPlants} />
-        <Route exact path="/collection/perfect-for-gits" component={PerfectForGifts} />
-        <Route exact path="/collection/pet-friendly-plants" component={PetFriendlyPlants} />
+        <AsyncRoute
+          exact
+          path="/collection/:collection"
+          component={CollectionPage}
+        />
+        <AsyncRoute exact path="/products/:product" component={ProductDetailPage} />
 
         <Route component={NotFoundPage} />
       </Switch>

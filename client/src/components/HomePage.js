@@ -1,36 +1,28 @@
 import React, { Component } from 'react';
-import productReducer from '../reducers/productReducer';
-import { connect } from 'react-redux';
-import Header from './Header'
-import ProductItem from './products/ProductItem';
+import Header from './Header';
 
-class HomePage extends Component {
+export class HomePage extends Component {
   render() {
-    const { products } = this.props.product;
-    let productItems;
-    
-    if (products === null) {
-      productItems = 'No items'
-    } else {
-      if (products.length > 0) {
-        productItems = products.map(product => (
-          <ProductItem key={product._id} product={product} />
-        ));
-      } else {
-        productItems = <h4>No profiles found...</h4>;
-      }
-    }
-
     return (
       <div>
         <Header />
-        {productItems}
+        <div className="container-hero">
+          <div className="home">
+            <img
+              src="http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg"
+              alt="hero"
+              className="home__hero-image"
+            />
+            <img
+              src="http://wistberry.imgix.net/images/products/toastandhoney/toastandhoney_hero.jpg"
+              alt="hero"
+              className="home__hero-image"
+            />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  product: state.product
-});
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;
