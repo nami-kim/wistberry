@@ -1,25 +1,26 @@
 import React from 'react';
-import { iconPaths } from './constants.js';
 
-function getPath(iconName) {
-  const icon = iconPaths.icons.find(icon => icon.properties.name === iconName);
-
-  if (icon) {
-    return icon.icon.paths.join(' ');
-  } else {
-    console.warn(`icon ${iconName} does not exist.`);
-    return '';
-  }
-}
-
-const Icon = props => (
+export const Icon = ({
+  width = 24,
+  height = 24,
+  paths = [],
+  className = '',
+  pathClassName = '',
+  style = {},
+  pathStyle = {}
+}) => (
   <svg
-    style={props.style}
-    width={props.width}
-    height={props.height}
-    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox={`0 0 ${24} ${24}`}
+    style={style}
+    className={className}
   >
-    <path d={getPath(props.icon)} />
+    {paths.map((path, i) => (
+      <path key={i} className={pathClassName} style={pathStyle} d={path} />
+    ))}
   </svg>
 );
 

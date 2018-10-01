@@ -4,7 +4,6 @@ import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { getAllProducts } from './actions/productActions';
 import { getAllSkus } from './actions/skuActions';
-import Header from './components/Header';
 
 const store = configureStore();
 

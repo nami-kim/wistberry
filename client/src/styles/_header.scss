@@ -1,29 +1,28 @@
+// header mobile styles
 .header {
   width: 100%;
-  height: 11.5rem;
+  height: 6.2rem;
   position: fixed;
-  display: grid;
   align-items: center;
-  align-content: center;
-  grid-template-columns: 1fr 1fr 1fr;
   font-size: 13px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   opacity: 0%;
- 
 
   &:hover {
     background: $color-white;
     color: $color-black;
-     transition: all .2s ease-in;
     a {
       &:link,
       &:visited {
         color: $color-black;
       }
     }
-
+    .header-icon {
+      stroke: $color-black;
+      fill: $color-black;
+    }
   }
 
   > * {
@@ -37,18 +36,14 @@
         display: inline-block;
         color: $color-white;
         border-bottom: 2px solid transparent;
-        transition: all 0.3s ease-out;
+        transition: all 0.25s ease-out;
         font-weight: 500;
-      }
-      &:hover {
-        border-bottom: 2px solid black;
       }
     }
   }
 
   &__left {
     justify-content: flex-start;
-    margin-left: 2.5rem;
   }
 
   &__middle {
@@ -60,20 +55,24 @@
 
   &__right {
     justify-content: flex-end;
-    margin-right: 2.5rem;
   }
 }
 
 .header-logo {
-  max-height: 8.5rem;
-  min-height: 5.5rem;
+  max-height: 4.8rem;
+  min-height: 3rem;
   color: $color-white;
+}
+
+.header-icon {
+  stroke: $color-white;
+  fill: $color-white;
 }
 
 .reducedHeaderOnScroll {
   background-color: $color-white;
   color: $color-black;
-  height: 8rem;
+  height: 6.2rem;
   box-shadow: $shadow-light;
   transition: all 0.25s ease-in;
   a {
@@ -83,94 +82,168 @@
     }
   }
   .header-logo {
-    max-height: 6.5rem;
-    min-height: 5.5rem;
+    max-height: 4.8rem;
+    min-height: 3rem;
+  }
+  .header-icon {
+    stroke: $color-black;
+    fill: $color-black;
+  }
+}
+// burgerMenu styling
+.header-dropdown-mobile {
+  width: 110%;
+  margin-left: -1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+  z-index: -1;
+  background-color: #fff3f2;
+}
+
+.nav-item-mobile {
+  padding-top: 2rem;
+  
+  a {
+    display: block;
+    color: $color-black;
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding: 1.2rem 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+    text-align: left;
+  }
+  &__main, &__secondary {
+    width: 90%;
+    margin-left: 1.5rem;
+  }
+  &__main {
+    border-bottom: 1px solid $color-grey-light-4;
   }
 }
 
-// .btn {
-//   &:link,
-//   &:visited {
-//     /* initial state setting */
-//     text-transform: uppercase;
-//     text-decoration: none;
-//     padding: 1.5rem 4rem;
-//     display: inline-block;
-//     border-radius: 10rem;
-//     transition: all 0.2s;
-//     /* transition property has to be in initial state */
-//     /* specify which element we want to animate - all */
-//     position: relative;
-//     font-size: $default-font-size;
-//   }
+@media only screen and (min-width: $sm-viewport) {
+  .header {
+    height: 9rem;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.2rem;
 
-//   &:hover {
-//     transform: translateY(-0.3rem);
-//     /* move up */
-//     box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
-//     /* 1st: x-direction, 2n: y-direction, 3rd: blur, 4th: color - we did black with 20% opacity */
+    > * {
+      a {
+        &:link,
+        &:visited {
+          padding: $font-xxs;
+          margin: 0 $font-xxs;
+          font-weight: 500;
+        }
+        &:hover {
+          border-bottom: 2px solid black;
+        }
+      }
+    }
 
-//     &::after {
-//       transform: scaleX(1.4) scaleY(1.6);
-//       opacity: 0;
-//     }
-//   }
+    &__middle {
+      a:hover {
+        border-bottom: 2px solid transparent;
+      }
+    }
+  }
 
-//   &:active {
-//     transform: translateY(-0.1rem);
-//     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
-//   }
+  .header-logo {
+    max-height: 5.4rem;
+    min-height: 4rem;
+  }
 
-//   &--white {
-//     background-color: $color-white;
-//     color: $color-grey-dark;
+  .reducedHeaderOnScroll {
+    height: 6.6rem;
+    .header-logo {
+      max-height: 4.8rem;
+      min-height: 4.4rem;
+    }
+  }
+}
+@media only screen and (min-width: $md-viewport) {
+  .header {
+    height: 9rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.10rem;
 
-//     &::after {
-//       background-color: $color-white;
-//     }
-//   }
+    > * {
+      a {
+        &:link,
+        &:visited {
+          padding: 0.08rem;
+          margin: 0 0.9rem;
+          font-weight: 500;
+        }
+        &:hover {
+          border-bottom: 2px solid black;
+        }
+      }
+    }
+ 
+    &__middle {
+      a:hover {
+        border-bottom: 2px solid transparent;
+      }
+    }
+  }
 
-//   &::after {
-//     content: '';
-//     display: inline-block;
-//     /* have to specify content & display property */
-//     height: 100%;
-//     width: 100%;
-//     /* this is height and width of the btn */
-//     border-radius: 10rem;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     z-index: -1;
-//     /* behind the btn element */
-//     transition: all 0.4s;
-//   }
+  .header-logo {
+    max-height: 5.8rem;
+    min-height: 4rem;
+  }
 
-//   &--animated {
-//     animation: moveInBottom 0.5s ease-out 0.75s;
-//     animation-fill-mode: backwards;
-//   }
-// }
+  .reducedHeaderOnScroll {
+    height: 7rem;
+    .header-logo {
+      max-height: 4.8rem;
+      min-height: 4.4rem;
+    }
+  }
+}
+@media only screen and (min-width: $lg-viewport) {
+  .header {
+    height: 11.2rem;
+    font-size: 1.26rem;
+    font-weight: 400;
+    letter-spacing: 0.14rem;
 
-// .btn-text {
-//   &:link,
-//   &:visited {
-//     font-size: $default-font-size;
-//     color: $color-primary;
-//     display: inline-block;
-//     text-decoration: none;
-//     border-bottom: 1px solid $color-primary;
-//     padding: 3px;
-//     transition: all .2s;
-//   }
-//   &:hover {
-//     background-color: $color-primary;
-//     color: $color-white;
-//     box-shadow: 0 1rem 2rem rgba($color-black, .15);
-//     transform: translateY(-2px);
-//   }
-//   &:active {
-//     box-shadow: 0 .5rem 1rem rgba($color-black, .15);
-//     transform: translateY(0);
-//   }
-// }
+    > * {
+      a {
+        &:link,
+        &:visited {
+          padding: $font-xxs;
+          margin: 0 $font-xxs;
+          font-weight: 500;
+        }
+        &:hover {
+          border-bottom: 2px solid black;
+        }
+      }
+    }
+
+    &__middle {
+      a:hover {
+        border-bottom: 2px solid transparent;
+      }
+    }
+  }
+
+  .header-logo {
+    max-height: 6.8rem;
+    min-height: 5.5rem;
+  }
+
+  .reducedHeaderOnScroll {
+    height: 8rem;
+    .header-logo {
+      max-height: 6rem;
+      min-height: 5.5rem;
+    }
+  }
+}

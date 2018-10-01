@@ -1,75 +1,73 @@
+.collection-hero {
+  height: 40rem;
+  overflow: hidden;
+}
 .collection {
-  max-width: 150rem;
-  display: grid;
-  grid-row-gap: 4rem;
-  grid-column-gap: 3rem;
-  margin: 0 5rem 2rem 5rem;
-  padding-top: 15rem;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  justify-content: center;
   font-size: $font-xs;
 
   a {
-      &:link,
-      &:visited {
-        text-decoration: none;
-        color: black;
-      }
+    &:link,
+    &:visited {
+      text-decoration: none;
+      color: black;
     }
+  }
   &__name {
-    grid-column: 1 / -1;
-    grid-row: 1 / span 1;
-    justify-self: center;
-    font-size: $font-s;
-    padding: 2rem 0;
+    font-size: $font-m;
+    letter-spacing: $font-xxxs;
+    font-weight: 400;
     text-transform: uppercase;
+    color: $color-white;
+    text-align: center;
+    padding-top: 24rem;
+  }
+  &__intro {
+    font-size: $font-s;
+    letter-spacing: 0.1rem;
+    color: $color-white;
+    text-align: center;
+  }
+  &__mobile {
+    font-size: $font-xl;
+    letter-spacing: $font-xxs;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: $color-white;
+    text-align: center;
+    padding-top: 20rem;
+    transform: skewY(-5deg);
   }
   &__card {
     text-align: left;
   }
-
-  .product__image {
-    display: block;
+  .product__image-container {
     width: 100%;
+    overflow: hidden;
+  }
+  .product__image {
+    width: 120%;
   }
 
   .product__info {
     display: flex;
     justify-content: space-between;
     margin-top: $font-xs;
-    &__name {
-      display: block;
-      font-size: $font-xs;
-    }
-
-    &__price {
-      display: block;
-      font-size: $font-xs;
-    }
+    font-size: $font-xs;
+  }
+  .product__name {
+    font-weight: 400;
   }
 
   .product__caption {
-    display: block;
-    margin-top: $font-xxxs;
-    justify-items: center;
-    font-size: $font-xxs;
+    font-size: 1.2rem;
     color: $color-grey-dark-3;
+    margin-bottom: $font-l;
+    margin-top: $font-xxxs;
+    display: flex;
+    justify-content: space-between;
+    &--1,
+    &--2 {
+      text-transform: uppercase;
+    }
   }
 }
-
-// .container {
-//   display: grid;
-//   grid-template-rows: repeat(2, minmax(150px, min-content));
-//   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-//   justify-content: center;
-//   align-content: center;
-//   margin: 30px auto;
-//   max-width: 1000px;
-//   grid-auto-rows: 200px; }
-
-// .container {
-//   display: grid;
-//   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
-//   grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start]
-//   minmax(6rem, 1fr) [center-start] repeat(8,[col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
-// }

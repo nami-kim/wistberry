@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header';
-import ProductOnHover from './ProductOnHover';
 import _ from 'lodash';
 
 class ProductDetailPage extends Component {

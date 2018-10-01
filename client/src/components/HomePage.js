@@ -8,13 +8,14 @@ export class HomePage extends Component {
         <Header />
         <div className="container-hero">
           <div className="home">
+          
             <img
-              src="http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg"
+              src="http://wistberry.imgix.net/images/products/toastandhoney/toastandhoney_hero.jpg"
               alt="hero"
               className="home__hero-image"
             />
             <img
-              src="http://wistberry.imgix.net/images/products/toastandhoney/toastandhoney_hero.jpg"
+              src="http://wistberry.imgix.net/images/products/toastandhoney/main2.jpg"
               alt="hero"
               className="home__hero-image"
             />
