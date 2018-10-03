@@ -113,14 +113,14 @@ export const signupInnerForm = ({ values, errors, touched, isSubmitting }) => (
       <Field className="signup-form__field" type="password" name="password" />
     </div>
     <div className="signup-form__item">
-      <label className="signup-form__label" htmlFor="password2">
+      <label className="signup-form__label" htmlFor="passwordConfirmation">
         Confirm Password
       </label>
-      {touched.password2 &&
-        errors.password2 && (
-          <p className="signup-form__error">{errors.password2}</p>
+      {touched.passwordConfirmation &&
+        errors.passwordConfirmation && (
+          <p className="signup-form__error">{errors.passwordConfirmation}</p>
         )}
-      <Field className="signup-form__field" type="password2" name="password2" />
+      <Field className="signup-form__field" type="password" name="passwordConfirmation" />
     </div>
     <div className="signup-form__item">
       <button
@@ -139,12 +139,12 @@ export const signupInnerForm = ({ values, errors, touched, isSubmitting }) => (
 );
 
 export const SignupForm = withFormik({
-  mapPropsToValues({ name, email, password, password2 }) {
+  mapPropsToValues({ name, email, password, passwordConfirmation }) {
     return {
       name: name || '',
       email: email || '',
       password: password || '',
-      password2: password2 || ''
+      passwordConfirmation: passwordConfirmation || ''
     };
   },
   validationSchema: yup.object().shape({
@@ -156,7 +156,7 @@ export const SignupForm = withFormik({
       .string()
       .min(8, 'Password must be 8 characters or longer')
       .required('Password is required'),
-    password2: yup
+    passwordConfirmation: yup
       .string()
       .oneOf([yup.ref('password'), null], "Passwords don't match")
       .required('Password confirmation is required')
