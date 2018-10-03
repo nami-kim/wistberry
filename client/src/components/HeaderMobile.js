@@ -7,7 +7,7 @@ export class HeaderMobile extends Component {
   state = {
     isReducedHeader: false,
     hover: false,
-    mobileMenuOpen: false,
+    mobileMenuOpen: false
   };
 
   toggleBurgerMenu = () => {
@@ -40,7 +40,10 @@ export class HeaderMobile extends Component {
         : '';
 
     const headerLogo =
-      this.state.isReducedHeader || defaultHeader || this.state.hover || this.state.mobileMenuOpen
+      this.state.isReducedHeader ||
+      defaultHeader ||
+      this.state.hover ||
+      this.state.mobileMenuOpen
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
@@ -123,7 +126,24 @@ export class HeaderMobile extends Component {
             <div className="flex flex-column">
               <div className="nav-item-mobile">
                 <div className="nav-item-mobile__main">
-                  <Link to="/collection/all-plants">Shop</Link>
+                  <div className="">
+                    <Link to="/collection/all-plants" className="shop">
+                      Shop
+                      <span>
+                        <Icon
+                          width="14"
+                          height="14"
+                          paths={ICON_PATHS['chevron-down']}
+                          pathStyle={{ strokeWidth: '3' }}
+                          style={{
+                            paddingLeft: '4px',
+                            paddingTop: '2px'
+                          }}
+                        />
+                      </span>
+                    </Link>
+                  </div>
+
                   <Link to="/about">About</Link>
                   <Link to="/blog">Blog</Link>
                   <Link to="/quiz">Quiz</Link>

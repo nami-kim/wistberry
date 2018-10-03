@@ -79,7 +79,7 @@ export class HeaderNonMobile extends Component {
             </Link>
           </div>
           <div className="col-xs-4 header__right">
-            <Link to="/account/signup" className="signup">
+            <Link to="/account/signup">
               Sign up
             </Link>
             <a className="country" href="#">

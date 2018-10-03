@@ -1,39 +1,45 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withFormik, Form, Field } from 'formik';
 import * as yup from 'yup';
-import Button from './Button';
 
 // Login Form starts here
 export const loginInnerForm = ({ values, errors, touched, isSubmitting }) => (
-  <Form>
-    <div>
-    <label htmlFor="email">Email</label>
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="email"
-        placeholder="Email"
-        name="email"
-      />
+  <Form className="signup-form">
+    <div className="signup-form__label signup-form__item">
+      <p className="signup-form__title">Login</p>
     </div>
-    <div>
-      <label htmlFor="email">Password</label>
-      {touched.password && errors.password && <p>{errors.password}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="password"
-        placeholder="Password"
-        name="password"
-      />
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="email">
+        Email
+      </label>
+      {touched.email &&
+        errors.email && <p className="signup-form__error">{errors.email}</p>}
+      <Field className="signup-form__field" type="email" name="email" />
     </div>
-    <div className="mv3">
-      <Button disabled={isSubmitting}>Submit</Button>
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="email">
+        Password
+      </label>
+      {touched.password &&
+        errors.password && (
+          <p className="signup-form__error">{errors.password}</p>
+        )}
+      <Field className="signup-form__field" type="password" name="password" />
+    </div>
+    <div className="signup-form__item">
+      <button
+        className="signup-form__field signup-form__btn"
+        disabled={isSubmitting}
+      >
+        Log in
+      </button>
     </div>
   </Form>
 );
 
 export const LoginForm = withFormik({
-  mapPropsToValues({ email, password}) {
+  mapPropsToValues({ email, password }) {
     return {
       email: email || '',
       password: password || ''
@@ -44,10 +50,7 @@ export const LoginForm = withFormik({
       .string()
       .email('Email is not valid')
       .required('Email is required'),
-    password: yup
-      .string()
-      .min(8, 'Password must be 8 characters or longer')
-      .required('Password is required')
+    password: yup.string().required('Password is required')
   }),
   handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
     setTimeout(() => {
@@ -64,81 +67,84 @@ export const LoginForm = withFormik({
 // Signup Form starts here
 
 export const signupInnerForm = ({ values, errors, touched, isSubmitting }) => (
-  <Form className="row flex">
-    <div className="">
-      <label htmlFor="firstname">First Name</label>
-      {touched.firstname && errors.firstname && <p>{errors.firstname}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="text"
-        placeholder="First Name"
-        name="firstname"
-      />
+  <Form className="signup-form">
+    <div className="signup-form__label signup-form__item">
+      <p className="signup-form__title">New Customers</p>
     </div>
-    <div>
-      <label htmlFor="lastname">Last Name</label>
-      {touched.lastname && errors.lastname && <p>{errors.lastname}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="text"
-        placeholder="Last Name"
-        name="lastname"
-      />
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="firstname">
+        First Name
+      </label>
+      {touched.firstname &&
+        errors.firstname && (
+          <p className="signup-form__error">{errors.firstname}</p>
+        )}
+      <Field className="signup-form__field" type="text" name="firstname" />
     </div>
-    <div>
-      <label htmlFor="email">Email</label>
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="email"
-        placeholder="Email"
-        name="email"
-      />
+    <div className="signup-form__item">
+      <label
+        className="signup-form__label"
+        htmlFor="lastname"
+      >
+        Last Name
+      </label>
+      {touched.lastname &&
+        errors.lastname && (
+          <p className="signup-form__error">{errors.lastname}</p>
+        )}
+      <Field className="signup-form__field" type="text" name="lastname" />
     </div>
-    <div>
-      <label htmlFor="password">Password</label>
-      {touched.password && errors.password && <p>{errors.password}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="password"
-        placeholder="Password"
-        name="password"
-      />
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="email">
+        Email
+      </label>
+      {touched.email &&
+        errors.email && <p className="signup-form__error">{errors.email}</p>}
+      <Field className="signup-form__field" type="email" name="email" />
     </div>
-    <div>
-      <label htmlFor="password2">Confirm Password</label>
-      {touched.password2 && errors.password2 && <p>{errors.password2}</p>}
-      <Field
-        className="db w-100 pa2 mv3 ba b--black-20"
-        type="password2"
-        placeholder="Confirm Password"
-        name="password2"
-      />
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="password">
+        Password
+      </label>
+      {touched.password &&
+        errors.password && (
+          <p className="signup-form__error">{errors.password}</p>
+        )}
+      <Field className="signup-form__field" type="password" name="password" />
     </div>
-    <label>
-      <Field
-        className="mr2"
-        type="checkbox"
-        name="newsletter"
-        placeholder="newsletter"
-        checked={values.newsletter}
-      />
-      Subscribe to our weekley newsletter
-    </label>
-    <div className="mv3">
-      <Button disabled={isSubmitting}>Submit</Button>
+    <div className="signup-form__item">
+      <label className="signup-form__label" htmlFor="password2">
+        Confirm Password
+      </label>
+      {touched.password2 &&
+        errors.password2 && (
+          <p className="signup-form__error">{errors.password2}</p>
+        )}
+      <Field className="signup-form__field" type="password2" name="password2" />
+    </div>
+    <div className="signup-form__item">
+      <button
+        className="signup-form__field signup-form__btn"
+        disabled={isSubmitting}
+      >
+        Sign up
+      </button>
+      <p className="signup-form__label signup-form__policy-agreement">
+        By registering you agree to our{' '}
+        <Link to="/terms-of-use">Terms of Use</Link> and{' '}
+        <Link to="/privacy-policy">Privacy Policy</Link>
+      </p>
     </div>
   </Form>
 );
 
 export const SignupForm = withFormik({
-  mapPropsToValues({ name, email, password, password2, newsletter }) {
+  mapPropsToValues({ name, email, password, password2 }) {
     return {
       name: name || '',
       email: email || '',
       password: password || '',
-      password2: password2 || '',
-      newsletter: newsletter || false
+      password2: password2 || ''
     };
   },
   validationSchema: yup.object().shape({
@@ -149,7 +155,11 @@ export const SignupForm = withFormik({
     password: yup
       .string()
       .min(8, 'Password must be 8 characters or longer')
-      .required('Password is required')
+      .required('Password is required'),
+    password2: yup
+      .string()
+      .oneOf([yup.ref('password'), null], "Passwords don't match")
+      .required('Password confirmation is required')
   }),
   handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
     setTimeout(() => {
@@ -162,5 +172,3 @@ export const SignupForm = withFormik({
     }, 1000);
   }
 })(signupInnerForm);
-
-

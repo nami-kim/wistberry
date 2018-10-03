@@ -1,0 +1,21 @@
+.terms-of-use {
+  h1,
+  h3 {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  h1 {
+    font-size: 2.6rem;
+    font-weight: 400;
+  }
+  h3 {
+    font-size: $font-s;
+    font-weight: 300;
+  }
+  p {
+    padding-top: $font-s;
+    padding-bottom: $font-m;
+    font-size: 1.4rem;
+  }
+}

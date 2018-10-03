@@ -93,34 +93,39 @@
 // burgerMenu styling
 .header-dropdown-mobile {
   width: 110%;
+  height: 100vh;
   margin-left: -1.5rem;
   display: flex;
   flex-direction: column;
-  padding-top: 6rem;
-  padding-bottom: 2rem;
+  padding: 6rem 2rem 2rem 2rem;
   z-index: -1;
   background-color: #fff3f2;
 }
 
 .nav-item-mobile {
   padding-top: 2rem;
-  
+
   a {
     display: block;
     color: $color-black;
     text-decoration: none;
-    font-size: 1.4rem;
-    padding: 1.2rem 1.8rem;
+    font-size: 1.6rem;
+    padding: 1.6rem 1.8rem;
     text-transform: uppercase;
     letter-spacing: 0.12rem;
     text-align: left;
   }
-  &__main, &__secondary {
+  &__main,
+  &__secondary {
     width: 90%;
     margin-left: 1.5rem;
   }
   &__main {
     border-bottom: 1px solid $color-grey-light-4;
+    padding-bottom: 1.5rem;
+  }
+  &__secondary {
+    padding-top: 1.5rem;
   }
 }
 
@@ -170,13 +175,13 @@
     height: 9rem;
     font-size: 1.2rem;
     font-weight: 400;
-    letter-spacing: 0.10rem;
+    letter-spacing: 0.1rem;
 
     > * {
       a {
         &:link,
         &:visited {
-          padding: 0.08rem;
+          padding: 0.6rem 0.08rem;
           margin: 0 0.9rem;
           font-weight: 500;
         }
@@ -185,7 +190,7 @@
         }
       }
     }
- 
+
     &__middle {
       a:hover {
         border-bottom: 2px solid transparent;

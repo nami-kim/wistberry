@@ -1,8 +1,79 @@
-
-
-
-.signup-content {
-  width: 100%;
-  background-color: #e6eaed;;
+.signup {
+  background-color: $color-primary-blue;
 }
+.signup-form {
+  display: block;
+  width: 100%;
+  &__item {
+    width: 100%;
+  }
+  &__label {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 400;
+    width: 99%;
+    margin: 0 auto;
+  }
+  &__field {
+    display: block;
+    width: 99%;
+    padding: 1.6rem;
+    margin: 0.3rem auto 1.6rem auto;
+    border: 1px solid $color-grey-light-3;
+    border-radius: 0.2rem;
+    background: $color-white;
+  }
+  &__title {
+    display: inline-block;
+    font-size: 2.4rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    margin: 1rem 0 3rem;
+  }
+  &__error {
+    display: block;
+    font-size: 1rem;
+    color: red;
+    width: 99%;
+    margin: 0 auto;
+    font-style: italic;
+  }
+  &__btn {
+    border: none;
+    font-size: $font-xs;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: $color-white;
+    border-radius: 0.3rem;
+    background: $color-black;
+    background: $color-black;
+    &:hover {
+      background-color: $color-primary-blue;
+      border: 1px solid $color-black;
+      color: $color-black;
+      cursor: pointer;
+    }
+    &__policy-agreement {
+      font-size: $font-s;
 
+      font-size: 1.1rem;
+      font-weight: 300;
+      a {
+        &:link,
+        &:visited {
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: $sm-viewport) {
+  .signup-form {
+    &__field,
+    &__label,
+    &__error {
+      width: 40rem;
+    }
+  }
+}

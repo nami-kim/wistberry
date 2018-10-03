@@ -5,7 +5,19 @@ const AboutPage = () => {
   return (
     <div>
       <Header defaultHeader={true} />
-      <h1>About Page</h1>
+      <div className="container-body">
+        <h1>About Page</h1>
+        <div
+          className="about__animation"
+          style={{
+            backgroundImage:
+              "url('https://s3-us-west-2.amazonaws.com/wistberry/images/bowery/animation.gif')",
+            backgroudSize: 'cover',
+            width: '524px',
+            height: '282px'
+          }}
+        />
+      </div>
     </div>
   );
 };
