@@ -39,9 +39,7 @@ export class HeaderMobile extends Component {
         : '';
 
     const headerLogo =
-      this.state.isReducedHeader ||
-      defaultHeader ||
-      this.state.mobileMenuOpen
+      this.state.isReducedHeader || defaultHeader || this.state.mobileMenuOpen
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
@@ -59,7 +57,7 @@ export class HeaderMobile extends Component {
                 paddingLeft: '4px',
                 paddingTop: '2px'
               }}
-              pathClassName="header-icon"
+              pathClassName="header__icon"
             />
           </span>
         ) : (
@@ -74,7 +72,7 @@ export class HeaderMobile extends Component {
                 paddingLeft: '4px',
                 paddingTop: '2px'
               }}
-              pathClassName="header-icon"
+              pathClassName="header__icon"
             />
           </span>
         )}
@@ -83,22 +81,23 @@ export class HeaderMobile extends Component {
 
     return (
       <div className="show-header-mobile container">
-        <div
-          className={`row header ${classReducedHeader}`}
-        >
-          <div className="col-xs-4 header__left">
-            <BurgerMenu onClick={this.toggleBurgerMenu} />
+        <div className={`row header ${classReducedHeader}`}>
+          <div className="col-xs-4 header--section__left">
+            <BurgerMenu
+              onClick={this.toggleBurgerMenu}
+              className="header__burger-menu"
+            />
           </div>
-          <div className="col-xs-4 header__middle">
+          <div className="col-xs-4 header__section--middle">
             <Link to="/" className="logo">
               <img
                 src={headerLogo}
-                className="header-logo"
+                className="header__logo"
                 alt="wistberry logo"
               />
             </Link>
           </div>
-          <div className="col-xs-4 header__right">
+          <div className="col-xs-4 header__section--right">
             <Link to="/cart" className="cart">
               <span>
                 <Icon
@@ -111,17 +110,17 @@ export class HeaderMobile extends Component {
                     verticalAlign: 'middle',
                     margin: '-12px 0px'
                   }}
-                  pathClassName="header-icon"
+                  pathClassName="header__icon"
                 />
               </span>
             </Link>
           </div>
         </div>
         {this.state.mobileMenuOpen && (
-          <div className="header-dropdown-mobile">
+          <div className="header-dropdown__menu">
             <div className="flex flex-column">
-              <div className="nav-item-mobile">
-                <div className="nav-item-mobile__main">
+              <div className="header-dropdown__menu-items">
+                <div className="header-dropdown__menu-items--main">
                   <div className="">
                     <Link to="/collection/all-plants" className="shop">
                       Shop
@@ -144,7 +143,7 @@ export class HeaderMobile extends Component {
                   <Link to="/blog">Blog</Link>
                   <Link to="/quiz">Quiz</Link>
                 </div>
-                <div className="nav-item-mobile__secondary">
+                <div className="header-dropdown__menu-items--secondary">
                   <Link to="/account/signup">Sign up</Link>
                   <Link to="/cart">Cart</Link>
                   <Link to="/contact">Contact Us</Link>

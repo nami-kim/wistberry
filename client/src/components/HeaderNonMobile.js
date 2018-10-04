@@ -46,7 +46,7 @@ export class HeaderNonMobile extends Component {
           onMouseOver={() => this.setState({ hover: true })}
           onMouseLeave={() => this.setState({ hover: false })}
         >
-          <div className="col-xs-4 header__left">
+          <div className="col-xs-4 header__section--left">
             <Link to="/collection/all-plants" className="shop">
               Shop
               <span>
@@ -60,7 +60,7 @@ export class HeaderNonMobile extends Component {
                     paddingLeft: '4px',
                     paddingTop: '2px'
                   }}
-                  pathClassName="header-icon"
+                  pathClassName="header__icon"
                 />
               </span>
             </Link>
@@ -69,16 +69,16 @@ export class HeaderNonMobile extends Component {
             <Link to="/blog">Blog</Link>
             <Link to="/quiz">Quiz</Link>
           </div>
-          <div className="col-xs-4 header__middle">
+          <div className="col-xs-4 header__section--middle">
             <Link to="/" className="logo">
               <img
                 src={headerLogo}
-                className="header-logo"
+                className="header__logo"
                 alt="wistberry logo"
               />
             </Link>
           </div>
-          <div className="col-xs-4 header__right">
+          <div className="col-xs-4 header__section--right">
             <Link to="/account/signup">
               Sign up
             </Link>
@@ -95,7 +95,7 @@ export class HeaderNonMobile extends Component {
                     paddingLeft: '4px',
                     paddingTop: '2px'
                   }}
-                  pathClassName="header-icon"
+                  pathClassName="header__icon"
                 />
               </span>
             </a>
@@ -112,7 +112,7 @@ export class HeaderNonMobile extends Component {
                     verticalAlign: 'middle',
                     margin: '-12px 0px'
                   }}
-                  pathClassName="header-icon"
+                  pathClassName="header__icon"
                 />
               </span>
             </Link>

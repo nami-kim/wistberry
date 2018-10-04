@@ -9,21 +9,6 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 
-  &:hover {
-    background: $color-white;
-    color: $color-black;
-    a {
-      &:link,
-      &:visited {
-        color: $color-black;
-      }
-    }
-    .header-icon {
-      stroke: $color-black;
-      fill: $color-black;
-    }
-  }
-
   > * {
     display: flex;
     a {
@@ -41,29 +26,26 @@
     }
   }
 
-  &__left {
+  &__section--left {
     justify-content: flex-start;
   }
 
-  &__middle {
-    a:hover {
-      border-bottom: 2px solid transparent;
-    }
+  &__section--middle {
     justify-content: center;
   }
 
-  &__right {
+  &__section--right {
     justify-content: flex-end;
   }
 }
 
-.header-logo {
+.header__logo {
   max-height: 4.8rem;
   min-height: 3rem;
   color: $color-white;
 }
 
-.header-icon {
+.header__icon {
   stroke: $color-white;
   fill: $color-white;
 }
@@ -74,34 +56,39 @@
   height: 6.2rem;
   box-shadow: $shadow-light;
   transition: all 0.25s ease-in;
+  
   a {
     &:link,
     &:visited {
       color: $color-black;
     }
   }
-  .header-logo {
+  .header__logo {
     max-height: 4.8rem;
     min-height: 3rem;
   }
-  .header-icon {
+  .header__icon {
     stroke: $color-black;
     fill: $color-black;
   }
 }
+
 // burgerMenu styling
-.header-dropdown-mobile {
+.header__burger-menu:hover {
+  cursor: pointer;
+}
+
+.header__dropdown-menu {
   width: 110%;
   height: 100vh;
   margin-left: -1.5rem;
   display: flex;
   flex-direction: column;
   padding: 6rem 2rem 2rem 2rem;
-  z-index: -1;
   background-color: #fff3f2;
 }
 
-.nav-item-mobile {
+.header-dropdown__menu-items {
   padding-top: 2rem;
 
   a {
@@ -143,27 +130,24 @@
           margin: 0 $font-xxs;
           font-weight: 500;
         }
-        &:hover {
-          border-bottom: 2px solid black;
-        }
       }
     }
 
-    &__middle {
+    &__section--middle {
       a:hover {
         border-bottom: 2px solid transparent;
       }
     }
   }
 
-  .header-logo {
+  .header__logo {
     max-height: 5.4rem;
     min-height: 4rem;
   }
 
   .reducedHeaderOnScroll {
     height: 6.6rem;
-    .header-logo {
+    .header__logo {
       max-height: 4.8rem;
       min-height: 4.4rem;
     }
@@ -176,6 +160,20 @@
     font-weight: 400;
     letter-spacing: 0.1rem;
 
+    &:hover {
+      background: $color-white;
+      color: $color-black;
+      a {
+        &:link,
+        &:visited {
+          color: $color-black;
+        }
+      }
+      .header__icon {
+        stroke: $color-black;
+        fill: $color-black;
+      }
+    }
     > * {
       a {
         &:link,
@@ -190,21 +188,21 @@
       }
     }
 
-    &__middle {
+    &__section--middle {
       a:hover {
         border-bottom: 2px solid transparent;
       }
     }
   }
 
-  .header-logo {
+  .header__logo {
     max-height: 5.8rem;
     min-height: 4rem;
   }
 
   .reducedHeaderOnScroll {
     height: 7rem;
-    .header-logo {
+    .header__logo {
       max-height: 4.8rem;
       min-height: 4.4rem;
     }
@@ -231,21 +229,21 @@
       }
     }
 
-    &__middle {
+    &__section--middle {
       a:hover {
         border-bottom: 2px solid transparent;
       }
     }
   }
 
-  .header-logo {
+  .header__logo {
     max-height: 6.8rem;
     min-height: 5.5rem;
   }
 
   .reducedHeaderOnScroll {
     height: 8rem;
-    .header-logo {
+    .header__logo {
       max-height: 6rem;
       min-height: 5.5rem;
     }
