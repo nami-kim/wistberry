@@ -5,7 +5,7 @@ const AboutPage = () => {
   return (
     <div>
       <Header defaultHeader={true} />
-      <div className="container-body">
+      <div className="container">
         <h1>About Page</h1>
         <div
           className="about__animation"

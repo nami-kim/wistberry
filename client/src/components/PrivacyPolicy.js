@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
   return (
     <div>
       <Header defaultHeader={true} />
-      <div className="container-narrow terms-of-use">
+      <div className="container terms-of-use">
         <div className="row">
           <h1>PRIVACY POLICY</h1>
           <p>

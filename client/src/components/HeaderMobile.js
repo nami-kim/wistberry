@@ -51,7 +51,7 @@ export class HeaderMobile extends Component {
               width="24"
               height="24"
               paths={ICON_PATHS['cross']}
-              pathStyle={{ strokeWidth: '1' }}
+              pathStyle={{ strokeWidth: '0' }}
               style={{
                 verticalAlign: 'middle',
                 paddingLeft: '4px',
@@ -63,8 +63,8 @@ export class HeaderMobile extends Component {
         ) : (
           <span>
             <Icon
-              width="30"
-              height="30"
+              width="31"
+              height="31"
               paths={ICON_PATHS['menu']}
               pathStyle={{ strokeWidth: '0' }}
               style={{
@@ -101,8 +101,8 @@ export class HeaderMobile extends Component {
             <Link to="/cart" className="cart">
               <span>
                 <Icon
-                  width="32"
-                  height="32"
+                  width="33"
+                  height="33"
                   paths={ICON_PATHS['cart']}
                   pathStyle={{ strokeWidth: '0' }}
                   style={{

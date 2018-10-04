@@ -15,7 +15,6 @@
       &:link,
       &:visited {
         padding: $font-xxs;
-        margin: 0 $font-xxs;
         text-decoration: none;
         display: inline-block;
         color: $color-white;
@@ -117,7 +116,7 @@
 
 @media only screen and (min-width: $sm-viewport) {
   .header {
-    height: 9rem;
+    height: 8rem;
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0.2rem;

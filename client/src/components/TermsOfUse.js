@@ -6,7 +6,7 @@ const TermsOfUse = () => {
   return (
     <div>
       <Header defaultHeader={true} />
-      <div className="container-narrow terms-of-use">
+      <div className="container terms-of-use">
         <div className="row">
           <h1>TERMS OF USE</h1>
           <h3>Last Updated: September 25th, 2015</h3>

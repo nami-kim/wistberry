@@ -1,40 +1,50 @@
-.signup {
+.signup-page {
+  padding-top: 10rem;
   background-color: $color-primary-blue;
 }
+.login__section,
+.signup__section {
+  padding: 3.6rem 0;
+  width: 100%;
+}
+
 .signup-form {
   display: block;
   width: 100%;
+  margin: 0 auto;
   &__item {
     width: 100%;
   }
   &__label {
     display: block;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 400;
-    width: 99%;
+    letter-spacing: 0.06rem;
+    width: 98%;
     margin: 0 auto;
   }
   &__field {
     display: block;
-    width: 99%;
-    padding: 1.6rem;
-    margin: 0.3rem auto 1.6rem auto;
+    font-size: 1.6rem;
+    width: 98%;
+    padding: 1.8rem;
+    margin: 0.3rem auto 1.5rem auto;
     border: 1px solid $color-grey-light-3;
     border-radius: 0.2rem;
     background: $color-white;
   }
   &__title {
     display: inline-block;
-    font-size: 2.4rem;
+    font-size: 2rem;
     letter-spacing: 0.08rem;
     text-transform: uppercase;
-    margin: 1rem 0 3rem;
+    margin-bottom: 3rem;
   }
   &__error {
     display: block;
     font-size: 1rem;
     color: red;
-    width: 99%;
+    width: 98%;
     margin: 0 auto;
     font-style: italic;
   }
@@ -73,7 +83,18 @@
     &__field,
     &__label,
     &__error {
-      width: 40rem;
+      width: 43rem;
     }
+  }
+
+}
+
+@media only screen and (min-width: $lg-viewport) {
+  
+  .login__section {
+    padding-left: 4rem;
+  }
+  .signup__section {
+    padding-right: 4rem;
   }
 }

@@ -57,10 +57,10 @@ class CollectionPage extends Component {
             {collectionIntro[collectionUrl]}
           </div>
         </div>
-        <div className="container-narrow">
+        <div className="container-fluid collection">
           <div className="row">
             {productList.map(({ id, name, caption, images, metadata }) => (
-              <div className="col-sm-6 col-md-6 col-lg-4 collection" key={id}>
+              <div className="col-sm-6 col-md-6 col-lg-4" key={id}>
                 <Link
                   to={`/products/${metadata.url}`}
                   className="collection__card"

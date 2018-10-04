@@ -6,7 +6,7 @@ export class HomePage extends Component {
     return (
       <div>
         <Header />
-        <div className="container-hero">
+        <div>
           <div className="home">
           
             <img

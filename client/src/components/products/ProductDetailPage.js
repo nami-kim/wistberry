@@ -92,7 +92,7 @@ class ProductDetailPage extends Component {
     return (
       <div>
         <Header />
-        <div className="container-main">
+        <div className="container">
           <div className="row">
             <div className="col-lg-8">
               <div className="row">

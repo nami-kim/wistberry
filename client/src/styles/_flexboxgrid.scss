@@ -8,6 +8,7 @@
 
 $gutter-width: 3rem;
 $outer-margin: 1.5rem;
+
 $gutter-compensation: calc((#{$gutter-width} * 0.5) * -1);
 $half-gutter-width: calc((#{$gutter-width} * 0.5));
 // xs: default, all mobile
@@ -20,29 +21,15 @@ $sm-viewport: ($sm-min + 'em');
 $md-viewport: ($md-min + 'em');
 $lg-viewport: ($lg-min + 'em');
 
+.container-fluid,
 .container {
-  margin-left: auto;
   margin-right: auto;
-  padding-right: $outer-margin;
-  padding-left: $outer-margin;
-}
-.container-body,
-.container-wide,
-.container-narrow {
   margin-left: auto;
-  margin-right: auto;
-  padding-top: 14rem;
-  padding-right: $outer-margin;
-  padding-left: $outer-margin;
 }
 
-.container-wide {
-  margin-left: $outer-margin;
-  margin-right: $outer-margin;
-}
-.container-narrow {
-  margin-left: $outer-margin;
-  margin-right: $outer-margin;
+.container-fluid {
+  padding-right: ($outer-margin);
+  padding-left: ($outer-margin);
 }
 
 .row {
@@ -51,8 +38,8 @@ $lg-viewport: ($lg-min + 'em');
   flex: 0 1 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-right: $gutter-compensation;
-  margin-left: $gutter-compensation;
+  // margin-right: $gutter-compensation;
+  // margin-left: $gutter-compensation;
 }
 
 .row.reverse {
@@ -253,13 +240,8 @@ $lg-viewport: ($lg-min + 'em');
 }
 
 @media only screen and (min-width: $sm-viewport) {
-  .container-wide {
-    padding-right: calc(#{$outer-margin} + 2rem);
-    padding-left: calc(#{$outer-margin} + 2rem);
-  }
-  .container-narrow {
-    padding-right: calc(#{$outer-margin} + 2rem);
-    padding-left: calc(#{$outer-margin} + 2rem);
+  .container {
+    width: $sm-viewport;
   }
 
   .col-sm,
@@ -453,19 +435,14 @@ $lg-viewport: ($lg-min + 'em');
 }
 
 @media only screen and (min-width: $md-viewport) {
+  .container {
+    width: $md-viewport;
+  }
   .show-header-mobile {
     display: none;
   }
   .show-header-non-mobile {
     display: block;
-  }
-  .container-wide {
-    padding-right: $outer-margin;
-    padding-left: $outer-margin;
-  }
-  .container-narrow {
-    padding-right: calc(#{$outer-margin} + 10rem);
-    padding-left: calc(#{$outer-margin} + 10rem);
   }
 
   .col-md,
@@ -659,19 +636,14 @@ $lg-viewport: ($lg-min + 'em');
 }
 
 @media only screen and (min-width: $lg-viewport) {
+  .container {
+    width: $lg-viewport;
+  }
   .show-header-mobile {
     display: none;
   }
   .show-header-non-mobile {
     display: block;
-  }
-  .container-wide {
-    padding-right: $outer-margin;
-    padding-left: $outer-margin;
-  }
-  .container-narrow {
-    padding-right: calc(#{$outer-margin} + 8rem);
-    padding-left: calc(#{$outer-margin} + 8rem);
   }
 
   .col-lg,
