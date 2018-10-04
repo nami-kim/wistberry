@@ -6,7 +6,6 @@ import { ICON_PATHS } from './common/constants';
 export class HeaderMobile extends Component {
   state = {
     isReducedHeader: false,
-    hover: false,
     mobileMenuOpen: false
   };
 
@@ -42,7 +41,6 @@ export class HeaderMobile extends Component {
     const headerLogo =
       this.state.isReducedHeader ||
       defaultHeader ||
-      this.state.hover ||
       this.state.mobileMenuOpen
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
@@ -87,14 +85,12 @@ export class HeaderMobile extends Component {
       <div className="show-header-mobile container">
         <div
           className={`row header ${classReducedHeader}`}
-          onMouseEnter={() => this.setState({ hover: true })}
-          onMouseLeave={() => this.setState({ hover: false })}
         >
           <div className="col-xs-4 header__left">
             <BurgerMenu onClick={this.toggleBurgerMenu} />
           </div>
           <div className="col-xs-4 header__middle">
-            <Link to="/" className="name">
+            <Link to="/" className="logo">
               <img
                 src={headerLogo}
                 className="header-logo"

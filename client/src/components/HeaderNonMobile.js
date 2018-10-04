@@ -43,7 +43,7 @@ export class HeaderNonMobile extends Component {
       <div className="show-header-non-mobile container">
         <div
           className={`row header ${classReducedHeader}`}
-          onMouseEnter={() => this.setState({ hover: true })}
+          onMouseOver={() => this.setState({ hover: true })}
           onMouseLeave={() => this.setState({ hover: false })}
         >
           <div className="col-xs-4 header__left">
@@ -70,7 +70,7 @@ export class HeaderNonMobile extends Component {
             <Link to="/quiz">Quiz</Link>
           </div>
           <div className="col-xs-4 header__middle">
-            <Link to="/" className="name">
+            <Link to="/" className="logo">
               <img
                 src={headerLogo}
                 className="header-logo"
