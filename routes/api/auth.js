@@ -1,11 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-// const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const keys = require('../../config/keys');
+const passport = require('passport');
+const _ = require('lodash');
+const Joi = require('joi');
 
-// @route   GET api/auth/test
-// @desc    Tests post route
-// @access  Public
-router.get('/test', (req, res) => res.json({ msg: 'Auth Works' }));
+router.get('/test', (req, res) => res.json({ msg: 'Auth works' }));
+
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
+
+router.get('/google/callback', passport.authenticate('google'));
 
 module.exports = router;

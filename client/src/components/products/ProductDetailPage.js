@@ -1,103 +1,161 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Header';
 import _ from 'lodash';
+import {
+  getAllPotProducts,
+  getAllPotSkus,
+  getAllBaseProducts,
+  getAllBaseSkus
+} from '../../actions/productActions';
 
 class ProductDetailPage extends Component {
   state = {
     currentPlantImage: 0,
-    currentPotImage: 0,
-    currentBaseImage: 0,
-    orderSkuObject: {
-      plantSku: {
-        id: '',
-        quantity: 0
-      },
-      potSku: {
-        id: '',
-        quantity: 0
-      },
-      baseSku: {
-        id: '',
-        quantity: 0
-      }
-    }
+    currentPotSku: { name: '', id: '', color: '', size: '' },
+    currentBaseSku: { name: '', id: '', material: '', size: '' },
+    currentPlantSku: { id: '', quantity: 0 }
   };
+
+  addItemsToCart = () => {
+    const orderSkuObject = {
+      plantSku: this.state.currentPlantSku,
+      potSku: this.state.currentPotSku,
+      baseSku: this.state.currentBaseSku
+    };
+  };
+
   render() {
     const { products, match, skus } = this.props;
-    const {
-      currentPlantImage,
-      currentPotImage,
-      currentBaseImage,
-      currentSku
-    } = this.state;
-    // current plant
-    const currentPlant = products.find(
+    const { currentPlantImage } = this.state;
+
+    // retrieve current plant
+    const currentPlantProduct = products.find(
       product => product.metadata.url === match.params.product
     );
-    const plantSkus = skus.find(sku => sku.product === currentPlant.id);
 
-    // all pots
-    const allPotProducts = products.filter(
-      product => product.metadata.type === 'pot'
-    );
-    const allPotSkus = _.flatMap(allPotProducts, pot =>
-      skus.filter(sku => sku.product === pot.id)
-    );
+    // skus.find(sku => sku.product === currentPlantProduct.id).then(sku =>
+    //   this.setState(() => ({
+    //     plantSku: { id: sku.id }
+    //   }))
+    // );
 
-    const potImages = allPotSkus.map((potSku, index) => (
-      <div>
-        <img
-          key={index}
-          onClick={() => this.setState(() => ({ currentPotImage: index }))}
-          src={potSku.image}
-        />
-      </div>
-    ));
+    // retrieve pots & base products and skus
+    const allPotProducts = getAllPotProducts(products);
+    const allPotSkus = getAllPotSkus(allPotProducts, skus);
+    const allBaseProducts = getAllBaseProducts(products);
+    const allBaseSkus = getAllBaseSkus(allBaseProducts, skus);
 
-    // all bases
-    const allBaseProducts = products.filter(
-      product => product.metadata.type === 'base'
-    );
-    const allBaseSkus = _.flatMap(allBaseProducts, base =>
-      skus.filter(sku => sku.product === base.id)
-    );
+    // show all pot images and display selected pot info
+    const potImages = allPotSkus.map((potSku, index) => {
+      const potName = products.find(({ id }) => potSku.product === id).name;
+      return (
+        <div
+          className={`pot-image__box ${
+            potSku.id === this.state.currentPotSku.id ? 'active' : ''
+          }`}
+        >
+          <div
+            key={index}
+            onClick={() =>
+              this.setState(() => ({
+                currentPotSku: {
+                  name: potName,
+                  id: potSku.id,
+                  color: potSku.attributes.color,
+                  size: potSku.attributes.size
+                }
+              }))
+            }
+            style={{
+              backgroundImage: `url(${potSku.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              overflow: 'hidden',
+              width: '5.5rem',
+              height: '5.5rem'
+            }}
+            className="pot-images"
+          />
+        </div>
+      );
+    });
 
-    const baseImages = allBaseSkus.map((baseSku, index) => (
-      <div>
-        <img
-          key={index}
-          onClick={() => this.setState(() => ({ currentBaseImage: index }))}
-          src={baseSku.image}
-        />
-      </div>
-    ));
+    // show all base images and display selected base info
+    const baseImages = allBaseSkus.map((baseSku, index) => {
+      const baseName = products.find(({ id }) => baseSku.product === id).name;
+      return (
+        <div
+          className={`base-image__box ${
+            baseSku.id === this.state.currentBaseSku.id ? 'active' : ''
+          }`}
+        >
+          <div
+            key={index}
+            onClick={() =>
+              this.setState(() => ({
+                currentBaseSku: {
+                  name: baseName,
+                  id: baseSku.id,
+                  material: baseSku.attributes.material,
+                  size: baseSku.attributes.size
+                }
+              }))
+            }
+            style={{
+              backgroundImage: `url(${baseSku.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              overflow: 'hidden',
+              width: '5.5rem',
+              height: '5.5rem'
+            }}
+            className="base-images"
+          />
+        </div>
+      );
+    });
 
     const {
       name: plantName,
       caption: plantCaption,
       images: plantImages,
-      description: plantDescription,
-      metadata: plantMetadata
-    } = currentPlant;
+      description: plantDescription
+    } = currentPlantProduct;
 
     const thumbnails = plantImages.map((image, index) => (
-      <img
-        key={index}
-        onClick={() => this.setState(() => ({ currentPlantImage: index }))}
-        src={image}
-        style={{ width: '100%' }}
-      />
+      <div
+        className={`thumnail-image-box ${
+          index === this.state.currentPlantImage ? 'active' : ''
+        }`}
+      >
+        <div
+          key={index}
+          onClick={() => this.setState(() => ({ currentPlantImage: index }))}
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            overflow: 'hidden',
+            width: '9rem',
+            height: '9rem'
+          }}
+          className="thumnail-image"
+        />
+      </div>
     ));
 
     return (
       <div>
-        <Header />
+        <Header productHeader={true} />
         <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="row">
-                <div className="col-lg-2">{thumbnails}</div>
-                <div className="col-lg-10">
+          <div className="row product">
+            <div className="col-md-8 product-images">
+              <div className="row product-images">
+                <div className="col-md-2 product-images__thumnail">
+                  {thumbnails}
+                </div>
+                <div className="col-md-10 product-images__main-image">
                   <img
                     src={plantImages[currentPlantImage]}
                     alt="current plant"
@@ -106,42 +164,61 @@ class ProductDetailPage extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 product-detail">
+            <div className="col-md-4 product-detail">
               <div className="product-detail__header">{plantName}</div>
+              <div className="product-detail__price">
+                <span className="product-detail__price--value">$ 129</span>
+                <span className="product-detail__price--currency"> CAD</span>
+              </div>
               <div className="product-detail__caption">{plantCaption}</div>
               <div className="product-detail__description">
                 {plantDescription}
               </div>
               <div className="product-detail__pot-selection">
+                <div className="product-detail__selected-pot">
+                  <span className="product-detail__selected-pot--style">
+                    Pot Style:{' '}
+                  </span>
+                  <span className="product-detail__selected-pot--name">
+                    {this.state.currentPotSku.name} (
+                    {this.state.currentPotSku.color})
+                  </span>
+                </div>
                 <div className="product-detail__pot-images">{potImages}</div>
               </div>
               <div className="product-detail__base-selection">
+                <div className="product-detail__selected-base">
+                  <span className="product-detail__selected-base--style">
+                    Base Style:{' '}
+                  </span>
+                  <span className="product-detail__selected-base--name">
+                    {this.state.currentBaseSku.name} (
+                    {this.state.currentBaseSku.material})
+                  </span>
+                </div>
                 <div className="product-detail__base-images">{baseImages}</div>
               </div>
               <div className="product-detail__form">
-                <form>
-                  <label htmlFor="Quantity">Quantity</label>
-                  <div>
-                    <button>+</button>
-                    <input type="text" />
-                    <button>-</button>
-                  </div>
-                  <button>Add To Cart</button>
-                </form>
+                <Link to="/cart">
+                  <button
+                    className="product-detail__add-to-cart-btn"
+                    onClick={this.addItemsToCart}
+                  >
+                    Add To Cart
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
+        <div className="product-banner" />
+        <div className="product-instagram" />
+        <div className="product-review" />
       </div>
     );
   }
 }
 
-<img
-  class="thumbnails-carousel__image"
-  src="//cdn.allbirds.com/image/fetch/q_auto,f_auto/q_auto,f_auto,b_rgb:F2F2F2/https://cdn.shopify.com/s/files/1/1104/4168/products/Allbirds_August_ReFresh_WL_RN_Tuke_Jam_MED_3fb30925-5354-4c07-aac2-a53b3a529b36_120x120.png%3Fv%3D1534272340"
-  alt="[SQUARE]:Tuke Jam (Jam Sole)"
-/>;
 export default ProductDetailPage;
 
 // <ProductOnHover onHover={<div> Show this on hover </div>}>
@@ -157,3 +234,13 @@ export default ProductDetailPage;
 //   {plantMetadata.light}
 //   {plantMetadata.story}
 // </div>
+
+// <form>
+//   <label htmlFor="Quantity">Quantity</label>
+//   <div>
+//     <button>-</button>
+//     <input type="text" />
+//     <button>+</button>
+//   </div>
+//
+// </form>

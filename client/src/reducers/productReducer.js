@@ -4,7 +4,7 @@ import isEmpty from '../validation/is-empty';
 const initialState = {
   product: null,
   products: null,
-  loading: false,
+  loading: false
 };
 
 export default (state = initialState, action) => {

@@ -8,6 +8,8 @@
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
+  transition: translate(-100%);
+  z-index: 2;
 
   > * {
     display: flex;
@@ -41,7 +43,7 @@
 .header__logo {
   max-height: 4.8rem;
   min-height: 3rem;
-  color: $color-white;
+  // color: $color-white;
 }
 
 .header__icon {
@@ -49,13 +51,31 @@
   fill: $color-white;
 }
 
+.productHeader {
+  transition: all 0.25s ease-in;
+  &:hover {
+    box-shadow: $shadow-light;
+  }
+
+  a {
+    &:link,
+    &:visited {
+      color: $color-black;
+    }
+  }
+
+  .header__icon {
+    stroke: $color-black;
+    fill: $color-black;
+  }
+}
+
 .reducedHeaderOnScroll {
   background-color: $color-white;
-  color: $color-black;
   height: 6.2rem;
   box-shadow: $shadow-light;
   transition: all 0.25s ease-in;
-  
+
   a {
     &:link,
     &:visited {
@@ -73,23 +93,32 @@
 }
 
 // burgerMenu styling
+
 .header__burger-menu:hover {
   cursor: pointer;
 }
-
+.header__dropdown-menu-box {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+}
 .header__dropdown-menu {
-  width: 110%;
+  width: 100%;
+  margin: 6rem 3rem;
   height: 100vh;
-  margin-left: -1.5rem;
-  display: flex;
+  // display: flex;
+  display: none;
   flex-direction: column;
-  padding: 6rem 2rem 2rem 2rem;
-  background-color: #fff3f2;
+  background-color: $color-white;
+  z-index: 4;
+  transition: all 4s ease;
 }
 
-.header-dropdown__menu-items {
-  padding-top: 2rem;
-
+.header__dropdown-menu-items {
   a {
     display: block;
     color: $color-black;
@@ -100,16 +129,20 @@
     letter-spacing: 0.12rem;
     text-align: left;
   }
-  &__main,
-  &__secondary {
+
+  &--content {
     width: 90%;
+  }
+
+  &--image {
+    width: 100%;
     margin-left: 1.5rem;
   }
-  &__main {
-    border-bottom: 1px solid $color-grey-light-4;
+  &--main {
+    // border-bottom: 1px solid $color-grey-light-4;
     padding-bottom: 1.5rem;
   }
-  &__secondary {
+  &--secondary {
     padding-top: 1.5rem;
   }
 }
@@ -195,7 +228,7 @@
   }
 
   .header__logo {
-    max-height: 5.8rem;
+    max-height: 5.6rem;
     min-height: 4rem;
   }
 

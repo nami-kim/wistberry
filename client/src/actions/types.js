@@ -8,6 +8,6 @@ export const SKU_LOADING = 'SKU_LOADING';
 
 export const HANDLE_TOKEN = 'HANDLE_TOKEN';
 
-// export const PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND';
-// export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
-// export const GET_PROFILES = 'GET_PROFILES';
+export const GET_ERRORS = 'GET_ERRORS'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+

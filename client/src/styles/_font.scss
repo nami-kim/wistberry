@@ -60,3 +60,74 @@
   src: local('Circular Std Black Italic'),
     url('./font/CircularStd-BlackItalic.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: normal;
+  font-weight: 200;
+  src: local('HurmeGeometricSans3 Light'),
+    url('./font/HurmeGeometricSans3 Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: italic;
+  font-weight: 200;
+  src: local('HurmeGeometricSans3 Light Italic'),
+    url('./font/HurmeGeometricSans3 LightOblique.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: normal;
+  font-weight: 300;
+  src: local('HurmeGeometricSans3'),
+    url('./font/HurmeGeometricSans3.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: italic;
+  font-weight: 300;
+  src: local('HurmeGeometricSans3 Italic'),
+    url('./font/HurmeGeometricSans3 Oblique.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: normal;
+  font-weight: 400;
+  src: local('HurmeGeometricSans3 SemiBold'),
+    url('./font/HurmeGeometricSans3 SemiBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: italic;
+  font-weight: 400;
+  src: local('HurmeGeometricSans3 SemiBold Italic'),
+    url('./font/HurmeGeometricSans3 SemiBoldOblique.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: normal;
+  font-weight: 500;
+  src: local('HurmeGeometricSans3 Bold'),
+    url('./font/HurmeGeometricSans3 Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: italic;
+  font-weight: 500;
+  src: local('HurmeGeometricSans3 Bold Italic'),
+    url('./font/HurmeGeometricSans3 BoldOblique.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: normal;
+  font-weight: 600;
+  src: local('HurmeGeometricSans3 Black'),
+    url('./font/HurmeGeometricSans3 Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'HurmeGeometricSans3';
+  font-style: italic;
+  font-weight: 600;
+  src: local('HurmeGeometricSans3 Black Italic'),
+    url('./font/HurmeGeometricSans3 BlackOblique.otf') format('opentype');
+}

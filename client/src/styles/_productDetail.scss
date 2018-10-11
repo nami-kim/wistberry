@@ -1,0 +1,143 @@
+.product {
+  padding-top: 14rem;
+  padding-bottom: 7rem;
+  width: 100%;
+  font-family: 'HurmeGeometricSans3';
+}
+
+.thumnail-image {
+  width: 100%;
+}
+
+.thumnail-image-box {
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -0.5rem 0 1.5rem;
+  transition: all 0.1s ease-out;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid $color-grey-dark-3;
+  }
+}
+.product-images {
+  &__thumnail {
+  }
+
+  &__main-image {
+    margin-left: -1rem;
+  }
+}
+
+.product-detail {
+  width: 80%;
+  margin-left: -2rem;
+  &__header {
+    font-size: $font-m;
+    font-weight: 400;
+  }
+  &__price {
+    font-size: $font-s;
+    letter-spacing: 0.06rem;
+    font-weight: 300;
+  }
+  &__caption {
+    font-size: 1.1rem;
+    font-weight: 200;
+  }
+  &__description {
+    padding-top: $font-xs;
+    font-size: 1.5rem;
+    font-weight: 200;
+  }
+  .pot-image__box,
+  .base-image__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: all 0.1s ease;
+    &:hover {
+      border: 1px solid $color-grey-dark-3;
+    }
+  }
+  .pot-images,
+  .base-images {
+    width: 100%;
+    border-radius: 100%;
+    
+  }
+  .active {
+    border: 1px solid $color-grey-dark-3;
+  }
+
+  &__selected-pot,
+  &__selected-base {
+    margin-top: 3rem;
+    font-size: 1.2rem;
+
+    &--style {
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    &--name {
+    }
+  }
+  &__pot-images,
+  &__base-images {
+    display: flex;
+  }
+
+  &__selected-base {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+
+    &--style {
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    &--name {
+    }
+  }
+
+  &__form {
+    margin-top: 1rem;
+  }
+  &__add-to-cart-btn {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    border: none;
+    background: $color-black;
+    color: $color-white;
+    padding: 1.6rem;
+    border: 2px solid transparent;
+    border-radius: 0.2rem;
+    transform: all .2s ease-in;
+    &:hover {
+      color: $color-black;
+      background: $color-white;
+      border: 2px solid $color-black;
+    }
+  }
+}
+
+.product-banner {
+  height: 100vh;
+  background: $color-primary-pink;
+}
+.product-instagram {
+  height: 100vh;
+}
+.product-review {
+  height: 100vh;
+  background: $color-primary-pink;
+}

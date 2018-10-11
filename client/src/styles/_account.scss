@@ -1,0 +1,75 @@
+.account-page {
+  padding: 10rem 2rem;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  background-color: $color-primary-blue;
+  text-transform: uppercase;
+  display: flex-wrap;
+  &__title {
+    font-size: 2.2rem;
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+  }
+  &__logout {
+    padding-top: 1rem;
+    font-weight: 400;
+    font-size: 1.2rem;
+    a {
+      text-decoration: none;
+      color: $color-black;
+      text-decoration: underline;
+    }
+  }
+  &__order {
+    align-content: center;
+    padding-top: 2rem;
+    text-transform: lowercase;
+    font-size: 1.5rem;
+    min-height: 10rem;
+  }
+}
+.customer-profile {
+  width: 95%;
+  align-items: end;
+  min-height: 22rem;
+  margin: 5rem auto;
+  padding: 3.5rem;
+  text-transform: uppercase;
+  background: $color-white;
+  text-align: left;
+
+  &__name {
+    font-weight: 400;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+  }
+  &__email,
+  &__address {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+  }
+  &__address {
+    text-transform: lowercase;
+    &--add {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (min-width: $lg-viewport) {
+  .account-page {
+    padding-top: 18rem;
+  }
+  .customer-profile {
+    position: fixed;
+    right: 5rem;
+    width: 40rem;
+    min-height: 24rem;
+    &__address {
+   
+    }
+  }
+}

@@ -12,7 +12,7 @@ const AboutPage = () => {
           style={{
             backgroundImage:
               "url('https://s3-us-west-2.amazonaws.com/wistberry/images/bowery/animation.gif')",
-            backgroudSize: 'cover',
+            backgroundSize: 'cover',
             width: '524px',
             height: '282px'
           }}

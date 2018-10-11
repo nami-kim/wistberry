@@ -1,11 +1,6 @@
 .signup-page {
-  padding-top: 10rem;
+  padding: 9rem 0;
   background-color: $color-primary-blue;
-}
-.login__section,
-.signup__section {
-  padding: 3.6rem 0;
-  width: 100%;
 }
 
 .signup-form {
@@ -14,6 +9,7 @@
   margin: 0 auto;
   &__item {
     width: 100%;
+
   }
   &__label {
     display: block;
@@ -29,27 +25,50 @@
     width: 98%;
     padding: 1.8rem;
     margin: 0.3rem auto 1.5rem auto;
-    border: 1px solid $color-grey-light-3;
+    border: none;
+    border: 1px solid $color-grey-light-1;
     border-radius: 0.2rem;
     background: $color-white;
   }
+
   &__title {
     display: inline-block;
     font-size: 2rem;
-    letter-spacing: 0.08rem;
+    letter-spacing: 0.07rem;
     text-transform: uppercase;
     margin-bottom: 3rem;
+    &--comment {
+      font-size: 1.5rem;
+      font-weight: 300;
+      padding-bottom: 3rem;
+      
+    }
   }
+    
   &__error {
     display: block;
-    font-size: 1rem;
-    color: red;
     width: 98%;
-    margin: 0 auto;
-    font-style: italic;
+    margin: -0.5rem auto 1rem auto;
+    color: red;
+    font-size: 1.3rem;
+    &--password-strong {
+      color: rgb(0, 166, 153);
+    }
   }
+  &__forgot-password {
+    text-decoration: underline;
+    font-size: 1.2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__btn {
-    border: none;
+    display: block;
+    width: 98%;
+    padding: 1.8rem;
+    margin: 2.8rem auto 1.5rem auto;
+    border: 1px solid transparent;
     font-size: $font-xs;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
@@ -63,38 +82,42 @@
       color: $color-black;
       cursor: pointer;
     }
-    &__policy-agreement {
-      font-size: $font-s;
+  }
+  &__policy-agreement {
+    font-family: 'HurmeGeometricSans3';
+    font-weight: 300;
+    font-size: 1.2rem;
 
-      font-size: 1.1rem;
-      font-weight: 300;
-      a {
-        &:link,
-        &:visited {
-          text-decoration: none;
-          color: black;
-        }
+    a {
+      &:link,
+      &:visited {
+        text-decoration: none;
+        color: black;
+        text-decoration: underline;
       }
     }
   }
 }
 @media only screen and (min-width: $sm-viewport) {
+  .signup-page {
+    padding-top: 12rem;
+    &__content {
+      margin: 0 auto;
+    }
+  }
   .signup-form {
     &__field,
     &__label,
+    &__btn,
     &__error {
-      width: 43rem;
+      max-width: 50rem;
     }
   }
-
 }
 
 @media only screen and (min-width: $lg-viewport) {
-  
-  .login__section {
-    padding-left: 4rem;
-  }
-  .signup__section {
-    padding-right: 4rem;
+  .signup-page {
+    padding-top: 16rem;
+    
   }
 }

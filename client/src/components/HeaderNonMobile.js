@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
+import { connect } from 'react-redux';
 
 export class HeaderNonMobile extends Component {
   state = {
     isReducedHeader: false,
-    hover: false,
+    hover: false
   };
 
-  headerLinkIsClicked = () => this.setState(() => !this.state.headerLinkIsClicked)
+  headerLinkIsClicked = () =>
+    this.setState(() => !this.state.headerLinkIsClicked);
 
   reduceHeader = () => {
     const { isReducedHeader } = this.state;
@@ -28,25 +30,31 @@ export class HeaderNonMobile extends Component {
   }
 
   render() {
-    const { defaultHeader = false } = this.props;
+    const { defaultHeader, productHeader } = this.props;
+    const { isAuthenticated } = this.props.auth;
+
+    const classProductHeader = productHeader ? 'productHeader' : '';
     const classReducedHeader =
       this.state.isReducedHeader || defaultHeader
         ? 'reducedHeaderOnScroll'
         : '';
 
     const headerLogo =
-      this.state.isReducedHeader || defaultHeader || this.state.hover
+      this.state.isReducedHeader ||
+      defaultHeader ||
+      this.state.hover ||
+      productHeader
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
     return (
       <div className="show-header-non-mobile container">
         <div
-          className={`row header ${classReducedHeader}`}
+          className={`row header ${classProductHeader} ${classReducedHeader}`}
           onMouseOver={() => this.setState({ hover: true })}
           onMouseLeave={() => this.setState({ hover: false })}
         >
-          <div className="col-xs-4 header__section--left">
+          <div className="col-xs-5 header__section--left">
             <Link to="/collection/all-plants" className="shop">
               Shop
               <span>
@@ -69,7 +77,7 @@ export class HeaderNonMobile extends Component {
             <Link to="/blog">Blog</Link>
             <Link to="/quiz">Quiz</Link>
           </div>
-          <div className="col-xs-4 header__section--middle">
+          <div className="col-xs-2 header__section--middle">
             <Link to="/" className="logo">
               <img
                 src={headerLogo}
@@ -78,10 +86,18 @@ export class HeaderNonMobile extends Component {
               />
             </Link>
           </div>
-          <div className="col-xs-4 header__section--right">
-            <Link to="/account/signup">
-              Sign up
-            </Link>
+          <div className="col-xs-5 header__section--right">
+            {!isAuthenticated && (
+              <div style={{ display: 'flex' }}>
+                <Link to="/account/signup">Sign up</Link>
+                <Link to="/account/login">Log in</Link>
+              </div>
+            )}
+            {isAuthenticated && (
+              <div style={{ display: 'flex' }}>
+                <Link to="/account">Account</Link>
+              </div>
+            )}
             <a className="country" href="#">
               CAN
               <span>
@@ -123,4 +139,8 @@ export class HeaderNonMobile extends Component {
   }
 }
 
-export default HeaderNonMobile;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(HeaderNonMobile);

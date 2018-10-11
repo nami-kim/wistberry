@@ -1,13 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const passport = require('passport')
-const path = require('path');
+const passport = require('passport');
 
+const path = require('path');
 const products = require('./routes/api/products');
 const skus = require('./routes/api/skus');
 const billing = require('./routes/api/billing');
 const order = require('./routes/api/order');
+const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
+mongoose.set('useCreateIndex', true);
 mongoose
   .connect(
     db,
@@ -27,11 +30,19 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
+// Passport middlware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
+
 // Use Routes
 app.use('/api/products', products);
 app.use('/api/skus', skus);
 app.use('/api/billing', billing);
 app.use('/api/order', order);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
@@ -40,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
   // app.use(express.static(path.resolve(__dirname, 'client', 'build')))
   // Any routes that gets hit here(above), we're loading into react html file
   app.get('*', (req, res) => {
-    res.send(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.send(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 

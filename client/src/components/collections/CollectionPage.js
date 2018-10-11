@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import { COLLECTIONS } from '../common/constants';
 import { Link } from 'react-router-dom';
+import { getAllPlantProducts } from '../../actions/productActions';
 
 class CollectionPage extends Component {
   state = {};
@@ -11,7 +12,7 @@ class CollectionPage extends Component {
 
     const productList =
       collectionUrl === 'all-plants'
-        ? products.filter(product => product.metadata.type === 'plant')
+        ? getAllPlantProducts(products)
         : products.filter(product =>
             JSON.parse(product.metadata.collection).includes(collectionUrl)
           );
