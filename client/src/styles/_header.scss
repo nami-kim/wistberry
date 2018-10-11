@@ -100,7 +100,7 @@
   position: fixed;
   top: 0;
   right: 0;
- 
+
   bottom: 0;
   z-index: 0;
 }
@@ -122,30 +122,44 @@
     justify-content: space-between;
     align-items: center;
   }
+  &-logobox {
+    display: flex;
+    position: relative;
+  }
+  // &-circle {
+  //   height: 6.5rem;
+  //   width: 6.5rem;
+  //   border-radius: 100%;
+  //   // background: $color-primary-pink;
+  //   // background: $color-orange-red;
+  //   background: $color-orange-yellow;
+  //   z-index: -1;
+  // }
   &-logo {
     width: 50%;
     text-align: center;
     position: fixed;
-    top: 7rem;
+    top: 6rem;
     max-height: 4rem;
     min-height: 3rem;
-  }
-  &-items {
-   
-    
+    background: $color-primary-pink;
+    // background: $color-orange-red;
+    // background: $color-orange-yellow;
   }
   &-links {
-     margin-top: 14rem;
-    width: 20rem;
-   a {
+    width: 100%;
+    margin-top: 12rem;
+
+    a {
+      width: 20rem;
       display: block;
       color: $color-black;
       text-decoration: none;
-      font-size: 1.4rem;
-      padding: 1.4rem;
+      font-size: 1.3rem;
+      padding: 1rem 1.4rem;
       text-transform: uppercase;
       letter-spacing: 0.12rem;
-      text-align: center;
+      text-align: left;
     }
   }
 }

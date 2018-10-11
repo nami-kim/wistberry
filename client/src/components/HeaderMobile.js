@@ -64,7 +64,8 @@ export class HeaderMobile extends Component {
                 stroke: 'black'
               }}
               style={{
-                margin: '20px'
+                marginLeft: '20px',
+                marginTop: '16px'
               }}
               pathClassName="header__icon"
             />
@@ -148,8 +149,8 @@ export class HeaderMobile extends Component {
                     <BurgerMenu onClick={this.toggleBurgerMenu} />
                     <Link to="/cart">
                       <Icon
-                        width="28"
-                        height="28"
+                        width="26"
+                        height="26"
                         paths={ICON_PATHS['cart']}
                         pathStyle={{
                           strokeWidth: '0',
@@ -157,19 +158,23 @@ export class HeaderMobile extends Component {
                           stroke: 'black'
                         }}
                         style={{
-                          margin: '20px'
+                          marginRight: '20px',
+                          marginTop: '16'
                         }}
                       />
                     </Link>
                   </div>
 
-                  <Link to="/">
-                    <img
-                      src={headerLogo}
-                      className="header__slidebar-logo"
-                      alt="wistberry logo"
-                    />
+                  <Link to="/" className="header__slidebar-logobox">
+                    <div className="header__slidebar-circle">
+                      <img
+                        src={headerLogo}
+                        className="header__slidebar-logo"
+                        alt="wistberry logo"
+                      />
+                    </div>
                   </Link>
+
                   <div className="header__slidebar-links">
                     <div>
                       <Link to="/collection/all-plants">

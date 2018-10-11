@@ -22,7 +22,7 @@ const signupInnerForm = ({
         <div className="col-xs-12">
           <Form className="signup-form">
             <div className="signup-form__label signup-form__item">
-              <p className="signup-form__title">New Customers</p>
+              <p className="signup-form__title">Create Account</p>
             </div>
             <div className="signup-form__item">
               <label className="signup-form__label" htmlFor="firstname">
