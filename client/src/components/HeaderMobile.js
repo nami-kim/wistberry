@@ -64,8 +64,7 @@ export class HeaderMobile extends Component {
                 stroke: 'black'
               }}
               style={{
-                marginLeft: '20px',
-                marginTop: '16px'
+                margin: '20px'
               }}
               pathClassName="header__icon"
             />
@@ -89,46 +88,42 @@ export class HeaderMobile extends Component {
     );
 
     return (
-      <div>
-        {!this.state.mobileMenuOpen && (
-          <div className="show-header-mobile container">
-            <div
-              className={`row header ${classProductHeader} ${classReducedHeader}`}
-            >
-              <div className="col-xs-4 header--section__left">
-                <BurgerMenu
-                  onClick={this.toggleBurgerMenu}
-                  className="header__burger-menu"
-                />
-              </div>
-              <div className="col-xs-4 header__section--middle">
-                <Link to="/" className="logo">
-                  <img
-                    src={headerLogo}
-                    className="header__logo"
-                    alt="wistberry logo"
-                  />
-                </Link>
-              </div>
-              <div className="col-xs-4 header__section--right">
-                <Link to="/cart" className="cart">
-                  <span>
-                    <Icon
-                      width="30"
-                      height="30"
-                      paths={ICON_PATHS['cart']}
-                      pathStyle={{ strokeWidth: '0' }}
-                      style={{
-                        verticalAlign: 'middle'
-                      }}
-                      pathClassName="header__icon"
-                    />
-                  </span>
-                </Link>
-              </div>
-            </div>
+      <div className="show-header-mobile container">
+        <div
+          className={`row header ${classProductHeader} ${classReducedHeader}`}
+        >
+          <div className="col-xs-4 header--section__left">
+            <BurgerMenu
+              onClick={this.toggleBurgerMenu}
+              className="header__burger-menu"
+            />
           </div>
-        )}
+          <div className="col-xs-4 header__section--middle">
+            <Link to="/" className="logo">
+              <img
+                src={headerLogo}
+                className="header__logo"
+                alt="wistberry logo"
+              />
+            </Link>
+          </div>
+          <div className="col-xs-4 header__section--right">
+            <Link to="/cart" className="cart">
+              <span>
+                <Icon
+                  width="30"
+                  height="30"
+                  paths={ICON_PATHS['cart']}
+                  pathStyle={{ strokeWidth: '0' }}
+                  style={{
+                    verticalAlign: 'middle'
+                  }}
+                  pathClassName="header__icon"
+                />
+              </span>
+            </Link>
+          </div>
+        </div>
 
         {this.state.mobileMenuOpen && (
           <div className="show-header-mobile container">
@@ -145,37 +140,7 @@ export class HeaderMobile extends Component {
             >
               <div className="header__slidebar">
                 <div className="header__slidebar-items">
-                  <div className="header__slidebar-nav">
-                    <BurgerMenu onClick={this.toggleBurgerMenu} />
-                    <Link to="/cart">
-                      <Icon
-                        width="26"
-                        height="26"
-                        paths={ICON_PATHS['cart']}
-                        pathStyle={{
-                          strokeWidth: '0',
-                          fill: 'black',
-                          stroke: 'black'
-                        }}
-                        style={{
-                          marginRight: '20px',
-                          marginTop: '16'
-                        }}
-                      />
-                    </Link>
-                  </div>
-
-                  <Link to="/" className="header__slidebar-logobox">
-                    <div className="header__slidebar-circle">
-                      <img
-                        src={headerLogo}
-                        className="header__slidebar-logo"
-                        alt="wistberry logo"
-                      />
-                    </div>
-                  </Link>
-
-                  <div className="header__slidebar-links">
+                 
                     <div>
                       <Link to="/collection/all-plants">
                         Shop
@@ -204,7 +169,7 @@ export class HeaderMobile extends Component {
                     )}
                     {isAuthenticated && <Link to="/account">Account</Link>}
                     <Link to="/contact">Contact</Link>
-                  </div>
+                  
                 </div>
               </div>
             </div>
