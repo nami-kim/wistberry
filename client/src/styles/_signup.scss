@@ -1,5 +1,5 @@
 .signup-page {
-  padding: 9rem 0;
+  padding: 9rem 1rem;
   background-color: $color-primary-blue;
 }
 
@@ -9,24 +9,23 @@
   margin: 0 auto;
   &__item {
     width: 100%;
-
   }
   &__label {
     display: block;
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: 0.06rem;
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
   }
   &__field {
     display: block;
     font-size: 1.6rem;
-    width: 98%;
+    width: 100%;
     padding: 1.8rem;
     margin: 0.3rem auto 1.5rem auto;
     border: none;
-    border: 1px solid $color-grey-light-1;
+    border: 1px solid $color-grey-light-2;
     border-radius: 0.2rem;
     background: $color-white;
   }
@@ -35,54 +34,49 @@
     display: inline-block;
     font-size: 2rem;
     letter-spacing: 0.07rem;
-    text-transform: uppercase;
     margin-bottom: 3rem;
     &--comment {
       font-size: 1.5rem;
       font-weight: 300;
       padding-bottom: 3rem;
-      
     }
   }
-    
+
   &__error {
     display: block;
-    width: 98%;
+    width: 100%;
     margin: -0.5rem auto 1rem auto;
-    color: red;
-    font-size: 1.3rem;
+    color: $color-error;
+    font-size: 1.4rem;
     &--password-strong {
       color: rgb(0, 166, 153);
     }
   }
-  &__forgot-password {
-    text-decoration: underline;
-    font-size: 1.2rem;
+
+  &__forgot-password, &__no-account {
+    font-size: 1.3rem;
     &:hover {
       cursor: pointer;
+    }
+    &--text {
+      border-bottom: 1px solid $color-black;
+      display: inline-block;
+    }
+  }
+  &__no-account {
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid $color-grey-light-4;
+    p {
+      padding-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    a {
+      text-decoration: none;
+      color: black;
     }
   }
 
-  &__btn {
-    display: block;
-    width: 98%;
-    padding: 1.8rem;
-    margin: 2.8rem auto 1.5rem auto;
-    border: 1px solid transparent;
-    font-size: $font-xs;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    color: $color-white;
-    border-radius: 0.3rem;
-    background: $color-black;
-    background: $color-black;
-    &:hover {
-      background-color: $color-primary-blue;
-      border: 1px solid $color-black;
-      color: $color-black;
-      cursor: pointer;
-    }
-  }
   &__policy-agreement {
     font-family: 'HurmeGeometricSans3';
     font-weight: 300;
@@ -108,7 +102,6 @@
   .signup-form {
     &__field,
     &__label,
-    &__btn,
     &__error {
       max-width: 50rem;
     }
@@ -118,6 +111,5 @@
 @media only screen and (min-width: $lg-viewport) {
   .signup-page {
     padding-top: 16rem;
-    
   }
 }

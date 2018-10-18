@@ -19,3 +19,113 @@
     opacity: 1;
   }
 }
+
+.black-lg-btn {
+  display: block;
+  width: 100%;
+  max-width: 50rem;
+  padding: 1.8rem;
+  margin: 2.8rem auto 1.5rem auto;
+  border: 1px solid transparent;
+  font-size: $font-xs;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: $color-white;
+  border-radius: 0.3rem;
+  background: $color-black;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $color-black;
+    color: $color-black;
+    cursor: pointer;
+  }
+}
+
+.black-sm-btn {
+  display: block;
+  width: 100%;
+  max-width: 55rem;
+  padding: 1.4rem;
+  margin: 2.2rem auto;
+  border: 1px solid transparent;
+  font-size: $font-xs;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: $color-white;
+  border-radius: 0.2rem;
+  background: $color-black;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $color-black;
+    color: $color-black;
+    cursor: pointer;
+  }
+}
+
+.orangeyellow-lg-btn {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  border: none;
+  background: $color-orange-yellow;
+  color: $color-black;
+  padding: 1.6rem;
+  border: 2px solid transparent;
+  border-radius: 0.2rem;
+  transform: all 0.2s ease-in;
+  &:hover {
+    color: $color-black;
+    background: $color-white;
+    border: 2px solid $color-black;
+    cursor: pointer;
+  }
+}
+
+.modal-inner {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 300px;
+  width: 500px;
+  background: $color-white;
+  border: 1px solid $color-black;
+  margin: auto;
+  max-width: 96%;
+  max-height: 96%;
+  overflow: auto;
+  z-index: 401;
+  font-size: 1.6rem;
+}
+.modal-outer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  z-index: 301;
+  background-color: rgba($color: $color-grey-dark-1, $alpha: 0.4);
+}
+
+.to-uppercase {
+  text-transform: uppercase;
+}
+.no-display {
+  display: none;
+}
+.underline-red {
+  border-bottom: 2px solid red;
+  padding: 0.3rem;
+}
+.border-bottom-error {
+  border-bottom: 1px solid $color-error;
+}
+.subtract-mr-1rem {
+  margin-right: -1rem;
+}
+.text-red {
+  color: red;
+}

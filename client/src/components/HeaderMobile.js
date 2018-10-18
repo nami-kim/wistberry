@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 import { connect } from 'react-redux';
+import { toggleCartOpen } from '../actions/cartActions';
 
 export class HeaderMobile extends Component {
   state = {
@@ -13,6 +14,11 @@ export class HeaderMobile extends Component {
   toggleBurgerMenu = () => {
     const { mobileMenuOpen } = this.state;
     this.setState(() => ({ mobileMenuOpen: !mobileMenuOpen }));
+  };
+
+  toggleCartOpen = e => {
+    e.preventDefault();
+    this.props.toggleCartOpen();
   };
 
   // Reduce header size and styling on scroll
@@ -33,11 +39,11 @@ export class HeaderMobile extends Component {
   }
 
   render() {
-    const { defaultHeader, productHeader } = this.props;
+    const { defaultHeader, productHeader, checkoutHeader } = this.props;
     const { isAuthenticated } = this.props.auth;
     const classProductHeader = productHeader ? 'productHeader' : '';
     const classReducedHeader =
-      this.state.isReducedHeader || defaultHeader || this.state.mobileMenuOpen
+      this.state.isReducedHeader || defaultHeader || checkoutHeader || this.state.mobileMenuOpen
         ? 'reducedHeaderOnScroll'
         : '';
 
@@ -45,7 +51,7 @@ export class HeaderMobile extends Component {
       this.state.isReducedHeader ||
       defaultHeader ||
       this.state.mobileMenuOpen ||
-      productHeader
+      productHeader || checkoutHeader
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
@@ -55,16 +61,16 @@ export class HeaderMobile extends Component {
         {this.state.mobileMenuOpen ? (
           <span>
             <Icon
-              width="20"
-              height="20"
+              width="32"
+              height="32"
               paths={ICON_PATHS['cross']}
               pathStyle={{
-                strokeWidth: '0',
+                strokeWidth: '.5',
                 fill: 'black',
                 stroke: 'black'
               }}
               style={{
-                margin: '20px'
+                margin: '10px'
               }}
               pathClassName="header__icon"
             />
@@ -72,12 +78,11 @@ export class HeaderMobile extends Component {
         ) : (
           <span>
             <Icon
-              width="26"
-              height="26"
+              width="34"
+              height="34"
               paths={ICON_PATHS['menu']}
-              pathStyle={{ strokeWidth: '0' }}
+              pathStyle={{ strokeWidth: '.5' }}
               style={{
-                verticalAlign: 'middle',
                 margin: '10px'
               }}
               pathClassName="header__icon"
@@ -108,69 +113,56 @@ export class HeaderMobile extends Component {
             </Link>
           </div>
           <div className="col-xs-4 header__section--right">
-            <Link to="/cart" className="cart">
+            <a
+              href=""
+              onClick={this.toggleCartOpen}
+              className="cart"
+              style={{ padding: '0' }}
+            >
               <span>
                 <Icon
-                  width="30"
-                  height="30"
+                  width="35"
+                  height="35"
                   paths={ICON_PATHS['cart']}
-                  pathStyle={{ strokeWidth: '0' }}
+                  pathStyle={{ strokeWidth: '.4' }}
                   style={{
                     verticalAlign: 'middle'
                   }}
                   pathClassName="header__icon"
                 />
               </span>
-            </Link>
+            </a>
           </div>
         </div>
 
         {this.state.mobileMenuOpen && (
           <div className="show-header-mobile container">
-            <div
-              className="header__slidebar-box"
-              style={{
-                backgroundImage:
-                  "url('http://wistberry.imgix.net/images/products/ideas/plant-closeup5.jpg')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'left center',
-                overflow: 'hidden',
-                height: '100vh'
-              }}
-            >
-              <div className="header__slidebar">
-                <div className="header__slidebar-items">
-                 
-                    <div>
-                      <Link to="/collection/all-plants">
-                        Shop
-                        <span>
-                          <Icon
-                            width="14"
-                            height="14"
-                            paths={ICON_PATHS['chevron-down']}
-                            pathStyle={{ strokeWidth: '2' }}
-                            style={{
-                              paddingLeft: '4px',
-                              paddingTop: '2px'
-                            }}
-                          />
-                        </span>
-                      </Link>
-                    </div>
-                    <Link to="/about">About</Link>
-                    <Link to="/blog">Blog</Link>
-                    <Link to="/quiz">Quiz</Link>
-                    {!isAuthenticated && (
-                      <Link to="/account/signup">Sign up</Link>
-                    )}
-                    {!isAuthenticated && (
-                      <Link to="/account/login">Log in</Link>
-                    )}
-                    {isAuthenticated && <Link to="/account">Account</Link>}
-                    <Link to="/contact">Contact</Link>
-                  
+            <div className="header__slidebar">
+              <div className="header__slidebar-items">
+                <div>
+                  <Link to="/collection/all-plants">
+                    Shop
+                    <span>
+                      <Icon
+                        width="14"
+                        height="14"
+                        paths={ICON_PATHS['chevron-down']}
+                        pathStyle={{ strokeWidth: '2' }}
+                        style={{
+                          paddingLeft: '4px',
+                          paddingTop: '2px'
+                        }}
+                      />
+                    </span>
+                  </Link>
                 </div>
+                <Link to="/about">About</Link>
+                <Link to="/blog">Blog</Link>
+
+                {!isAuthenticated && <Link to="/signup">Sign up</Link>}
+                {!isAuthenticated && <Link to="/login">Log in</Link>}
+                {isAuthenticated && <Link to="/me/account">Account</Link>}
+                <Link to="/contact">Contact</Link>
               </div>
             </div>
           </div>
@@ -184,16 +176,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(HeaderMobile);
-
-// <div className="col-xs-7">
-//   <div
-//     className="header__dropdown-menu-items--image"
-//     style={{
-//       backgroundImage:
-//         "url('http://wistberry.imgix.net/images/products/ideas/plant-closeup5.jpg')",
-//       backgroundSize: 'cover',
-//       height: '100vh',
-//     }}
-//   />
-// </div>
+export default connect(
+  mapStateToProps,
+  { toggleCartOpen }
+)(HeaderMobile);

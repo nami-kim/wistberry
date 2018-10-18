@@ -8,6 +8,14 @@ export const SKU_LOADING = 'SKU_LOADING';
 
 export const HANDLE_TOKEN = 'HANDLE_TOKEN';
 
-export const GET_ERRORS = 'GET_ERRORS'
-export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
+export const TOGGLE_CART_OPEN = 'TOGGLE_CART_OPEN';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const FETCH_ITEMS_FROM_CART = 'FETCH_ITEMS_FROM_CART';
+export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';
+export const PLUS_QTY_TO_CART = 'PLUS_QTY_TO_CART';
+export const MINUS_QTY_TO_CART = 'MINUS_QTY_TO_CART';
+
+export const TOGGLE_MODAL_OPEN = 'TOGGLE_MODAL_OPEN';

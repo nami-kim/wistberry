@@ -29,7 +29,7 @@ export const loginInnerForm = ({ values, errors, touched, isSubmitting }) => (
     </div>
     <div className="signup-form__item">
       <button
-        className="signup-form__field signup-form__btn"
+        className="signup-form__field black-lg-btn"
         disabled={isSubmitting}
       >
         Log in
@@ -82,10 +82,7 @@ export const signupInnerForm = ({ values, errors, touched, isSubmitting }) => (
       <Field className="signup-form__field" type="text" name="firstname" />
     </div>
     <div className="signup-form__item">
-      <label
-        className="signup-form__label"
-        htmlFor="lastname"
-      >
+      <label className="signup-form__label" htmlFor="lastname">
         Last Name
       </label>
       {touched.lastname &&
@@ -120,11 +117,15 @@ export const signupInnerForm = ({ values, errors, touched, isSubmitting }) => (
         errors.passwordConfirmation && (
           <p className="signup-form__error">{errors.passwordConfirmation}</p>
         )}
-      <Field className="signup-form__field" type="password" name="passwordConfirmation" />
+      <Field
+        className="signup-form__field"
+        type="password"
+        name="passwordConfirmation"
+      />
     </div>
     <div className="signup-form__item">
       <button
-        className="signup-form__field signup-form__btn"
+        className="signup-form__field black-lg-btn"
         disabled={isSubmitting}
       >
         Sign up

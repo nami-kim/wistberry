@@ -1,75 +1,170 @@
 .account-page {
-  padding: 10rem 2rem;
   height: 100vh;
   margin: 0 auto;
-  text-align: center;
   background-color: $color-primary-blue;
-  text-transform: uppercase;
-  display: flex-wrap;
-  &__title {
-    font-size: 2.2rem;
-    letter-spacing: 0.2rem;
-    font-weight: 500;
+  // account-page__nav
+  &__menu-nav {
+    width: 90%;
+    height: 400px;
+    max-width: 400px;
+    min-width: 220px;
+    margin: 0 auto;
+    margin-top: 14rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    padding: 2.8rem;
+    background: $color-white;
+    text-align: left;
+    box-shadow: $shadow-light;
+    border: 1px solid $color-grey-light-3;
   }
-  &__logout {
-    padding-top: 1rem;
-    font-weight: 400;
-    font-size: 1.2rem;
-    a {
+  // account-page__menu
+  &__menu {
+    text-align: left;
+    &-icon {
+      margin-right: 1rem;
+    }
+
+    &-title {
+      font-weight: 400;
+      text-transform: uppercase;
+      border-bottom: 1px solid $color-grey-dark-4;
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &-items {
       text-decoration: none;
       color: $color-black;
-      text-decoration: underline;
+      padding: 1.4rem 0;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+      span {
+        padding: 0.5rem;
+        transition: all 0.1s ease-in;
+        border-bottom: 1px solid transparent;
+        &:hover {
+          border-bottom: 1px solid black;
+        }
+      }
     }
   }
-  &__order {
+  &__top-icons {
+    display: flex;
+    justify-content: space-between;
     align-content: center;
-    padding-top: 2rem;
-    text-transform: lowercase;
-    font-size: 1.5rem;
-    min-height: 10rem;
+  }
+  &__edit-icon,
+  &__back-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 1rem;
+    text-transform: uppercase;
+  }
+  &__edit-icon {
+    justify-content: flex-end;
+    color: $color-grey-dark-3;
+  }
+  &__back-icon {
+    justify-content: flex-start;
+  }
+  #account-menu-icon {
+    &:hover {
+      fill: #89c5da;
+    }
+  }
+  // account-page__details
+  &__details {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 14rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    padding: 1rem;
+    text-align: left;
+    background: $color-white;
+    height: 400px;
+    box-shadow: $shadow-light;
+    border: 1px solid $color-grey-light-3;
+  }
+  &__title {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    font-weight: 500;
+    text-align: center;
+  }
+  &__body {
+    margin-top: 3rem;
+  }
+  &__profile {
   }
 }
-.customer-profile {
-  width: 95%;
-  align-items: end;
-  min-height: 22rem;
-  margin: 5rem auto;
-  padding: 3.5rem;
-  text-transform: uppercase;
-  background: $color-white;
-  text-align: left;
+.profile-item {
+  padding: 1.4rem;
+  display: flex;
 
-  &__name {
-    font-weight: 400;
-    font-size: 1.5rem;
-    letter-spacing: 0.2rem;
+  &__title {
+    text-transform: uppercase;
+    width: 10rem;
   }
-  &__email,
-  &__address {
-    margin-top: 2rem;
-    font-size: 1.4rem;
+  &__field {
+    width: 10rem;
+    align-items: center;
+    display: flex;
   }
-  &__address {
-    text-transform: lowercase;
-    &--add {
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      text-decoration: underline;
+}
+.hide-on-mobile {
+  display: none;
+}
+@media only screen and (min-width: $sm-viewport) {
+}
+@media only screen and (min-width: $md-viewport) {
+  .hide-on-mobile {
+    display: block;
+  }
+  .hide-on-desktop {
+    display: none;
+  }
+  .account-page {
+    padding: 1rem 3rem;
+
+    &__menu-nav {
+      background: $color-white;
+      width: 95%;
     }
+    &__details {
+      width: 95%;
+      padding: 2rem;
+    }
+    &__top-icons {
+    justify-content: flex-end;
+  }
   }
 }
 
 @media only screen and (min-width: $lg-viewport) {
   .account-page {
-    padding-top: 18rem;
-  }
-  .customer-profile {
-    position: fixed;
-    right: 5rem;
-    width: 40rem;
-    min-height: 24rem;
-    &__address {
-   
+    padding: 1rem 7rem;
+    &__menu-nav {
+      height: 400px;
+      box-shadow: none;
     }
+    &__menu-items {
+      &:hover {
+      }
+    }
+    &__details {
+      height: 400px;
+      padding: 2.8rem;
+    }
+  }
+  .underline {
+    padding: 0.5rem;
+    border-bottom: 1px solid black !important;
   }
 }

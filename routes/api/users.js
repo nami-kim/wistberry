@@ -10,6 +10,7 @@ const _ = require('lodash');
 const User = require('../../models/User');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const validatePasswordForgotInput = require('../../validation/password-forgot');
 
 router.get('/test', (req, res) => res.json({ msg: 'Users works' }));
 
@@ -19,7 +20,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = 'Email already exists';
+      errors.email = 'This email address is already in use.';
       return res.status(400).send(errors);
     }
     const newUser = new User(
@@ -56,7 +57,7 @@ router.post('/register', (req, res) => {
               }
             );
           })
-          .catch(err => console.log(err));
+          .catch(err => res.status(400).send(err));
       });
     });
   });
@@ -71,7 +72,7 @@ router.post('/login', (req, res) => {
 
   User.findOne({ email }).then(user => {
     if (!user) {
-      errors.email = 'User not found'
+      errors.email = 'This user does not exist.';
       return res.status(404).send(errors);
     }
 
@@ -99,10 +100,39 @@ router.post('/login', (req, res) => {
           }
         );
       } else {
-        errors.password = 'Password incorrect'
+        errors.password =
+          'The password you entered is incorrect. Try again, or reset your password.';
         return res.status(400).send(errors);
       }
     });
+  });
+});
+
+
+router.get('/users', (req, res) => {
+  const email = decodeURIComponent(req.body.query.email);
+
+  User.findOne({ email }).then(user => {
+    if (user) {
+      errors.message = `${req.body.query} already registered.`;
+      return res.status(404).send(errors);
+    }
+  });
+});
+
+router.post('/reset-password', (req, res) => {
+  const { errors, isValid } = validatePasswordForgotInput(req.body);
+  if (!isValid) return res.status(400).send(errors);
+
+  const email = req.body.email;
+
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      errors.email = 'This user does not exist.';
+      return res.status(404).send(errors);
+    }
+    // Reset password
+    // Send an email
   });
 });
 

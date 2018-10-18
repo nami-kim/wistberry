@@ -8,7 +8,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Order Works' }));
 router.post('/stripe', (req, res) => {
   stripe.orders
     .create({
-      currency: 'usd', // ?
+      currency: 'cad',
       items: [
         {
           type: 'sku',

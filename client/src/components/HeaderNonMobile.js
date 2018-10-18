@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 import { connect } from 'react-redux';
+import { toggleCartOpen } from '../actions/cartActions';
 
 export class HeaderNonMobile extends Component {
   state = {
@@ -10,8 +11,8 @@ export class HeaderNonMobile extends Component {
     hover: false
   };
 
-  headerLinkIsClicked = () =>
-    this.setState(() => !this.state.headerLinkIsClicked);
+  // headerLinkIsClicked = () =>
+  //   this.setState(() => !this.state.headerLinkIsClicked);
 
   reduceHeader = () => {
     const { isReducedHeader } = this.state;
@@ -19,6 +20,11 @@ export class HeaderNonMobile extends Component {
     window.scrollY > 10
       ? !isReducedHeader && this.setState(() => ({ isReducedHeader: true }))
       : isReducedHeader && this.setState(() => ({ isReducedHeader: false }));
+  };
+
+  toggleCartOpen = e => {
+    e.preventDefault();
+    this.props.toggleCartOpen();
   };
 
   componentDidMount() {
@@ -30,12 +36,12 @@ export class HeaderNonMobile extends Component {
   }
 
   render() {
-    const { defaultHeader, productHeader } = this.props;
+    const { defaultHeader, productHeader, checkoutHeader } = this.props;
     const { isAuthenticated } = this.props.auth;
 
     const classProductHeader = productHeader ? 'productHeader' : '';
     const classReducedHeader =
-      this.state.isReducedHeader || defaultHeader
+      this.state.isReducedHeader || defaultHeader || checkoutHeader
         ? 'reducedHeaderOnScroll'
         : '';
 
@@ -43,7 +49,8 @@ export class HeaderNonMobile extends Component {
       this.state.isReducedHeader ||
       defaultHeader ||
       this.state.hover ||
-      productHeader
+      productHeader ||
+      checkoutHeader
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
@@ -72,10 +79,11 @@ export class HeaderNonMobile extends Component {
                 />
               </span>
             </Link>
-
-            <Link to="/about">About</Link>
-            <Link to="/blog">Blog</Link>
-            <Link to="/quiz">Quiz</Link>
+            <div className={`${checkoutHeader && 'no-display'}`}>
+              <Link to="/about">About</Link>
+              <Link to="/blog">Blog</Link>
+              <Link to="/quiz">Quiz</Link>
+            </div>
           </div>
           <div className="col-xs-2 header__section--middle">
             <Link to="/" className="logo">
@@ -87,51 +95,36 @@ export class HeaderNonMobile extends Component {
             </Link>
           </div>
           <div className="col-xs-5 header__section--right">
-            {!isAuthenticated && (
-              <div style={{ display: 'flex' }}>
-                <Link to="/account/signup">Sign up</Link>
-                <Link to="/account/login">Log in</Link>
-              </div>
-            )}
-            {isAuthenticated && (
-              <div style={{ display: 'flex' }}>
-                <Link to="/account">Account</Link>
-              </div>
-            )}
-            <a className="country" href="#">
-              CAN
-              <span>
-                <Icon
-                  width="14"
-                  height="14"
-                  paths={ICON_PATHS['chevron-down']}
-                  pathStyle={{ strokeWidth: '2' }}
-                  style={{
-                    verticalAlign: '',
-                    paddingLeft: '4px',
-                    paddingTop: '2px'
-                  }}
-                  pathClassName="header__icon"
-                />
-              </span>
-            </a>
-            <Link to="/cart" className="cart">
+            <div className={`${checkoutHeader && 'no-display'}`}>
+              {!isAuthenticated && (
+                <div style={{ display: 'flex' }}>
+                  <Link to="/signup">Sign up</Link>
+                  <Link to="/login">Log in</Link>
+                </div>
+              )}
+              {isAuthenticated && (
+                <div style={{ display: 'flex' }}>
+                  <Link to="/me/account">Account</Link>
+                </div>
+              )}
+            </div>
+
+            <a href="" onClick={this.toggleCartOpen} className="cart">
               CART
               <span>
                 <Icon
-                  width="28"
-                  height="28"
+                  width="35"
+                  height="35"
                   paths={ICON_PATHS['cart']}
-                  pathStyle={{ strokeWidth: '0' }}
+                  pathStyle={{ strokeWidth: '.4' }}
                   style={{
-                    paddingLeft: '4px',
-                    verticalAlign: 'middle',
+                    verticalAlign: 'top',
                     margin: '-12px 0px'
                   }}
                   pathClassName="header__icon"
                 />
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -143,4 +136,31 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(HeaderNonMobile);
+export default connect(
+  mapStateToProps,
+  { toggleCartOpen }
+)(HeaderNonMobile);
+
+// <a className="country" href="#">
+//   <img
+//     alt="country icon"
+//     src='http://wistberry.imgix.net/images/flags/canada.png'
+//     style={{ width: '3rem', height: '1.9rem', paddingTop: '3px' }}
+//     className="header__icon--country"
+
+//   />
+// </a>
+// <span>
+//   <Icon
+//     width="14"
+//     height="14"
+//     paths={ICON_PATHS['chevron-down']}
+//     pathStyle={{ strokeWidth: '2' }}
+//     style={{
+//       verticalAlign: 'top',
+//       paddingLeft: '4px',
+//       paddingTop: '2px'
+//     }}
+//     pathClassName="header__icon"
+//   />
+// </span>

@@ -1,0 +1,25 @@
+.StripeElement {
+  display: block;
+  
+  
+  background: $color-white;
+  padding: 1.4rem;
+  margin: 0.9rem auto;
+  border-radius: 0.2rem;
+  border-bottom: 1px solid $color-grey-dark-2;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+.StripeElement--input {
+// font-size: 1.4rem;
+font-family: 'HurmeGeometricSans3';
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}

@@ -5,20 +5,23 @@ $color-primary-blue: #e6eaed;
 $color-orange-red: #fc534e;
 $color-letter-highlight: #f41f4d;
 $color-orange-yellow: #ffd16d;
+$color-light-blue: #89c5da;
 
-$color-secondary: #101d2c;
+$color-blue: #2a73cc;
 $color-white: #ffffff;
 $color-black: black;
+$color-red: red;
+$color-error: #eb1c26;
 
 $color-grey-light-1: #faf9f9;
 $color-grey-light-2: #f4f2f2;
 $color-grey-light-3: #f0eeee;
 $color-grey-light-4: #ccc;
-
+$color-grey-background: #f2f2f2;
 $color-grey-dark-1: #333;
 $color-grey-dark-2: #777;
 $color-grey-dark-3: #999;
-$color-grey-dark-4: rgb(199, 196, 196);
+$color-grey-dark-4: rgb(196, 198, 199);
 
 // FONT VARIABLES
 $font-primary: 'Circular';
@@ -34,6 +37,7 @@ $font-xl: 8rem;
 
 // shadow
 $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+$shadow-mid: 0 2rem 5rem rgba(0, 0, 0, 0.12);
 $shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.08);
 
 *,
