@@ -2,11 +2,15 @@
 
 $color-primary-pink: #fff3f2;
 $color-primary-blue: #e6eaed;
+$color-primary-grey: rgb(72, 72, 72);
+// $color-primary-blue: rgb(235, 245, 251);
 $color-orange-red: #fc534e;
 $color-letter-highlight: #f41f4d;
 $color-orange-yellow: #ffd16d;
-$color-light-blue: #89c5da;
-
+$color-light-blue: #ebf5fb;
+// $color-light-blue: #e6eef3;
+$color-dark-blue: #1e306e;
+$color-navy: #051a30;
 $color-blue: #2a73cc;
 $color-white: #ffffff;
 $color-black: black;
@@ -38,7 +42,8 @@ $font-xl: 8rem;
 // shadow
 $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 $shadow-mid: 0 2rem 5rem rgba(0, 0, 0, 0.12);
-$shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.08);
+$shadow-light: 0 0rem 1rem rgba(0, 0, 0, 0.12);
+$shadow-all-light: 0.4rem 1rem 2rem rgba(0, 0, 0, 0.1);
 
 *,
 *::before,
@@ -56,7 +61,12 @@ html {
 body {
   font-family: $font-primary;
   font-weight: 300;
-  font-weight: 300;
   line-height: 1.6;
 }
+
+button {
+  font-family: $font-primary;
+  font-weight: 300;
+}
+
 

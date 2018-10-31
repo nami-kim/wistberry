@@ -5,6 +5,7 @@ const stripe = require('stripe')(stripeKey);
 
 router.get('/test', (req, res) => res.json({ msg: 'Billing Works' }));
 
+// Creates a stripe customer & Create an order & Charge the order to the customer
 router.post('/stripe', async (req, res) => {
   try {
     let customer;

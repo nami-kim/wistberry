@@ -13,9 +13,10 @@
   right: 0;
   bottom: 0;
   top: 0;
+  overflow: auto;
   width: 100%;
   background: $color-white;
-  margin-top: 0.5rem 0;
+  margin: 0 auto;
   padding: 2rem;
   z-index: 101;
 
@@ -30,7 +31,8 @@
   }
 
   &__free-shipping {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    color: $color-blue;
     text-align: center;
     padding: 1.1rem;
     border-bottom: 1rem solid $color-primary-blue;
@@ -39,14 +41,14 @@
 
   &__product-summary {
     margin: 2rem 0 2.2rem 0;
-    border-bottom: 1px solid $color-grey-dark-4;
+    border-bottom: 1px solid $color-grey-light-4;
     padding: 2rem 0;
   }
   &__product-image {
     border: $color-grey-dark-2;
   }
   &__plant-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 400;
   }
   &__pot-name,
@@ -64,6 +66,7 @@
     padding: 0.8rem 0;
   }
   &__qty-control-bar {
+    margin-left: 1rem;
     border: 2px solid $color-grey-light-4;
     display: flex;
     justify-content: space-evenly;
@@ -74,7 +77,7 @@
   }
   &__price {
     font-size: 1.4rem;
-    text-align: left;
+    text-align: right;
   }
   &__bottom {
     background: $color-grey-background;
@@ -93,6 +96,30 @@
     font-size: 1.4rem;
     font-weight: 300;
   }
+  &__total {
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+  &__trash-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__plus-icon, &__minus-icon, &__cross-icon, &__cart-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__no-items {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+  }
+  &__continue-shopping {
+    width: 25rem;
+    margin: 0 auto;
+  }
 }
 
 // Cart Summary Page Starts Here
@@ -104,9 +131,7 @@
   overflow: auto;
   z-index: 51;
   background: $color-white;
-  &__product-summary {
-    // border-bottom: 1px solid $color-grey-dark-4;
-  }
+ 
   &__product-details {
     text-align: left;
     margin-bottom: 1rem;
@@ -141,16 +166,16 @@
     right: 0;
     bottom: 0;
     top: 0;
-    width: 460px;
+    width: 470px;
   }
 }
 
-@media only screen and (min-width: $md-viewport) {
-  .cart-summary {
-    position: absolute;
-    top: 6rem;
-    right: 0;
-    overflow: auto;
-    box-shadow: $shadow-light;
-  }
-}
+// @media only screen and (min-width: $md-viewport) {
+//   .cart-summary {
+//     position: absolute;
+//     top: 6rem;
+//     right: 0;
+//     overflow: auto;
+//     box-shadow: $shadow-light;
+//   }
+// }

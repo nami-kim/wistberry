@@ -13,51 +13,65 @@ class SignupInnerForm extends Component {
       errors,
       touched,
       isSubmitting,
-      handleChange
+      handleChange,
+      type
     } = this.props;
 
     return (
       <div>
         <Form className="signup-form">
-          <div className="signup-form__label signup-form__item">
-            <p className="signup-form__title">Create Account</p>
-          </div>
-          <div className="signup-form__item">
-            <label className="signup-form__label" htmlFor="firstname">
-              First Name
-            </label>
-            <div className="signup-form__error">
-              {touched.firstname &&
-                errors.firstname && (
-                  <p className="signup-form__error--item">{errors.firstname}</p>
-                )}
+          {type === 'signup' && (
+            <div className="signup-form__label signup-form__item">
+              <p className="signup-form__title">Create Account</p>
             </div>
-            <Field
-              className="signup-form__field"
-              type="text"
-              name="firstname"
-              value={values.firstname}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="signup-form__item">
-            <label className="signup-form__label" htmlFor="lastname">
-              Last Name
-            </label>
-            <div className="signup-form__error">
-              {touched.lastname &&
-                errors.lastname && (
-                  <p className="signup-form__error--item">{errors.lastname}</p>
-                )}
+          )}
+          <div className="row signup-form__name">
+            <div className="col-xs-6 no-gutter reduced-gutter-right">
+              <div className="signup-form__item">
+                <label className="signup-form__label" htmlFor="firstname">
+                  First Name
+                </label>
+                <div className="signup-form__error">
+                  {touched.firstname &&
+                    errors.firstname && (
+                      <p className="signup-form__error--item">
+                        {errors.firstname}
+                      </p>
+                    )}
+                </div>
+                <Field
+                  className="signup-form__field"
+                  type="text"
+                  name="firstname"
+                  value={values.firstname}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-            <Field
-              className="signup-form__field"
-              type="text"
-              name="lastname"
-              value={values.lastname}
-              onChange={handleChange}
-            />
+            <div className="col-xs-6 no-gutter reduced-gutter-left">
+              <div className="signup-form__item">
+                <label className="signup-form__label" htmlFor="lastname">
+                  Last Name
+                </label>
+                <div className="signup-form__error">
+                  {touched.lastname &&
+                    errors.lastname && (
+                      <p className="signup-form__error--item">
+                        {errors.lastname}
+                      </p>
+                    )}
+                </div>
+                <Field
+                  className="signup-form__field"
+                  type="text"
+                  name="lastname"
+                  value={values.lastname}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
           </div>
+
           <div className="signup-form__item">
             <label className="signup-form__label" htmlFor="email">
               Email
@@ -100,8 +114,10 @@ class SignupInnerForm extends Component {
                     <p className="signup-form__error--item">
                       Password strength: Weak
                     </p>
-                    {errors.password.map(password => (
-                      <p className="signup-form__error--item">{password}</p>
+                    {errors.password.map((password, index) => (
+                      <p key={index} className="signup-form__error--item">
+                        {password}
+                      </p>
                     ))}
                   </div>
                 )}
@@ -109,13 +125,15 @@ class SignupInnerForm extends Component {
           </div>
           <div className="signup-form__item">
             <Button type="submit" disabled={isSubmitting}>
-              Sign up
+              {type}
             </Button>
-            <p className="signup-form__label signup-form__policy-agreement">
-              By registering you agree to our{' '}
-              <Link to="/terms-of-use">Terms of Use</Link> and{' '}
-              <Link to="/privacy-policy">Privacy Policy</Link>
-            </p>
+            {type === 'signup' && (
+              <p className="signup-form__label signup-form__policy-agreement">
+                By registering you agree to our{' '}
+                <Link to="/terms-of-use">Terms of Use</Link> and{' '}
+                <Link to="/privacy-policy">Privacy Policy</Link>
+              </p>
+            )}
           </div>
         </Form>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import StripeCheckoutForm from './StripeCheckoutForm';
+import { withFormik, Form, Field } from 'formik';
 
 class PaymentForm extends Component {
   render() {

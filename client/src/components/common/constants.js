@@ -16,7 +16,7 @@ export const COLLECTIONS = [
   },
   {
     name: 'Safe For Pets',
-    url: 'safe-for-pets',
+    url: 'pet-safe-plants',
     image: 'http://wistberry.imgix.net/images/products/eight/main.jpg'
   },
   {

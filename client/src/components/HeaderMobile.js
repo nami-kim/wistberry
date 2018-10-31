@@ -4,11 +4,13 @@ import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 import { connect } from 'react-redux';
 import { toggleCartOpen } from '../actions/cartActions';
+import ShopCategory from './ShopCategory';
 
 export class HeaderMobile extends Component {
   state = {
     isReducedHeader: false,
-    mobileMenuOpen: false
+    mobileMenuOpen: false,
+    shopCategoryOpen: false
   };
 
   toggleBurgerMenu = () => {
@@ -19,6 +21,11 @@ export class HeaderMobile extends Component {
   toggleCartOpen = e => {
     e.preventDefault();
     this.props.toggleCartOpen();
+  };
+
+  toggleShopCategory = e => {
+    e.preventDefault();
+    this.setState(() => ({ shopCategoryOpen: !this.state.shopCategoryOpen }));
   };
 
   // Reduce header size and styling on scroll
@@ -43,15 +50,21 @@ export class HeaderMobile extends Component {
     const { isAuthenticated } = this.props.auth;
     const classProductHeader = productHeader ? 'productHeader' : '';
     const classReducedHeader =
-      this.state.isReducedHeader || defaultHeader || checkoutHeader || this.state.mobileMenuOpen
+      this.state.isReducedHeader ||
+      this.state.shopCategoryOpen ||
+      defaultHeader ||
+      checkoutHeader ||
+      this.state.mobileMenuOpen
         ? 'reducedHeaderOnScroll'
         : '';
 
     const headerLogo =
       this.state.isReducedHeader ||
+      this.state.shopCategoryOpen ||
       defaultHeader ||
       this.state.mobileMenuOpen ||
-      productHeader || checkoutHeader
+      productHeader ||
+      checkoutHeader
         ? 'http://wistberry.imgix.net/images/logo/logo_4.svg'
         : 'http://wistberry.imgix.net/images/logo/logo_4_white.svg';
 
@@ -94,6 +107,7 @@ export class HeaderMobile extends Component {
 
     return (
       <div className="show-header-mobile container">
+        {this.state.shopCategoryOpen && <ShopCategory />}
         <div
           className={`row header ${classProductHeader} ${classReducedHeader}`}
         >
@@ -116,7 +130,7 @@ export class HeaderMobile extends Component {
             <a
               href=""
               onClick={this.toggleCartOpen}
-              className="cart"
+              className="header__cart"
               style={{ padding: '0' }}
             >
               <span>
@@ -131,6 +145,9 @@ export class HeaderMobile extends Component {
                   pathClassName="header__icon"
                 />
               </span>
+              <div className="header__cart-count">
+                <div>{this.props.cart.length}</div>
+              </div>
             </a>
           </div>
         </div>
@@ -140,7 +157,10 @@ export class HeaderMobile extends Component {
             <div className="header__slidebar">
               <div className="header__slidebar-items">
                 <div>
-                  <Link to="/collection/all-plants">
+                  <Link
+                    to="/collection/all-plants"
+                    onClick={this.toggleShopCategory}
+                  >
                     Shop
                     <span>
                       <Icon
@@ -173,7 +193,8 @@ export class HeaderMobile extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  cart: state.cart.cart
 });
 
 export default connect(

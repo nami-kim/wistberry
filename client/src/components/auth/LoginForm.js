@@ -17,13 +17,13 @@ class loginInnerForm extends Component {
     }));
   };
   render() {
-    const { title, errors, touched, isSubmitting } = this.props;
+    const { title, errors, touched, isSubmitting, type } = this.props;
 
     return (
       <div>
-        {!this.state.passwordForgotFormOpen && (
-          <div>
-            <Form className="signup-form">
+        <Form className="signup-form">
+          {!this.state.passwordForgotFormOpen && (
+            <div>
               <div className="signup-form__label signup-form__item">
                 <p
                   className={`signup-form__title ${
@@ -33,7 +33,10 @@ class loginInnerForm extends Component {
                   {title}
                 </p>
               </div>
-              <div className="signup-form__item">
+              <div
+                className={`signup-form__item ${type === 'userExists' &&
+                  'no-display'}`}
+              >
                 <label className="signup-form__label" htmlFor="email">
                   Email
                 </label>
@@ -72,40 +75,41 @@ class loginInnerForm extends Component {
                   Log in
                 </Button>
               </div>
-            </Form>
-            <div
-              className="signup-form__label signup-form__forgot-password"
-              onClick={this.onPasswordForgotClick}
-            >
-              <span className="signup-form__forgot-password--text">
-                Forgot password?
-              </span>
-            </div>
-            <div
-              className="signup-form__label signup-form__no-account"
-            >
-              <p>Don't have an account?</p>
-              <Link to="/signup">
-                <span className="signup-form__no-account--text">
-                  Sign up
+              <div
+                className="signup-form__label signup-form__forgot-password"
+                onClick={this.onPasswordForgotClick}
+              >
+                <span className="signup-form__forgot-password--text">
+                  Forgot password?
                 </span>
-              </Link>
+              </div>
+              <div className="signup-form__label signup-form__no-account">
+                <p className={`${type === 'userExists' && 'no-display'}`}>
+                  Don't have an account?
+                </p>
+                <Link
+                  className={`${type === 'userExists' && 'no-display'}`}
+                  to="/signup"
+                >
+                  <span className="signup-form__no-account--text">Sign up</span>
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
-        {this.state.passwordForgotFormOpen && (
-          <div>
-            <PasswordForgotForm />
-            <div
-              className="signup-form__label signup-form__forgot-password"
-              onClick={this.onPasswordForgotClick}
-            >
-              <span className="signup-form__forgot-password--text">
-              Cancel
-              </span>
+          )}
+          {this.state.passwordForgotFormOpen && (
+            <div>
+              <PasswordForgotForm />
+              <div
+                className="signup-form__label signup-form__forgot-password"
+                onClick={this.onPasswordForgotClick}
+              >
+                <span className="signup-form__forgot-password--text">
+                  Cancel
+                </span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </Form>
       </div>
     );
   }

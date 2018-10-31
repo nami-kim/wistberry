@@ -8,7 +8,7 @@ const SignupPage = () => (
     <div className="container signup-page">
       <div className="row signup-page__content">
         <div className="col-xs-12">
-          <SignupForm />
+          <SignupForm type="signup"/>
         </div>
       </div>
     </div>

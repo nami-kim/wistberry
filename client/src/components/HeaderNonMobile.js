@@ -4,15 +4,14 @@ import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 import { connect } from 'react-redux';
 import { toggleCartOpen } from '../actions/cartActions';
+import ShopCategory from './ShopCategory';
 
 export class HeaderNonMobile extends Component {
   state = {
     isReducedHeader: false,
-    hover: false
+    hover: false,
+    shopCategoryOpen: false
   };
-
-  // headerLinkIsClicked = () =>
-  //   this.setState(() => !this.state.headerLinkIsClicked);
 
   reduceHeader = () => {
     const { isReducedHeader } = this.state;
@@ -25,6 +24,10 @@ export class HeaderNonMobile extends Component {
   toggleCartOpen = e => {
     e.preventDefault();
     this.props.toggleCartOpen();
+  };
+  toggleShopCategory = e => {
+    e.preventDefault();
+    this.setState(() => ({ shopCategoryOpen: !this.state.shopCategoryOpen }));
   };
 
   componentDidMount() {
@@ -41,12 +44,16 @@ export class HeaderNonMobile extends Component {
 
     const classProductHeader = productHeader ? 'productHeader' : '';
     const classReducedHeader =
-      this.state.isReducedHeader || defaultHeader || checkoutHeader
+      this.state.isReducedHeader ||
+      this.state.shopCategoryOpen ||
+      defaultHeader ||
+      checkoutHeader
         ? 'reducedHeaderOnScroll'
         : '';
 
     const headerLogo =
       this.state.isReducedHeader ||
+      this.state.shopCategoryOpen ||
       defaultHeader ||
       this.state.hover ||
       productHeader ||
@@ -56,13 +63,20 @@ export class HeaderNonMobile extends Component {
 
     return (
       <div className="show-header-non-mobile container">
+        {this.state.shopCategoryOpen && (
+          <ShopCategory toggleShopCategory={this.toggleShopCategory} />
+        )}
         <div
           className={`row header ${classProductHeader} ${classReducedHeader}`}
           onMouseOver={() => this.setState({ hover: true })}
           onMouseLeave={() => this.setState({ hover: false })}
         >
           <div className="col-xs-5 header__section--left">
-            <Link to="/collection/all-plants" className="shop">
+            <Link
+              to="/collection/all-plants"
+              className="shop"
+              onClick={this.toggleShopCategory}
+            >
               Shop
               <span>
                 <Icon
@@ -82,7 +96,6 @@ export class HeaderNonMobile extends Component {
             <div className={`${checkoutHeader && 'no-display'}`}>
               <Link to="/about">About</Link>
               <Link to="/blog">Blog</Link>
-              <Link to="/quiz">Quiz</Link>
             </div>
           </div>
           <div className="col-xs-2 header__section--middle">
@@ -109,7 +122,7 @@ export class HeaderNonMobile extends Component {
               )}
             </div>
 
-            <a href="" onClick={this.toggleCartOpen} className="cart">
+            <a href="" onClick={this.toggleCartOpen} className="header__cart">
               CART
               <span>
                 <Icon
@@ -124,6 +137,11 @@ export class HeaderNonMobile extends Component {
                   pathClassName="header__icon"
                 />
               </span>
+              <div className="header__cart-count">
+                <div>
+                  {this.props.cart.length}
+                </div>
+              </div>
             </a>
           </div>
         </div>
@@ -133,7 +151,8 @@ export class HeaderNonMobile extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  cart: state.cart.cart
 });
 
 export default connect(

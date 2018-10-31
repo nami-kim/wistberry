@@ -20,7 +20,7 @@ class CollectionPage extends Component {
     const collectionHeroImage = {
       'all-plants':
         'http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg',
-      'safe-for-pets':
+      'pet-safe-plants':
         'http://wistberry.imgix.net/images/products/hero/orangewall.jpg',
       'most-popular-plants':
         'http://wistberry.imgix.net/images/products/hero/orangewall.jpg',
@@ -31,7 +31,7 @@ class CollectionPage extends Component {
     const collectionIntro = {
       'all-plants':
         'Non-toxic and pet-friendly picks, according to experts at the ASPCA',
-      'safe-for-pets':
+      'pet-safe-plants':
         'Non-toxic and pet-friendly picks, according to experts at the ASPCA',
       'most-popular-plants':
         'Our most popular, top-selling plants of the season',

@@ -2,16 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { SmallButton } from '../utils/Button';
-import { handleToken } from '../../actions/billingActions';
+import { handleToken } from '../../actions/checkoutActions';
 
 class StripeCheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { complete: false };
+    this.state = {
+      complete: false,
+      error: ''
+    };
     this.submit = this.submit.bind(this);
   }
+  handleChange = e => {
+    if (e.error) {
+      this.setState(() => ({ error: e.error.message }));
+    }
+  };
 
   async submit(ev) {
+    this.setState(() => ({ error: '' }));
     this.props.stripe
       .createToken({
         name: 'Name',
@@ -23,33 +32,13 @@ class StripeCheckoutForm extends Component {
         address_country: 'CA'
       })
       .then(({ token }) => {
-        const order = {
-          currency: 'cad',
-          items: [
-            {
-              type: 'sku',
-              parent: 'sku_Dfd8fekKmrtZTU'
-            }
-          ],
-          shipping: {
-            name: 'Jenny Rosen',
-            address: {
-              line1: 'Unit 808',
-              city: 'Vancouver',
-              state: 'ON',
-              country: 'CA',
-              postal_code: 'V6E 0B1'
-            }
-          },
-          email: 'jenny.rosen@example.com'
-        };
-
-        handleToken(token, order)
-          .then(orderResult => {
-            console.log(orderResult);
-          })
-          .catch(err => console.log(err));
-      });
+        this.props.handleToken(token);
+      })
+      .catch(err =>
+        this.setState(() => ({
+          error: 'Something went wrong on our side. Please try again later.'
+        }))
+      );
   }
 
   render() {
@@ -60,11 +49,34 @@ class StripeCheckoutForm extends Component {
             <span className="text-red">02</span> Payment
           </p>
         </div>
-        <CardElement />
+        <div className="shipping-form__delivery">
+          <span className="shipping-form__sub-title">Delivery</span>
+          <input
+            name="delivery"
+            className="shipping-form__field"
+            value="FREE (7-10 business days)"
+            readOnly
+          />
+        </div>
+        <div className="shipping-form__sub-title">
+          <span>Payment</span>
+          <CardElement onChange={this.handleChange} />
+        </div>
+        {this.state.error && (
+          <div className="shipping-form__error">
+            <div className="shipping-form__error--item">{this.state.error}</div>
+          </div>
+        )}
+        <div className="shipping-form__comment">
+          You can review this order before it's final.
+        </div>
         <SmallButton onClick={this.submit}>Next</SmallButton>
       </div>
     );
   }
 }
 
-export default injectStripe(StripeCheckoutForm);
+export default connect(
+  null,
+  { handleToken }
+)(injectStripe(StripeCheckoutForm));

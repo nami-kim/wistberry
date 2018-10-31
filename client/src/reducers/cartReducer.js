@@ -1,10 +1,10 @@
 import {
   TOGGLE_CART_OPEN,
   ADD_TO_CART,
-  FETCH_ITEMS_FROM_CART,
+  SET_CART,
+  RESET_CART,
   REMOVE_ITEM_FROM_CART,
-  PLUS_QTY_TO_CART,
-  MINUS_QTY_TO_CART
+  UPDATE_CART
 } from '../actions/types';
 import isEmpty from '../validation/is-empty';
 
@@ -21,36 +21,24 @@ export default (state = initialState, action) => {
         cartIsOpen: !state.cartIsOpen
       };
     case ADD_TO_CART:
-      return [...state, action.payload];
-    // case FETCH_ITEMS_FROM_CART:
-    //   return [
-    //     ...state,
-    //     action.payload
-    //   ];
+      return { ...state, cart: [...state.cart, ...action.cartItems] };
+
+    case SET_CART:
+      return { ...state, cart: action.cart };
+
+    case RESET_CART:
+      return initialState;
+
     case REMOVE_ITEM_FROM_CART:
-      return state.filter(({ id }) => id !== action.id);
-
-    case PLUS_QTY_TO_CART:
-      // customer ID has to match first?
-
-      return state.map(orderItem => {
-        if (orderItem.id === action.id) {
-          return {
-            ...orderItem,
-            ...action.update // ? how to add qty to prev.state
-          };
-        }
-      });
-
-    case MINUS_QTY_TO_CART:
-      return state.map(orderItem => {
-        if (orderItem.id === action.id) {
-          return {
-            ...orderItem,
-            ...action.update // ? how to add qty to prev.state
-          };
-        }
-      });
+      return {
+        ...state,
+        cart: state.cart.filter(({ group }) => group.id !== action.groupId)
+      };
+    case UPDATE_CART:
+    return {
+      ...state,
+      cart: action.newCart
+    }
 
     default:
       return state;

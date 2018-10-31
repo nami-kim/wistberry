@@ -18,4 +18,10 @@ export const OrangeButton = ({ children, ...rest }) => (
   </button>
 );
 
+export const EditButton = ({ children, ...rest }) => (
+  <button className="edit-btn" {...rest}>
+    {children}
+  </button>
+);
+
 export default Button;

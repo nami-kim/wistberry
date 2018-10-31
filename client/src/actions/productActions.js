@@ -27,9 +27,8 @@ export const setProductLoading = () => {
   };
 };
 
+
 // Selectors from here
-
-
 export const getAllPlantProducts = products =>
   products.filter(product => product.metadata.type === 'plant');
 

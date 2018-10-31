@@ -24,7 +24,15 @@ router.post('/register', (req, res) => {
       return res.status(400).send(errors);
     }
     const newUser = new User(
-      _.pick(req.body, ['firstname', 'lastname', 'email', 'password'])
+      _(req.body)
+        .pick(['firstname', 'lastname', 'email', 'password'])
+        .merge({
+          orderHistory: [],
+          shippingInfo: [],
+          billingInfo: [],
+          cart: []
+        })
+        .value()
     );
 
     bcrypt.genSalt(12, (err, salt) => {
@@ -36,12 +44,8 @@ router.post('/register', (req, res) => {
           // .then(user => res.send(user)) this was original done by Brad
           .then(user => {
             // Create JWT payload
-            const payload = {
-              id: user.id,
-              email: user.email,
-              firstname: user.firstname,
-              lastname: user.lastname
-            };
+            const payload = _.pick(user, ['firstname', 'lastname', 'email']);
+
             // Sign Token
             jwt.sign(
               payload,
@@ -51,8 +55,8 @@ router.post('/register', (req, res) => {
                 // Send User information
                 res.send({
                   success: true,
-                  user,
-                  token: 'Bearer ' + token
+                  token: 'Bearer ' + token,
+                  user
                 });
               }
             );
@@ -81,12 +85,7 @@ router.post('/login', (req, res) => {
         // User Matched
 
         // Create JWT payload
-        const payload = {
-          id: user.id,
-          email: user.email,
-          firstname: user.firstname,
-          lastname: user.lastname
-        };
+        const payload = _.pick(req.body, ['firstname', 'lastname', 'email']);
         // Sign Token
         jwt.sign(
           payload,
@@ -94,7 +93,7 @@ router.post('/login', (req, res) => {
           { expiresIn: '100d' },
           (err, token) => {
             res.send({
-              success: true,
+              user,
               token: 'Bearer ' + token
             });
           }
@@ -108,16 +107,19 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/user-exists', (req, res) => {
+  const email = decodeURIComponent(req.query.email);
 
-router.get('/users', (req, res) => {
-  const email = decodeURIComponent(req.body.query.email);
+  User.findOne({ email })
+    .then(user => {
+      let userExist;
+      if (user) {
+        return res.status(200).send({ userExists: true });
+      }
 
-  User.findOne({ email }).then(user => {
-    if (user) {
-      errors.message = `${req.body.query} already registered.`;
-      return res.status(404).send(errors);
-    }
-  });
+      return res.status(200).send({ userExists: false });
+    })
+    .catch(err => res.status(400).send(err));
 });
 
 router.post('/reset-password', (req, res) => {
@@ -136,12 +138,54 @@ router.post('/reset-password', (req, res) => {
   });
 });
 
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.send({ id: req.user.id, email: req.user.email });
-  }
-);
+// router.get(
+//   '/current',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     res.send({ id: req.user.id, email: req.user.email });
+//   }
+// );
+
+// to get all User Detail Info (used for startSetUserDetail in userActions)
+router.get('/me', (req, res) => {
+  const email = decodeURIComponent(req.query.email);
+
+  User.findOne({ email })
+    .then(user => {
+      if (user) {
+        res.status(200).send(user);
+      } else {
+        res.status(400).send('User does not exist');
+      }
+    })
+    .catch(err => res.status(400).send(err));
+});
+
+// Update cart in DB (inside users table)
+router.post('/me/cart', (req, res) => {
+  const { email, cart } = req.body;
+
+  User.findOne({ email })
+    .then(user => {
+      user.cart = cart;
+      user.save();
+      res.status(200).send(user);
+    })
+    .catch(err => res.status(400).send(err));
+});
+
+// Overwrite cart in DB (inside users table)
+// If user logs in with anything in their cart already, we overwrite the cart in DB with redux state cart
+router.post('/me/cart/overwrite', (req, res) => {
+  const { email, cart } = req.body;
+
+  User.findOne({ email })
+    .then(user => {
+      user.cart = cart;
+      user.save();
+      res.status(200).send(user);
+    })
+    .catch(err => res.status(400).send(err));
+});
 
 module.exports = router;

@@ -42,7 +42,7 @@ class AccountMenu extends Component {
               {accountIcon('user')}
               <span
                 className={
-                  this.props.currentPage === 'myProfile' ? 'underline' : ''
+                  this.props.currentPage === 'myProfile' ? 'underline-main' : ''
                 }
               >
                 My Profile
@@ -52,7 +52,7 @@ class AccountMenu extends Component {
               {accountIcon('history')}
               <span
                 className={
-                  this.props.currentPage === 'orderHistory' ? 'underline' : ''
+                  this.props.currentPage === 'orderHistory' ? 'underline-main' : ''
                 }
               >
                 Order History
@@ -62,7 +62,7 @@ class AccountMenu extends Component {
               {accountIcon('address')}
               <span
                 className={
-                  this.props.currentPage === 'addressBook' ? 'underline' : ''
+                  this.props.currentPage === 'addressBook' ? 'underline-main' : ''
                 }
               >
                 Address Book
@@ -72,7 +72,7 @@ class AccountMenu extends Component {
               {accountIcon('credit-card')}
               <span
                 className={
-                  this.props.currentPage === 'paymentDetails' ? 'underline' : ''
+                  this.props.currentPage === 'paymentDetails' ? 'underline-main' : ''
                 }
               >
                 Payment Details

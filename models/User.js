@@ -22,7 +22,19 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     minlength: 8
-  }
+  },
+  orderHistory: {
+    type: Array
+  },
+  billingInfo: {
+    type: Array
+  },
+  cart: {
+    type: Array,
+  },
+  shippingInfo: {
+    type: Array,
+  },
 });
 
-module.exports = User = mongoose.model('users', UserSchema)
+module.exports = User = mongoose.model('users', UserSchema);

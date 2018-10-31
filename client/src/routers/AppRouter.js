@@ -1,24 +1,29 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import ScrollToTop from '../components/ScrollToTop';
 
 import test from '../components/test';
-// general info
+// General
 import HomePage from '../components/HomePage';
 import AboutPage from '../components/AboutPage';
 import TermsOfUse from '../components/TermsOfUse';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import Contact from '../components/Contact';
 import Quiz from '../components/Quiz';
+import GetStarted from '../components/GetStarted';
+import BlogPage from '../components/BlogPage';
 
-// auth
+// Auth
 import LoginPage from '../components/auth/LoginPage';
 import SignupPage from '../components/auth/SignupPage';
+
+// Account
 import AccountPage from '../components/account/AccountPage';
-import MyProfile from '../components/account/MyProfile';
-import OrderHistory from '../components/account/OrderHistory';
-import AddressBook from '../components/account/AddressBook';
-import PaymentDetails from '../components/account/PaymentDetails';
+import MyProfilePage from '../components/account/MyProfilePage';
+import OrderHistoryPage from '../components/account/OrderHistoryPage';
+import AddressBookPage from '../components/account/AddressBookPage';
+import PaymentDetailsPage from '../components/account/PaymentDetailsPage';
 
 // Collections
 import CollectionPage from '../components/collections/CollectionPage';
@@ -31,8 +36,7 @@ import ProductDetailPage from '../components/products/ProductDetailPage';
 
 // Checkout
 import CheckoutOption from '../components/checkout/CheckoutOption';
-import CheckoutPage from '../components/checkout/CheckoutPage'
-
+import CheckoutPage from '../components/checkout/CheckoutPage';
 
 import NotFoundPage from '../components/NotFoundPage';
 
@@ -40,44 +44,58 @@ export const history = createHistory();
 
 const AppRouter = () => (
   <Router history={history}>
-    <div>
-      <Switch>
-        <AsyncRoute exact path="/" component={HomePage} />
-        <PublicRoute path="/about" component={AboutPage} />
-        <PublicRoute path="/contact" component={Contact} />
-        <PublicRoute path="/quiz" component={Quiz} />
-        <PrivateRoute exact path="/me/account" component={AccountPage} />
-        <PrivateRoute exact path="/me/my-profile" component={MyProfile} />
-        <PrivateRoute exact path="/me/order-history" component={OrderHistory} />
-        <PrivateRoute exact path="/me/address-book" component={AddressBook} />
-        <PrivateRoute
-          exact
-          path="/me/payment-details"
-          component={PaymentDetails}
-        />
+    <ScrollToTop>
+      <div>
+        <Switch>
+          <AsyncRoute exact path="/" component={HomePage} />
+          <AsyncRoute exact path="/about" component={AboutPage} />
+          <PublicRoute path="/contact" component={Contact} />
+          <PublicRoute path="/quiz" component={Quiz} />
+          <PublicRoute path="/get-started" component={GetStarted} />
+          <PublicRoute path="/blog" component={BlogPage} />
+          
+          <PrivateRoute exact path="/me/account" component={AccountPage} />
 
-        <PublicRoute exact path="/signup" component={SignupPage} />
-        <PublicRoute exact path="/login" component={LoginPage} />
-        <PublicRoute path="/checkout-option" component={CheckoutOption}/>
-        <PublicRoute path="/checkout" component={CheckoutPage} />
-        <PublicRoute path="/terms-of-use" component={TermsOfUse} />
-        <PublicRoute path="/privacy-policy" component={PrivacyPolicy} />
-        <PublicRoute path="/test" component={test} />
+          <PrivateRoute exact path="/me/my-profile" component={MyProfilePage} />
+          <PrivateRoute
+            exact
+            path="/me/order-history"
+            component={OrderHistoryPage}
+          />
+          <PrivateRoute
+            exact
+            path="/me/address-book"
+            component={AddressBookPage}
+          />
+          <PrivateRoute
+            exact
+            path="/me/payment-details"
+            component={PaymentDetailsPage}
+          />
 
-        <AsyncRoute
-          exact
-          path="/collection/:collection"
-          component={CollectionPage}
-        />
-        <AsyncRoute
-          exact
-          path="/products/:product"
-          component={ProductDetailPage}
-        />
+          <PublicRoute exact path="/signup" component={SignupPage} />
+          <PublicRoute exact path="/login" component={LoginPage} />
+          <PublicRoute path="/checkout-option" component={CheckoutOption} />
+          <PublicRoute path="/checkout" component={CheckoutPage} />
+          <PublicRoute path="/terms-of-use" component={TermsOfUse} />
+          <PublicRoute path="/privacy-policy" component={PrivacyPolicy} />
+          <PublicRoute path="/test" component={test} />
 
-        <PublicRoute component={NotFoundPage} />
-      </Switch>
-    </div>
+          <AsyncRoute
+            exact
+            path="/collection/:collection"
+            component={CollectionPage}
+          />
+          <AsyncRoute
+            exact
+            path="/products/:product"
+            component={ProductDetailPage}
+          />
+
+          <PublicRoute component={NotFoundPage} />
+        </Switch>
+      </div>
+    </ScrollToTop>
   </Router>
 );
 

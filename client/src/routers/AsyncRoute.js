@@ -9,7 +9,6 @@ import Modal from '../components/utils/Modal';
 export const AsyncRoute = ({
   component: Component,
   cartIsOpen,
-  modalIsOpen,
   products,
   skus,
   loading,
@@ -28,7 +27,6 @@ export const AsyncRoute = ({
         if (products.length > 0) {
           return (
             <div>
-              {cartIsOpen && <Cart />}
               {cartIsOpen && <Cart />}
               <Component products={products} skus={skus} {...props} />
             </div>

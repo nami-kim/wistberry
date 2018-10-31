@@ -5,8 +5,7 @@ import Cart from '../components/Cart';
 import Modal from '../components/utils/Modal';
 
 export const PublicRoute = ({
-  // isAuthenticated,
-  modalIsOpen,
+  isAuthenticated,
   cartIsOpen,
   component: Component,
   ...rest
@@ -16,7 +15,6 @@ export const PublicRoute = ({
     component={props => (
       <div>
         {cartIsOpen && <Cart />}
-        {cartIsOpen && <Cart />}
         <Component {...props} />
       </div>
     )}
@@ -25,7 +23,8 @@ export const PublicRoute = ({
 
 const mapStateToProps = state => ({
   // isAuthenticated: !!state.auth.isAuthenticated,
-  cartIsOpen: !!state.cart.cartIsOpen
+  cartIsOpen: !!state.cart.cartIsOpen,
+  isAuthenticated: !!state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(PublicRoute);

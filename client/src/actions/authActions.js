@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { SET_CURRENT_USER } from './types';
+import { SET_AUTH_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import { startSetUser, resetUser } from './userActions';
+import { resetCart } from './cartActions';
 import jwt_decode from 'jwt-decode';
 
 export const registerUser = (userData, history) => dispatch => {
@@ -17,8 +19,11 @@ export const registerUser = (userData, history) => dispatch => {
         setAuthToken(token);
         // Decode token to get user data
         const decoded = jwt_decode(token);
+        // Set current AuthUser
+        dispatch(setAuthUser(decoded));
         // Set current User
-        dispatch(setCurrentUser(decoded));
+        const { user } = res.data;
+        dispatch(startSetUser(user.email));
       })
   );
 };
@@ -33,20 +38,22 @@ export const loginUser = (userData, history) => dispatch => {
     setAuthToken(token);
     // Decode token to get user data
     const decoded = jwt_decode(token);
-    // Set current User
-    dispatch(setCurrentUser(decoded));
+    // Set current UserAuth
+    dispatch(setAuthUser(decoded));
+    // Set current User (in userReducer)
+    const { user } = res.data;
+    dispatch(startSetUser(user.email));
   });
 };
 
-export const checkUserEmail = (email) => {
-  return axios.get(`/users?email=${encodeURIComponent(email)}`);
-}
+export const checkUserEmail = email => {
+  return axios.get(`/api/users/user-exists?email=${encodeURIComponent(email)}`);
+};
 
-
-export const setCurrentUser = decoded => {
+export const setAuthUser = decoded => {
   return {
-    type: SET_CURRENT_USER,
-    payload: decoded
+    type: SET_AUTH_USER,
+    decoded
   };
 };
 
@@ -56,7 +63,9 @@ export const logoutUser = history => dispatch => {
   // Remove the auth header for future requests
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  dispatch(setAuthUser({}));
+  dispatch(resetUser());
+  dispatch(resetCart());
   history.push('/login');
 };
 

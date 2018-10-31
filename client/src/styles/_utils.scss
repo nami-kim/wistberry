@@ -24,7 +24,7 @@
   display: block;
   width: 100%;
   max-width: 50rem;
-  padding: 1.8rem;
+  padding: 1.6rem;
   margin: 2.8rem auto 1.5rem auto;
   border: 1px solid transparent;
   font-size: $font-xs;
@@ -46,14 +46,24 @@
   width: 100%;
   max-width: 55rem;
   padding: 1.4rem;
-  margin: 2.2rem auto;
+  margin: 4rem auto;
   border: 1px solid transparent;
   font-size: $font-xs;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   color: $color-white;
   border-radius: 0.2rem;
-  background: $color-black;
+  background: $color-dark-blue;
+
+  // &:disabled {
+  //   opacity: 0.65;
+  //   cursor: not-allowed;
+  //   &:hover {
+  //     background: $color-black;
+  //     opacity: 0.65;
+  //     color: white;
+  //   }
+  // }
   &:hover {
     background-color: transparent;
     border: 1px solid $color-black;
@@ -61,24 +71,54 @@
     cursor: pointer;
   }
 }
+.edit-btn {
+  display: block;
+  width: 100%;
+  max-width: 55rem;
+  padding: 1.4rem;
+  margin: 4rem auto;
+  border: 1px solid $color-black;
+  font-size: $font-xs;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: $color-black;
+  border-radius: 0.2rem;
+  background: $color-white;
+
+  // &:disabled {
+  //   opacity: 0.65;
+  //   cursor: not-allowed;
+  //   &:hover {
+  //     background: $color-black;
+  //     opacity: 0.65;
+  //     color: white;
+  //   }
+  // }
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $color-black;
+    color: $color-blue;
+    cursor: pointer;
+  }
+}
 
 .orangeyellow-lg-btn {
   width: 100%;
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   border: none;
   background: $color-orange-yellow;
   color: $color-black;
   padding: 1.6rem;
-  border: 2px solid transparent;
+  // border: 1px solid transparent;
   border-radius: 0.2rem;
   transform: all 0.2s ease-in;
   &:hover {
     color: $color-black;
-    background: $color-white;
-    border: 2px solid $color-black;
+    background: darken($color-orange-yellow, 14%);
+    // border: 1px solid $color-black;
     cursor: pointer;
   }
 }
@@ -89,7 +129,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  height: 300px;
+  height: 400px;
   width: 500px;
   background: $color-white;
   border: 1px solid $color-black;
@@ -128,4 +168,18 @@
 }
 .text-red {
   color: red;
+}
+.inactive {
+  opacity: 0.2;
+  background: white;
+}
+.background-img-styling {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+
+}
+.no-border {
+  border: none;
 }

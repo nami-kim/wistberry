@@ -1,11 +1,10 @@
 import React from 'react';
 import Modal from './utils/Modal'
+import ShopCategory from './ShopCategory'
 
 const test = () => (
   <div>
-  <Modal>
-  Hahaha. Finally!
-  </Modal>
+    <ShopCategory />
   </div>
 )
 
