@@ -1,5 +1,4 @@
 import { SKU_LOADING, GET_ALL_SKUS, GET_SKU } from '../actions/types';
-import isEmpty from '../validation/is-empty';
 
 const initialState = {
   sku: null,

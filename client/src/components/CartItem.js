@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 import { connect } from 'react-redux';

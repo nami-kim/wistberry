@@ -1,5 +1,5 @@
-import { SET_AUTH_USER } from '../actions/types'
-import isEmpty from '../validation/is-empty'
+import { SET_AUTH_USER, UPDATE_USER_PROFILE } from '../actions/types';
+import isEmpty from '../validation/is-empty';
 
 const initialState = {
   isAuthenticated: false,
@@ -13,7 +13,12 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: !isEmpty(action.decoded),
         authUser: action.decoded
-      }
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        authUser: action.updates
+      };
     default:
       return state;
   }

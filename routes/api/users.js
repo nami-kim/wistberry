@@ -28,9 +28,10 @@ router.post('/register', (req, res) => {
         .pick(['firstname', 'lastname', 'email', 'password'])
         .merge({
           orderHistory: [],
-          shippingInfo: [],
+          shippingAddress: [],
           billingInfo: [],
-          cart: []
+          cart: [],
+          newsletter: false
         })
         .value()
     );
@@ -50,7 +51,7 @@ router.post('/register', (req, res) => {
             jwt.sign(
               payload,
               keys.secretOrKey,
-              { expiresIn: '60d' },
+              { expiresIn: '100d' },
               (err, token) => {
                 // Send User information
                 res.send({
@@ -122,7 +123,7 @@ router.get('/user-exists', (req, res) => {
     .catch(err => res.status(400).send(err));
 });
 
-router.post('/reset-password', (req, res) => {
+router.post('/me/reset-password', (req, res) => {
   const { errors, isValid } = validatePasswordForgotInput(req.body);
   if (!isValid) return res.status(400).send(errors);
 
@@ -188,4 +189,58 @@ router.post('/me/cart/overwrite', (req, res) => {
     .catch(err => res.status(400).send(err));
 });
 
+router.put('/me/profile', (req, res) => {
+  const { email, updates } = req.body;
+
+  User.findOne({ email }).then(user => {
+    user.firstname = updates.firstname;
+    user.lastname = updates.lastname;
+    user.email = updates.email;
+    user.password = updates.password;
+
+    bcrypt.genSalt(12, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err) throw err;
+        user.password = hash;
+        user
+          .save()
+          .then(user => {
+            // Create JWT payload
+            const payload = _.pick(user, ['firstname', 'lastname', 'email']);
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: '100d' },
+              (err, token) => {
+                // Send User information
+                res.send({
+                  success: true,
+                  token: 'Bearer ' + token,
+                  user
+                });
+              }
+            );
+          })
+          .catch(err => res.status(400).send(err));
+      });
+    });
+  });
+});
+
+router.post('/me/shipping-address', (req, res) => {
+  const { email, shippingAddress } = req.body;
+
+  User.findOne({ email })
+    .then(user => {
+      if(shippingAddress.defaultShippingAddress) {
+        user.shippingAddressOptions.forEach(address => address.defaultShippingAddress = false)
+      }
+      user.shippingAddressOptions = user.shippingAddressOptions.concat([shippingAddress]);
+      user.save();
+      res.status(200).send(user);
+    })
+    .catch(err => res.status(400).send(err));
+});
 module.exports = router;

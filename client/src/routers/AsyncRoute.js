@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Spinner from '../components/common/Spinner';
-import Header from '../components/Header';
 import Cart from '../components/Cart';
-import Modal from '../components/utils/Modal';
 
 export const AsyncRoute = ({
   component: Component,

@@ -43,11 +43,7 @@ class CheckoutReview extends Component {
   render() {
     return (
       <div className="shipping-form">
-        <div className="shipping-form__label shipping-form__item">
-          <p className="shipping-form__title">
-            <span className="text-red">03</span> Order Summary
-          </p>
-        </div>
+        
         <div className="order-summary__checkout">
           <OrderSummary />
         </div>

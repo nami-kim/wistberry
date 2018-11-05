@@ -1,102 +1,40 @@
-import React from 'react';
-import Modal from './utils/Modal'
-import ShopCategory from './ShopCategory'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const test = () => (
-  <div>
-    <ShopCategory />
-  </div>
-)
+class test extends Component {
+  render() {
+    const {
+      shippingAddress,
+      newsletter,
+      email,
+      paymentInfo
+    } = this.props.checkout;
+    const {
+      firstname = '',
+      lastname ='',
+      address2 ='',
+      address1 ='',
+      city ='',
+      postalCode ='',
+      province ='',
+      phone ='',
+      country =''
+    } = shippingAddress[0];
+    return (
+      <div>
+        {firstname} {lastname}
+        {address2}, {address1}
+        {city}, {province}, {postalCode}
+        {phone}
+        {country}
+      </div>
+    );
+  }
+}
 
-export default test;
+const mapStateToProps = state => ({
+  checkout: state.checkout,
+  isAuthenticated: !!state.auth.isAuthenticated
+});
 
-// return (
-//   <div>
-//     <div className="container">
-//       <div className="row">
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'red', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Left Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'yellow', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Mid Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'blue', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Right Content
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     <div className="container-main">
-//       <div className="row">
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'red', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Left Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'yellow', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Mid Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'blue', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Right Content
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     <div className="container-narrow">
-//       <div className="row">
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'red', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Left Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'yellow', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Mid Content
-//           </div>
-//         </div>
-//         <div
-//           className="col-xs-4"
-//           style={{ backgroundColor: 'blue', height: '100px' }}
-//         >
-//           <div style={{ backgroundColor: 'grey', height: '100px' }}>
-//             Right Content
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-
-
-// );
+export default connect(mapStateToProps)(test);

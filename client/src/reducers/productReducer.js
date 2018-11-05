@@ -1,5 +1,4 @@
 import { PRODUCT_LOADING, GET_ALL_PRODUCTS, GET_PRODUCT } from '../actions/types';
-import isEmpty from '../validation/is-empty';
 
 const initialState = {
   product: null,

@@ -4,7 +4,6 @@ import {
   ADD_TO_CART,
   SET_CART,
   RESET_CART,
-  FETCH_CART,
   REMOVE_ITEM_FROM_CART,
   UPDATE_CART
 } from './types';
@@ -40,7 +39,7 @@ export const setCart = cart => ({
 export const resetCart = () => ({
   type: RESET_CART
 });
-export const fetchCart = () => getState => getState().cart.cart;
+// export const fetchCart = () => getState => getState().cart.cart;
 
 export const removeItemFromCart = groupId => ({
   type: REMOVE_ITEM_FROM_CART,

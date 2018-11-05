@@ -5,7 +5,7 @@ import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ShippingForm from '../checkout/ShippingForm'
+import AddressForm from '../checkout/AddressForm';
 
 class AddressBookPage extends Component {
   state = {
@@ -17,10 +17,17 @@ class AddressBookPage extends Component {
   toggleAddNewAddress = () =>
     this.setState(() => ({ addNewAddress: !this.state.addNewAddress }));
   render() {
-    const { shippingInfo } = this.props.user;
-    const orderSummary = this.state.orders
-      ? 'order details: to be updated'
-      : 'You have not yet ordered any items.';
+    //  this.props.user.shippingAddress;
+    // const {
+    //   firstname,
+    //   lastname,
+    //   line1,
+    //   line2,
+    //   city,
+    //   state,
+    //   postal_code,
+    //   country
+    // }
     return (
       <div>
         <Header defaultHeader={true} />
@@ -46,12 +53,10 @@ class AddressBookPage extends Component {
                       />
                     </Link>
                   </span>
-                  
                 </div>
                 <div className="account-page__title">Address Book</div>
                 <div className="account-page__body">
                   <div className="account-page__order-history">
-                    
                     <div className="account-page__current-address">
                       <span className="account-page__edit-icon">
                         <span>Edit</span>
@@ -72,12 +77,22 @@ class AddressBookPage extends Component {
                       <div>Vancouver, BC V6Z 3H8</div>
                       <div>Canada</div>
                     </div>
-                    
-                    <div className="account-page__add-new-address" onClick={this.toggleAddNewAddress}>Add New Address</div>
-                  {this.state.addNewAddress && <div className="account-page__new-address-form">
-                      <ShippingForm type="accountEdit" />
-                    </div>}
-                   
+
+                    <div
+                      className="account-page__add-new-address"
+                      onClick={this.toggleAddNewAddress}
+                    >
+                      + Add New Address
+                    </div>
+                    {this.state.addNewAddress && (
+                      <div className="account-page__new-address-form">
+                        <AddressForm
+                          forExistingUser={true}
+                          addNewAddress={true}
+                          toggleAddNewAddress={this.toggleAddNewAddress}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -89,8 +104,8 @@ class AddressBookPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
+// const mapStateToProps = state => ({
+//   user: state.user
+// });
 
-export default connect(mapStateToProps)(AddressBookPage);
+export default connect(null)(AddressBookPage);

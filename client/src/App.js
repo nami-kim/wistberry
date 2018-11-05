@@ -8,7 +8,6 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setAuthUser, logoutUser } from './actions/authActions';
 import { startSetUser } from './actions/userActions';
-import { startSetShippingInfo } from './actions/checkoutActions';
 import { setCart } from './actions/cartActions';
 
 

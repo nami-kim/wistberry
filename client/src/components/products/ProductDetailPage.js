@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header';
-import _ from 'lodash';
 import { OrangeButton } from '../utils/Button';
 import {
   getAllPotProducts,
@@ -110,7 +109,7 @@ class ProductDetailPage extends Component {
   }
 
   render() {
-    const { products, skus } = this.props;
+    const { products } = this.props;
 
     // show all pot images and display selected pot info
     const potImages = this.state.allPotSkus.map((potSku, index) => {

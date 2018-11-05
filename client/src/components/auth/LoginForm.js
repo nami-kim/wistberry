@@ -21,7 +21,11 @@ class loginInnerForm extends Component {
 
     return (
       <div>
-        <Form className="signup-form">
+        <Form
+          className={`signup-form ${
+            type === 'userExistsModal' ? 'narrow-width' : ''
+          }`}
+        >
           {!this.state.passwordForgotFormOpen && (
             <div>
               <div className="signup-form__label signup-form__item">
@@ -34,7 +38,7 @@ class loginInnerForm extends Component {
                 </p>
               </div>
               <div
-                className={`signup-form__item ${type === 'userExists' &&
+                className={`signup-form__item ${type === 'userExistsModal' &&
                   'no-display'}`}
               >
                 <label className="signup-form__label" htmlFor="email">
@@ -84,11 +88,11 @@ class loginInnerForm extends Component {
                 </span>
               </div>
               <div className="signup-form__label signup-form__no-account">
-                <p className={`${type === 'userExists' && 'no-display'}`}>
+                <p className={`${type === 'userExistsModal' && 'no-display'}`}>
                   Don't have an account?
                 </p>
                 <Link
-                  className={`${type === 'userExists' && 'no-display'}`}
+                  className={`${type === 'userExistsModal' && 'no-display'}`}
                   to="/signup"
                 >
                   <span className="signup-form__no-account--text">Sign up</span>
@@ -131,18 +135,33 @@ export const LoginFormFormik = withFormik({
     password: yup.string().required('Password is required')
   }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    props
-      .loginUser(values, props.history)
-      .then(() => {
-        resetForm();
-        props.history.push('/me/account');
-      })
-      .catch(err => {
-        const errors = err.response.data;
-        return setErrors(errors);
-      });
-
-    setSubmitting(false);
+    if (props.type === 'loginPage' || 'checkoutOption') {
+      props
+        .loginUser(values, props.history)
+        .then(() => {
+          resetForm();
+          setSubmitting(false);
+          props.type === 'loginPage' ? props.history.push('/me/account') : props.history.push('/checkout')
+        })
+        .catch(err => {
+          setSubmitting(false);
+          const errors = err.response.data;
+          return setErrors(errors);
+        });
+    } else if (props.type === 'userExistsModal') {
+      props
+        .loginUser({email: props.email, password: values.password}, props.history)
+        .then(() => {
+          resetForm();
+          setSubmitting(false);
+          props.history.push('/checkout');
+        })
+        .catch(err => {
+          setSubmitting(false);
+          const errors = err.response.data;
+          return setErrors(errors);
+        });
+    }
   }
 })(loginInnerForm);
 

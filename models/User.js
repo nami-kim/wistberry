@@ -30,11 +30,54 @@ const UserSchema = new Schema({
     type: Array
   },
   cart: {
-    type: Array,
+    type: Array
   },
-  shippingInfo: {
-    type: Array,
-  },
+
+  shippingAddressOptions: [
+    {
+      firstname: {
+        type: String,
+        required: true
+      },
+      lastname: {
+        type: String,
+        required: true
+      },
+      address1: {
+        type: String,
+        required: true
+      },
+      address2: {
+        type: String,
+        required: false
+      },
+      city: {
+        type: String,
+        required: true
+      },
+      province: {
+        type: String,
+        required: true
+      },
+      postalCode: {
+        type: String,
+        required: true
+      },
+      phone: {
+        type: Number,
+        required: true
+      },
+      country: {
+        type: String,
+        required: true
+      },
+      defaultShippingAddress: Boolean
+    }
+  ],
+
+  newsletter: {
+    type: Boolean
+  }
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

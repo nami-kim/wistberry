@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Cart from '../components/Cart';
-import Modal from '../components/utils/Modal';
 
 export const PublicRoute = ({
   isAuthenticated,

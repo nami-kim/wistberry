@@ -21,14 +21,16 @@ class StripeCheckoutForm extends Component {
 
   async submit(ev) {
     this.setState(() => ({ error: '' }));
+    this.props.togglePaymentOpen()
+    const {firstname, lastname, address1, address2, city, province, postalCode} = this.props.selectedShippingAddress
     this.props.stripe
       .createToken({
-        name: 'Name',
-        address_line1: '',
-        address_line2: '',
-        address_city: '',
-        address_state: '',
-        address_zip: '',
+        name: `${firstname} ${lastname}`,
+        address_line1: address1,
+        address_line2: address2,
+        address_city: city,
+        address_state: province,
+        address_zip: postalCode,
         address_country: 'CA'
       })
       .then(({ token }) => {
@@ -44,11 +46,7 @@ class StripeCheckoutForm extends Component {
   render() {
     return (
       <div className="shipping-form">
-        <div className="shipping-form__label shipping-form__item">
-          <p className="shipping-form__title">
-            <span className="text-red">02</span> Payment
-          </p>
-        </div>
+        
         <div className="shipping-form__delivery">
           <span className="shipping-form__sub-title">Delivery</span>
           <input
@@ -76,7 +74,11 @@ class StripeCheckoutForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  selectedShippingAddress: state.checkout.selectedShippingAddress
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   { handleToken }
 )(injectStripe(StripeCheckoutForm));

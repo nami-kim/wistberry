@@ -19,7 +19,21 @@
   margin: 0 auto;
   padding: 2rem;
   z-index: 101;
-
+  &__cart-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: $color-orange-red;
+    color: $color-white;
+    font-size: 1.4rem;
+    font-weight: 300;
+    right: 1.4rem;
+    top: 1.5rem;
+    border-radius: 100%;
+    width: 2rem;
+    height: 2rem;
+  }
   &__top {
     display: flex;
     justify-content: space-between;
@@ -105,7 +119,10 @@
       cursor: pointer;
     }
   }
-  &__plus-icon, &__minus-icon, &__cross-icon, &__cart-icon {
+  &__plus-icon,
+  &__minus-icon,
+  &__cross-icon,
+  &__cart-icon {
     &:hover {
       cursor: pointer;
     }
@@ -131,7 +148,7 @@
   overflow: auto;
   z-index: 51;
   background: $color-white;
- 
+
   &__product-details {
     text-align: left;
     margin-bottom: 1rem;

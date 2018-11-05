@@ -68,7 +68,9 @@ class Cart extends Component {
               <div className="cart-page__subtotal-price">Free</div>
             </div>
           </div>
-          <Link to="/checkout-option">
+          <Link
+            to={this.props.isAuthenticated ? '/checkout' : '/checkout-option'}
+          >
             <OrangeButton onClick={toggleCartOpen}>Checkout</OrangeButton>
           </Link>
         </div>
@@ -104,6 +106,9 @@ class Cart extends Component {
                   stroke: 'black'
                 }}
               />
+              <div className="cart-page__cart-count">
+                <div>{this.props.cart.length}</div>
+              </div>
             </div>
           </div>
           <div className="cart-page__free-shipping">
@@ -117,7 +122,8 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart.cart
+  cart: state.cart.cart,
+  isAuthenticated: !!state.auth.isAuthenticated
 });
 
 export default connect(

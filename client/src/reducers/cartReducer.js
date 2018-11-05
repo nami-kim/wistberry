@@ -6,7 +6,6 @@ import {
   REMOVE_ITEM_FROM_CART,
   UPDATE_CART
 } from '../actions/types';
-import isEmpty from '../validation/is-empty';
 
 const initialState = {
   cartIsOpen: false,

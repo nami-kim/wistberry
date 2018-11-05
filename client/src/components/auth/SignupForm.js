@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { withFormik, Form, Field } from 'formik';
 import * as yup from 'yup';
-import { registerUser } from '../../actions/authActions';
+import {
+  registerUser,
+  startUpdateUserProfile
+} from '../../actions/authActions';
 import Button from '../utils/Button';
 
 class SignupInnerForm extends Component {
@@ -102,13 +105,13 @@ class SignupInnerForm extends Component {
               onChange={handleChange}
             />
             <div className="signup-form__error">
-              {touched.password &&
+              {values.password !== '' &&
                 !errors.password && (
                   <p className="signup-form__error--password-strong">
                     Password strength: Strong
                   </p>
                 )}
-              {touched.password &&
+              {values.password !== '' &&
                 errors.password && (
                   <div>
                     <p className="signup-form__error--item">
@@ -142,11 +145,11 @@ class SignupInnerForm extends Component {
 }
 
 const SignupFormFormik = withFormik({
-  mapPropsToValues({ firstname, lastname, email, password }) {
+  mapPropsToValues({ type, authUser, firstname, lastname, email, password }) {
     return {
-      firstname: firstname || '',
-      lastname: lastname || '',
-      email: email || '',
+      firstname: type === 'update' ? authUser.firstname : firstname || '',
+      lastname: type === 'update' ? authUser.lastname : lastname || '',
+      email: type === 'update' ? authUser.email : email || '',
       password: password || ''
     };
   },
@@ -175,28 +178,50 @@ const SignupFormFormik = withFormik({
         }, {});
       }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    props
-      .registerUser(values, props.history)
-      .then(() => {
-        resetForm();
-        props.history.push('/');
-      })
-      .catch(err => {
-        const errors = err.response.data;
-        return setErrors(errors);
-      });
-
-    setSubmitting(false);
+    if (props.type === 'signup') {
+      props
+        .registerUser(values, props.history)
+        .then(() => {
+          resetForm();
+          setSubmitting(false);
+          props.history.push('/');
+        })
+        .catch(err => {
+          setSubmitting(false);
+          const errors = err.response.data;
+          return setErrors(errors);
+        });
+    } else if (props.type === 'update') {
+      const updates = {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        password: values.password
+      };
+      props
+        .startUpdateUserProfile(props.authUser.email, updates)
+        .then(() => {
+          resetForm();
+          // setSubmitting(false);
+          props.history.push('/me/my-profile');
+        })
+        .catch(err => {
+          // setSubmitting(false);
+          const errors = err.response.data;
+          return setErrors(errors);
+        });
+    }
   }
 })(SignupInnerForm);
 
-// const mapStateToProps = state => ({
-//   auth: state.auth,
-// });
+const mapStateToProps = state => ({
+  authUser: state.auth.authUser,
+  isAuthenticated: !!state.auth.isAuthenticated
+});
 
 const SignupForm = connect(
-  null,
-  { registerUser }
+  mapStateToProps,
+  { registerUser, startUpdateUserProfile }
 )(SignupFormFormik);
 
 export default withRouter(SignupForm);

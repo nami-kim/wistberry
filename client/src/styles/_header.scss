@@ -42,12 +42,9 @@
     background: $color-orange-red;
     color: $color-white;
     font-weight: 300;
-   
-      bottom: 2rem;
-      right: -0.6rem;
-    
+    bottom: 2rem;
+    right: -0.6rem;
     border-radius: 100%;
-
     width: 2rem;
     height: 2rem;
   }
@@ -172,7 +169,7 @@
         border-bottom: 2px solid transparent;
       }
     }
-     &__cart-count {
+    &__cart-count {
       bottom: 2rem;
       right: -0.6rem;
     }

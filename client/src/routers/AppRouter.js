@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ScrollToTop from '../components/ScrollToTop';
 
@@ -48,7 +48,7 @@ const AppRouter = () => (
       <div>
         <Switch>
           <AsyncRoute exact path="/" component={HomePage} />
-          <AsyncRoute exact path="/about" component={AboutPage} />
+          <PublicRoute exact path="/about" component={AboutPage} />
           <PublicRoute path="/contact" component={Contact} />
           <PublicRoute path="/quiz" component={Quiz} />
           <PublicRoute path="/get-started" component={GetStarted} />

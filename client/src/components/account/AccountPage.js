@@ -3,9 +3,7 @@ import AccountMenu from './AccountMenu';
 import Header from '../Header';
 import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
-import { browserHistory } from 'react-router';
 import SignupForm from '../auth/SignupForm';
-import { Link } from 'react-router-dom';
 
 class AccountPage extends Component {
   state = {

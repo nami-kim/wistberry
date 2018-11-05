@@ -1,31 +1,84 @@
 // Checkout Page
-.checkout__forms {
-  background-color: $color-light-blue;
+.checkout {
+  font-family: 'HurmeGeometricSans3';
 }
-.checkout__shipping-container {
-  // background-color: $color-primary-pink;
+.checkout__forms {
+}
+.checkout__shipping-container,
+.checkout__payment-container,
+.checkout__order-summary-container {
   width: 100%;
   margin: 6rem auto 0 auto;
 }
-.checkout__payment-container {
-  // background-color: $color-primary-pink;
-  width: 100%;
-  margin: 1rem auto;
+
+.checkout__shipping-inner-container,
+.checkout__payment-inner-container,
+.checkout__order-summary-inner-container {
+  position: relative;
+  background-color: $color-primary-pink;
+  overflow: auto;
+  padding-bottom: 1rem;
 }
-.checkout__order-summary-container {
-  // background-color: $color-primary-pink;
-  width: 100%;
-  margin: 0rem auto;
+.checkout__add-new-address {
+  text-decoration: underline;
+  width: 90%;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-top: 3rem;
+  &:hover {
+    cursor: pointer;
+    color: $color-blue;
+  }
+}
+.checkout__login-view {
+  min-height: 100vh;
+  padding-top: 3rem;
+}
+.checkout__customer-address {
+  display: block;
+  font-size: 1.4rem;
+  width: 90%;
+  padding: 1.2rem;
+  margin: 0 auto;
+  border: none;
+  border-radius: 0.2rem;
+  background: $color-white;
+}
+
+.checkout__add-new-address {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+.checkout__address-options {
+  display: flex;
+  margin: 1rem;
+  border-bottom: 1px solid $color-grey-light-4;
+  padding-bottom: 1.5rem;
+  &-name {
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  &-radio-check {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+  }
+}
+.checkout__title {
+  font-weight: 400;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.07rem;
+  padding-top: 2rem;
+  padding-bottom: 1.6rem;
 }
 
 // shipping-form
 .shipping-form {
-  // background-color: $color-primary-pink;
   width: 90%;
   max-width: 55rem;
   margin: 0 auto;
-  padding: 3rem 1rem;
-  font-family: 'HurmeGeometricSans3';
+  padding-top: 2rem;
   &__item {
     width: 100%;
   }
@@ -83,6 +136,21 @@
     font-size: 1.5rem;
     font-weight: 400;
   }
+  &__select-wrapper {
+    height: 4.5rem;
+  }
+  &__select-inner {
+    padding: 1rem;
+    margin: -1rem;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    -webkit-appearance: none;
+    &:focus {
+      outline: none;
+    }
+  }
   &__country {
     font-size: 1.4rem;
     p {
@@ -96,6 +164,18 @@
         display: inline-block;
         padding: 0 2rem;
       }
+    }
+  }
+  &__default-address {
+    margin-top: 2rem;
+  }
+  &__cancel-btn {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    text-decoration: underline;
+    &:hover {
+      cursor: pointer;
     }
   }
 }
@@ -165,38 +245,54 @@
   &__content {
     font-weight: 400;
   }
+  &__login {
+    width: 30rem;
+  }
+  p {
+    cursor: pointer;
+  }
 }
 
 @media only screen and (min-width: $md-viewport) {
+  .checkout__shipping-inner-container,
+  .checkout__payment-inner-container,
+  .checkout__order-summary-inner-container {
+    min-height: 100vh;
+  }
+
   .order-summary__container {
     position: absolute;
     width: 400px;
     top: 5rem;
     right: 1.2rem;
   }
+  .checkout__title {
+    padding-top: 3rem;
+    padding-bottom: 1.8rem;
+  }
+  .shipping-form {
+    padding-top: 3rem;
+  }
 }
 @media only screen and (min-width: $lg-viewport) {
   .checkout__forms {
-    background-color: $color-light-blue;
-    min-height: 120vh;
+    // background-color: $color-primary-pink;
+    // min-height: 100vh;
   }
 
-  .shipping-form {
-    min-height: 130vh;
-  }
   .checkout__shipping-container {
     width: 96%;
     margin: 7rem auto;
-    min-height: 130vh;
+    // min-height: 130vh;
   }
   .checkout__payment-container {
     width: 96%;
     margin: 7rem auto;
-    min-height: 130vh;
+    // min-height: 130vh;
   }
   .checkout__order-summary-container {
     width: 96%;
     margin: 7rem auto;
-    min-height: 130vh;
+    // min-height: 130vh;
   }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_SKUS, SKU_LOADING, GET_SKU } from './types';
+import { GET_ALL_SKUS, SKU_LOADING } from './types';
 
 export const getAllSkus = () => dispatch => {
   dispatch(setSkuLoading());

@@ -1,13 +1,10 @@
 import { SET_USER, RESET_USER } from '../actions/types';
-import isEmpty from '../validation/is-empty';
 
 const initialState = {
   firstname: '',
   lastname: '',
   email: '',
-  shippingInfo: [],
   orderHistory: [],
-  billingInfo: [],
 };
 
 export default (state = initialState, action) => {
