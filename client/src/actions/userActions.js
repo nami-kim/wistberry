@@ -19,7 +19,7 @@ export const startSetUser = email => (dispatch, getState) => {
       }
       // If logged in, no localStorage - manage everything from redux state
       localStorage.removeItem('cart');
-      // Extract shippingAddress, and BillingInfo from db user and save in checkout redux state
+      // Extract shippingAddressOptions, and BillingOptions from db user and save in checkout redux state
       dispatch(startSetCheckout(user.data))
      
     })
@@ -31,23 +31,12 @@ export const startSetUser = email => (dispatch, getState) => {
 // note: we remove cart from user object so there's no duplicate cart in redux state
 export const setUser = user => ({
   type: SET_USER,
-  user: _.omit(user, ['cart', 'password', 'shippingAddress', 'billingInfo', 'newsletter'])
+  user: _.omit(user, ['cart', 'password', 'shippingAddressOptions', 'billingOptions', 'newsletter'])
 });
 
 export const resetUser = () => ({
   type: RESET_USER
 });
 
-// getUserShippingAddress
-
-// getUserBillingInfo
-
-// getUserOrderHistory
-
-// updateShippingAddress
-
-// editShippingAddress
-
-// removeShippingAddress
 
 

@@ -4,7 +4,7 @@
   bottom: 0;
   top: 0;
   left: 0;
-  z-index: 201;
+  z-index: 601;
   background-color: rgba($color: $color-grey-dark-1, $alpha: 0.4);
 }
 
@@ -18,7 +18,7 @@
   background: $color-white;
   margin: 0 auto;
   padding: 2rem;
-  z-index: 101;
+  z-index: 501;
   &__cart-count {
     display: flex;
     align-items: center;
@@ -147,7 +147,7 @@
   padding-top: 2rem;
   display: block;
   overflow: auto;
-  z-index: 51;
+  z-index: 401;
   background: $color-white;
 
   &__product-details {

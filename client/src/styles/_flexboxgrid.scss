@@ -12,22 +12,22 @@ $gutter-width-md: 2rem;
 $gutter-width-lg: 2.5rem;
 
 // container with small margin (large view) - use to provide lots of info eg.product-details page
-$wide-outer-margin: 2rem;
-$wide-outer-margin-sm: 2rem;
-$wide-outer-margin-md: 3rem;
-$wide-outer-margin-lg: 5rem;
+$wide-outer-margin: 1rem;
+$wide-outer-margin-sm: 1rem;
+$wide-outer-margin-md: 2rem;
+$wide-outer-margin-lg: 3rem;
 
 // container with medium margin (mid view) - use most often: easy read
 $main-outer-margin: 2rem;
 $main-outer-margin-sm: 3rem;
-$main-outer-margin-md: 6rem;
-$main-outer-margin-lg: 7rem;
+$main-outer-margin-md: 4rem;
+$main-outer-margin-lg: 5rem;
 
 // container with large margin (narrower view) 
 $narrow-outer-margin: 2rem;
-$narrow-outer-margin-sm: 10rem;
-$narrow-outer-margin-md: 15rem;
-$narrow-outer-margin-lg: 20rem;
+$narrow-outer-margin-sm: 8rem;
+$narrow-outer-margin-md: 13rem;
+$narrow-outer-margin-lg: 17rem;
 
 $gutter-compensation: calc((#{$gutter-width} * 0.5) * -1);
 $half-gutter-width: calc((#{$gutter-width} * 0.5));

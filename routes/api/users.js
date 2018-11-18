@@ -28,8 +28,8 @@ router.post('/register', (req, res) => {
         .pick(['firstname', 'lastname', 'email', 'password'])
         .merge({
           orderHistory: [],
-          shippingAddress: [],
-          billingInfo: [],
+          shippingAddressOptions: [],
+          billingOptions: [],
           cart: [],
         })
         .value()

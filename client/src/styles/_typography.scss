@@ -3,7 +3,7 @@
 .OstrichSans { font-family: "Ostrich Sans", sans-serif };
 .Futura { font-family: "Futura", sans-serif };
 
-.f-headline { font-size: 4rem; }
+.f-headline { font-size: 3.4rem; }
 .f-subheadline { font-size: 3.2rem; }
 .f1 { font-size: 2.4rem; }
 .f2 { font-size: 1.9rem; }
@@ -11,14 +11,14 @@
 .f4 { font-size: 1.5rem; }
 
 @media only screen and (min-width: $sm-viewport) {
-  .f-headline { font-size: 4.5rem; }
+  .f-headline { font-size: 4rem; }
   .f-subheadline { font-size: 3.8rem; }
   .f1 { font-size: 2.6rem; }
   .f2 { font-size: 2.1rem; }
 }
 
 @media only screen and (min-width: $md-viewport) {
-  .f-headline { font-size: 5.3rem; }
+  .f-headline { font-size: 5rem; }
   .f-subheadline { font-size: 4.3rem; }
   .f1 { font-size: 3rem; }
   .f2 { font-size: 2.2rem; }

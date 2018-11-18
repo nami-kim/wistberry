@@ -5,13 +5,14 @@ import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import _ from 'lodash'
 
 class PaymentDetailsPage extends Component {
   state = {
     orders: ['123', '456']
   };
   render() {
-    const { billingInfo } = this.props.user;
+    const { billingOptions } = this.props.user;
     
     return (
       <div>
@@ -56,7 +57,7 @@ class PaymentDetailsPage extends Component {
                     />
                   </div>
                   <div className="account-page__order-history">
-                  {billingInfo ? "Should update this!!!" : 'You have not yet created billing info.'}
+                  {!_.isEmpty(billingOptions) ? "Should update this!!!" : 'You have not yet created billing info.'}
                   </div>
                 </div>
               </div>

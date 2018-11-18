@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   orderHistory: {
     type: Array
   },
-  billingInfo: {
+  billingOptions: {
     type: Array
   },
   cart: {

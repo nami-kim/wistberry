@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
     case SET_BILLING_OPTIONS:
       return {
         ...state,
-        billingInfo: action.billingOptions
+        billingOptions: action.billingOptions
       };
     case SET_CHECKOUT_EMAIL:
       return {
