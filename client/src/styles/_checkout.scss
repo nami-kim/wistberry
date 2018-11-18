@@ -19,6 +19,16 @@
   overflow: auto;
   padding-bottom: 1rem;
 }
+.checkout__shipping-inner-container {
+  min-height: 60vh;
+}
+.checkout__payment-inner-container {
+  min-height: 60vh;
+}
+.checkout__order-summary-inner-container {
+  min-height: 60vh;
+}
+
 .checkout__add-new-address {
   text-decoration: underline;
   width: 90%;
@@ -34,8 +44,8 @@
   min-height: 100vh;
   padding-top: 3rem;
 }
-.checkout__customer-address {
-  display: block;
+.checkout__customer-address, .checkout__customer-email {
+  overflow: auto;
   font-size: 1.4rem;
   width: 90%;
   padding: 1.2rem;
@@ -43,6 +53,9 @@
   border: none;
   border-radius: 0.2rem;
   background: $color-white;
+  &-title {
+    font-weight: 400
+  }
 }
 
 .checkout__add-new-address {
@@ -71,6 +84,15 @@
   letter-spacing: 0.07rem;
   padding-top: 2rem;
   padding-bottom: 1.6rem;
+}
+.checkout__btn {
+  width: 90%;
+  margin: 0 auto;
+
+}
+.checkout__edit-btn {
+  width: 90%;
+  margin: 30rem auto 0 auto;
 }
 
 // shipping-form
@@ -169,15 +191,7 @@
   &__default-address {
     margin-top: 2rem;
   }
-  &__cancel-btn {
-    display: inline-block;
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
-    text-decoration: underline;
-    &:hover {
-      cursor: pointer;
-    }
-  }
+  
 }
 
 // OrderSummary Starts Here
@@ -200,33 +214,35 @@
   &__title {
     text-align: center;
     text-transform: uppercase;
+    font-size: 1.8rem;
   }
   &__bottom {
     margin-top: 1rem;
     padding-top: 1rem;
+    font-size: 1.4rem;
   }
   &__subtotal {
     display: flex;
     justify-content: space-between;
     padding: 0.1rem 0.7rem;
     font-weight: 300;
-    &__name {
-      font-size: 1.3rem;
-    }
-    &__price {
-      font-size: 1.3rem;
-    }
+    // &__name {
+    //   // font-size: 1.4rem;
+    // }
+    // &__price {
+    //   // font-size: 1.4rem;
+    // }
   }
   &__total {
     border-top: 1px solid $color-grey-light-4;
-    background: $color-grey-background;
+    // background: $color-grey-background;
     text-transform: uppercase;
     font-weight: 400;
-    font-size: 1.4rem;
+    // font-size: 1.4rem;
     display: flex;
     justify-content: space-between;
-    padding: 0.6rem 0.7rem;
-    margin-bottom: 0.5rem;
+    padding: 0.7rem;
+    margin-bottom: 0.8rem;
     font-weight: 400;
   }
 
@@ -243,6 +259,7 @@
     font-weight: 300;
   }
   &__content {
+    margin-top: 1rem;
     font-weight: 400;
   }
   &__login {

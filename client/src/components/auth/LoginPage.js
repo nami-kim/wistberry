@@ -11,7 +11,7 @@ class LoginPage extends Component {
         <div className="container signup-page">
           <div className="row signup-page__content">
             <div className="col-xs-12">
-              <LoginForm title="login" type="loginPage"/>
+              <LoginForm title="login" formType="loginPage"/>
             </div>
           </div>
         </div>

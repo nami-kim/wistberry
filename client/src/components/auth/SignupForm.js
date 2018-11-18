@@ -145,11 +145,11 @@ class SignupInnerForm extends Component {
 }
 
 const SignupFormFormik = withFormik({
-  mapPropsToValues({ type, authUser, firstname, lastname, email, password }) {
+  mapPropsToValues({ type, user, firstname, lastname, email, password }) {
     return {
-      firstname: type === 'update' ? authUser.firstname : firstname || '',
-      lastname: type === 'update' ? authUser.lastname : lastname || '',
-      email: type === 'update' ? authUser.email : email || '',
+      firstname: type === 'update' ? user.firstname : firstname || '',
+      lastname: type === 'update' ? user.lastname : lastname || '',
+      email: type === 'update' ? user.email : email || '',
       password: password || ''
     };
   },
@@ -215,7 +215,7 @@ const SignupFormFormik = withFormik({
 })(SignupInnerForm);
 
 const mapStateToProps = state => ({
-  authUser: state.auth.authUser,
+  user: state.user,
   isAuthenticated: !!state.auth.isAuthenticated
 });
 

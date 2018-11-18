@@ -27,7 +27,6 @@ import PaymentDetailsPage from '../components/account/PaymentDetailsPage';
 
 // Collections
 import CollectionPage from '../components/collections/CollectionPage';
-import AsyncRoute from './AsyncRoute';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -47,7 +46,7 @@ const AppRouter = () => (
     <ScrollToTop>
       <div>
         <Switch>
-          <AsyncRoute exact path="/" component={HomePage} />
+          <PublicRoute exact path="/" component={HomePage} />
           <PublicRoute exact path="/about" component={AboutPage} />
           <PublicRoute path="/contact" component={Contact} />
           <PublicRoute path="/quiz" component={Quiz} />
@@ -81,12 +80,12 @@ const AppRouter = () => (
           <PublicRoute path="/privacy-policy" component={PrivacyPolicy} />
           <PublicRoute path="/test" component={test} />
 
-          <AsyncRoute
+          <PublicRoute
             exact
             path="/collection/:collection"
             component={CollectionPage}
           />
-          <AsyncRoute
+          <PublicRoute
             exact
             path="/products/:product"
             component={ProductDetailPage}

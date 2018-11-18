@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Header';
 // import CheckoutNav from './CheckoutNav';
-import PaymentForm from './payment/PaymentForm';
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
 import CheckoutReview from './CheckoutReview';
-import ShippingSummary from './shipping/ShippingSummary';
-import ShippingForm from './shipping/ShippingForm';
+import ShippingSummary from './ShippingSummary';
 import { EditButton } from '../utils/Button';
 import { setSelectedShippingAddress } from '../../actions/checkoutActions';
 
@@ -35,6 +35,7 @@ class CheckoutPage extends Component {
       orderSummaryFormOpen: !this.state.orderSummaryFormOpen
     }));
   };
+
   toggleAddNewAddress = () =>
     this.setState(() => ({ addNewAddress: !this.state.addNewAddress }));
 
@@ -49,7 +50,81 @@ class CheckoutPage extends Component {
   };
 
   render() {
-    console.log(this.state.shippingFormOpen)
+    let shippingFormDisplay;
+
+    const { isAuthenticated, checkout } = this.props;
+    const { shippingAddressOptions } = checkout;
+    if (this.state.shippingFormOpen) {
+      if (isAuthenticated) {
+        shippingFormDisplay = (
+          <div className="checkout__login-view">
+            <div className="checkout__customer-address">
+              <form>
+                {shippingAddressOptions.map((address, i) => {
+                  const {
+                    firstname,
+                    lastname,
+                    address2,
+                    address1,
+                    city,
+                    postalCode,
+                    province,
+                    country,
+                    phone
+                  } = address;
+
+                  return (
+                    <div key={i} className="checkout__address-options">
+                      <input
+                        className="checkout__address-options-radio-check"
+                        type="radio"
+                        value={i}
+                        checked={this.state.radioChecked === i}
+                        onChange={this.handleChange}
+                      />
+                      <div className="">
+                        <div className="checkout__address-options-name">{`${firstname} ${lastname}`}</div>
+                        <div>{`${address2}, ${address1}`}</div>
+                        <div>{`${city}, ${province} ${postalCode}`}</div>
+                        <div>{phone}</div>
+                        <div>{country}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </form>
+            </div>
+            <div
+              className="checkout__add-new-address"
+              onClick={this.toggleAddNewAddress}
+            >
+              + Add a new address
+            </div>
+            <div className="checkout__new-address-form">
+              <AddressForm
+                forExistingUser={isAuthenticated}
+                addNewAddress={this.state.addNewAddress}
+                toggleShippingFormOpen={this.toggleShippingFormOpen}
+                toggleAddNewAddress={this.toggleAddNewAddress}
+              />
+            </div>
+          </div>
+        );
+      } else {
+        shippingFormDisplay = (
+          <div>
+            <AddressForm
+              forExistingUser={false}
+              toggleShippingFormOpen={this.toggleShippingFormOpen}
+              toggleAddNewAddress={this.toggleAddNewAddress}
+            />
+          </div>
+        );
+      }
+    } else {
+      shippingFormDisplay = <ShippingSummary />;
+    }
+
     return (
       <div>
         <Header checkoutHeader={true} />
@@ -64,22 +139,17 @@ class CheckoutPage extends Component {
                   <div
                     className={`${
                       this.state.shippingFormOpen ? '' : 'inactive'
-                    }`}
+                      }`}
                   >
-                    <div className={`checkout__edit-btn ${!this.state.shippingFormOpen ? '': 'no-display'}`}>
-                      <EditButton
-                        show={!this.state.shippingFormOpen}
-                        onClick={this.handleEditShipping}
-                      >
-                        Edit
-                      </EditButton>
-                    </div>
+                    {!this.state.shippingFormOpen && (
+                      <div className="checkout__edit-btn">
+                        <EditButton onClick={this.handleEditShipping}>
+                          Edit
+                        </EditButton>
+                      </div>
+                    )}
                   </div>
-                  <ShippingForm
-                    toggleShippingFormOpen={this.toggleShippingFormOpen}
-                    show={this.state.shippingFormOpen}
-                  />
-                  <ShippingSummary show={!this.state.shippingFormOpen} />
+                  {shippingFormDisplay}
                 </div>
               </div>
             </div>
@@ -93,8 +163,10 @@ class CheckoutPage extends Component {
                   <div
                     className={`${
                       this.state.paymentFormOpen ? '' : 'inactive'
-                    }`}
-                  />
+                      }`}
+                  >
+
+                  </div>
                   <PaymentForm
                     togglePaymentFormOpen={this.togglePaymentFormOpen}
                   />
@@ -110,7 +182,7 @@ class CheckoutPage extends Component {
                   <div
                     className={`${
                       this.state.orderSummaryFormOpen ? '' : 'inactive'
-                    }`}
+                      }`}
                   />
                   <CheckoutReview
                     toggleOrderSummaryFormOpen={this.toggleOrderSummaryFormOpen}
@@ -136,4 +208,6 @@ export default connect(
   { setSelectedShippingAddress }
 )(CheckoutPage);
 
-
+// <div className="col-xs-12">
+//   <CheckoutNav checkoutStep="shipping" />
+// </div>

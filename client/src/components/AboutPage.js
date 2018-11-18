@@ -90,7 +90,7 @@ const AboutPage = () => {
             </div>
           </div>
           <div className="col-xs-12 col-sm-5 col-lg-4 first-sm">
-            <div className="aspect-ratio aspect-ratio--1x1 overflow-hidden" style={{ borderRadius: '100%', boxShadow: '0 .2rem .5rem 0 rgba(0,0,0,0.2)' }}>
+            <div className="aspect-ratio aspect-ratio--1x1 overflow-hidden" style={{ borderRadius: '100%', boxShadow: '0 .2rem .5rem 0 rgba(0,0,0,0.2)', zIndex: '0' }}>
               <div
                 className="aspect-ratio--object"
                 style={{

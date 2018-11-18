@@ -6,20 +6,20 @@ export const Button = ({ children, ...rest }) => (
   </button>
 );
 
-export const SmallButton = ({ children, ...rest }) => (
-  <button className="black-sm-btn" {...rest}>
+export const SmallButton = ({ children, show = true, ...rest }) => (
+  <button className={`black-sm-btn ${show ? '': 'no-display'}`} {...rest}>
     {children}
   </button>
 );
 
-export const OrangeButton = ({ children, ...rest }) => (
-  <button className="orangeyellow-lg-btn" {...rest}>
+export const OrangeButton = ({ children, show = true, ...rest }) => (
+  <button className={`orangeyellow-lg-btn ${show ? '': 'no-display'}`} {...rest}>
     {children}
   </button>
 );
 
-export const EditButton = ({ children, ...rest }) => (
-  <button className="edit-btn" {...rest}>
+export const EditButton = ({ children, show = true, ...rest }) => (
+  <button className={`edit-btn ${show ? '' : 'no-display'}`} {...rest}>
     {children}
   </button>
 );

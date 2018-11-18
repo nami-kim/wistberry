@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import { SmallButton } from '../utils/Button';
-import { handleToken } from '../../actions/checkoutActions';
+import { SmallButton } from '../../utils/Button';
+import { handleToken } from '../../../actions/checkoutActions';
 
 class StripeCheckoutForm extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class StripeCheckoutForm extends Component {
 
   async submit(ev) {
     this.setState(() => ({ error: '' }));
-    this.props.togglePaymentOpen()
+    this.props.togglePaymentFormOpen()
     const {firstname, lastname, address1, address2, city, province, postalCode} = this.props.selectedShippingAddress
     this.props.stripe
       .createToken({

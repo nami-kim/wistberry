@@ -31,7 +31,6 @@ router.post('/register', (req, res) => {
           shippingAddress: [],
           billingInfo: [],
           cart: [],
-          newsletter: false
         })
         .value()
     );
@@ -230,17 +229,46 @@ router.put('/me/profile', (req, res) => {
 });
 
 router.post('/me/shipping-address', (req, res) => {
+  console.log(req.body)
   const { email, shippingAddress } = req.body;
-
+  
   User.findOne({ email })
     .then(user => {
-      if(shippingAddress.defaultShippingAddress) {
-        user.shippingAddressOptions.forEach(address => address.defaultShippingAddress = false)
+      // Reset the existing shippingAddressOptions in DB to false if the req shippingAddress's default is true
+      if (shippingAddress.defaultShippingAddress && !_.isEmpty(user.shippingAddressOptions)) {
+        user.shippingAddressOptions.forEach(
+          address => (address.defaultShippingAddress = false)
+        );
       }
-      user.shippingAddressOptions = user.shippingAddressOptions.concat([shippingAddress]);
+      user.shippingAddressOptions = user.shippingAddressOptions.concat([
+        shippingAddress
+      ]);
+      user.save();
+      res.status(200).send(user);
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(400).send(err)
+    });
+});
+
+router.put('/me/shipping-address', (req, res) => {
+  const { email, shippingAddress } = req.body;
+  const { _id } = shippingAddress;
+  console.log(shippingAddress)
+  User.findOne({ email })
+    .then(user => {
+      user.shippingAddressOptions = user.shippingAddressOptions.map(option => {
+        const { _id: shippingAddressOptionId } = option;
+        if (_id === shippingAddressOptionId) {
+          return shippingAddress;
+        }
+      });
+      console.log(user)
       user.save();
       res.status(200).send(user);
     })
     .catch(err => res.status(400).send(err));
 });
+
 module.exports = router;

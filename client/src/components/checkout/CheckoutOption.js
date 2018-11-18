@@ -28,7 +28,7 @@ class CheckoutOption extends Component {
                 <div className="row checkout-options__option">
                   <div className="col-xs-12 col-md-6 last-xs first-md checkout-options__log-in--outer">
                     <div className="checkout-options__log-in">
-                      <LoginForm title="Login to your account" type="checkoutOption"/>
+                      <LoginForm title="Login to your account" formType="checkoutOption"/>
                     </div>
                   </div>
                   <div className="col-xs-12 col-md-6 first-xs last-md checkout-options__guest-checkout--outer">

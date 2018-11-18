@@ -1,125 +1,63 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import provinces from '../common/provinces';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
-import { SmallButton, EditButton } from '../utils/Button';
-import { checkUserEmail } from '../../actions/authActions';
-import Modal from '../utils/Modal';
-import LoginForm from '../auth/LoginForm';
-import Icon from '../common/Icon';
-import { ICON_PATHS } from '../common/constants';
+import { SmallButton } from '../utils/Button';
 import _ from 'lodash';
-import {
-  startAddShippingAddress,
-  setCheckoutEmail,
-  setNewsletter
-} from '../../actions/checkoutActions';
 
 class AddressForm extends Component {
-  state = {
-    shippingFormOpen: true,
-    modalOpen: false,
-    existingUserContinueAsGuest: false,
-    selectedShippingAddress: {}
+  getInitialValues = () => {
+    const initialValues = _({
+      firstname: '',
+      lastname: '',
+      email: '',
+      address1: '',
+      address2: '',
+      city: '',
+      postalCode: '',
+      province: '',
+      phone: '',
+      defaultShippingAddress: true,
+      country: 'Canada',
+      newsletter: true,
+    })
+      .omit(this.props.excludeFields || [])
+      .valueOf();
+    return { ...initialValues, ...this.props.initialValues };
   };
-
-  toggleModalOpen = () => {
-    this.setState(() => ({ modalOpen: !this.state.modalOpen }));
+  getYupShape = () => {
+    return _({
+      firstname: yup.string().required('Please enter your first name.'),
+      lastname: yup.string().required('Please enter your last name.'),
+      email: yup
+        .string()
+        .email('Email is not valid')
+        .required('Email is required'),
+      address1: yup.string().required('Please enter your address.'),
+      city: yup.string().required('City is required.'),
+      postalCode: yup.string().required('Please enter postal code.'),
+      province: yup.string().required('Please enter province.'),
+      phone: yup.number().required('Please enter your phone number.'),
+      country: yup.string().required('Country is required.')
+    })
+      .omit(this.props.excludeFields || [])
+      .valueOf();
   };
-  existingUserContinueAsGuest = e => {
-    this.setState(() => ({
-      modalOpen: !this.state.modalOpen,
-      existingUserContinueAsGuest: true
-    }));
-  };
-  toggleShippingFormOpen = () =>
-    this.setState(() => ({
-      shippingFormOpen: !this.state.shippingFormOpen
-    }));
-
-  handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-    console.log(this.props);
-    const proceedToPaymentForm = () => {
-      this.props.startAddShippingAddress(
-        _.omit(values, ['newsletter', 'email'])
-      );
-
-      console.log('is this running 1');
-      if (!this.props.isAuthenticated) {
-        this.props.setCheckoutEmail(values.email);
-        this.props.setNewsletter(values.newsletter);
-      }
-      setSubmitting(false);
-      // props.history.push('/me/address-book');
-      this.props.toggleShippingFormOpen();
-      this.toggleShippingFormOpen();
-    };
-
-    if (this.state.existingUserContinueAsGuest || this.props.isAuthenticated) {
-      proceedToPaymentForm();
-    } else {
-      checkUserEmail(values.email)
-        .then(res => {
-          if (res.data.userExists) {
-            this.toggleModalOpen();
-            setSubmitting(false);
-          } else {
-            console.log('is this running 2');
-            proceedToPaymentForm();
-          }
-        })
-        .catch(err => console.log(err));
-    }
+  handleSubmit = (value, { setSubmitting, resetForm }) => {
+    console.log('value', value);
+    this.props.onSubmit(value, { setSubmitting, resetForm });
   };
 
   render() {
-    const { selectedShippingAddress = {} } = this.props.checkout;
-    const getInitialValues = selectedShippingAddress => ({
-      email: this.props.authUser.email,
-      firstname:
-        (selectedShippingAddress && selectedShippingAddress.firstname) || '',
-      lastname:
-        (selectedShippingAddress && selectedShippingAddress.lastname) || '',
-      address1:
-        (selectedShippingAddress && selectedShippingAddress.address1) || '',
-      address2:
-        (selectedShippingAddress && selectedShippingAddress.address2) || '',
-      city: (selectedShippingAddress && selectedShippingAddress.city) || '',
-      postalCode:
-        (selectedShippingAddress && selectedShippingAddress.postalCode) || '',
-      province:
-        (selectedShippingAddress && selectedShippingAddress.province) || '',
-      phone: (selectedShippingAddress && selectedShippingAddress.phone) || '',
-      defaultShippingAddress:
-        (selectedShippingAddress &&
-          selectedShippingAddress.defaultShippingAddress) ||
-        true,
-      country: 'Canada'
-    });
-
-    console.log(getInitialValues(selectedShippingAddress));
     return (
       <Formik
-        initialValues={getInitialValues(selectedShippingAddress)}
+        initialValues={this.getInitialValues()}
         onSubmit={this.handleSubmit}
         validate={values =>
           yup
             .object()
-            .shape({
-              firstname: yup.string().required('Please enter your first name.'),
-              lastname: yup.string().required('Please enter your last name.'),
-              email: yup
-                .string()
-                .email('Email is not valid')
-                .required('Email is required'),
-              address1: yup.string().required('Please enter your address.'),
-              city: yup.string().required('City is required.'),
-              postalCode: yup.string().required('Please enter postal code.'),
-              province: yup.string().required('Please enter province.'),
-              phone: yup.number().required('Please enter your phone number.'),
-              country: yup.string().required('Country is required.')
-            })
+            .shape(this.getYupShape())
             .validate(values, { abortEarly: false })
             .catch(err => {
               throw err.inner.reduce((errors, err) => {
@@ -135,13 +73,7 @@ class AddressForm extends Component {
         validateOnChange={false}
         render={props =>
           ShippingInnerForm({
-            state: this.state,
-            toggleModalOpen: this.toggleModalOpen,
-            existingUserContinueAsGuest: this.existingUserContinueAsGuest,
-            toggleAddressFormOpen: this.toggleAddressFormOpen,
-            forExistingUser: this.props.forExistingUser,
-            addNewAddress: this.props.addNewAddress,
-            toggleAddNewAddress: this.props.toggleAddNewAddress,
+            ...this.props,
             ...props
           })
         }
@@ -154,64 +86,19 @@ const ShippingInnerForm = ({
   errors,
   isSubmitting,
   handleChange,
-  toggleModalOpen,
-  existingUserContinueAsGuest,
-  toggleAddNewAddress,
-  addNewAddress,
-  state,
-  forExistingUser,
-  isAuthenticated
+  show,
+  excludeFields = [],
+  buttonText
 }) => {
-  const iconCross = (
-    <div onClick={toggleModalOpen}>
-      <Icon
-        width="31"
-        height="31"
-        paths={ICON_PATHS['cross']}
-        pathStyle={{
-          strokeWidth: '.4',
-          fill: 'black',
-          stroke: 'black'
-        }}
-        style={{
-          display: 'inline-block',
-          marginLeft: '2rem',
-          marginTop: '2rem'
-        }}
-      />
-    </div>
-  );
-  console.log(values);
   return (
-    <div>
-      {state.modalOpen &&
-        !isAuthenticated && (
-          <Modal>
-            {iconCross}
-            <div className="user-exists-modal">
-              <div className="user-exists-modal__header">
-                {values.email} is already registered. You can login here!
-              </div>
-              <LoginForm
-                className="user-exists-modal__login"
-                formType="userExistsModal"
-                email={values.email}
-              />
-              <div
-                className="user-exists-modal__content"
-                onClick={existingUserContinueAsGuest}
-              >
-                <p>No Thanks, I'll continue as a guest.</p>
-              </div>
-            </div>
-          </Modal>
-        )}
-
+    <div className={show ? '' : 'no-display'}>
       <Form className="shipping-form">
         {errors.email}
-        {!forExistingUser && (
-          <div>
-            <div className="shipping-form__item">
+        <div>
+          <div className="shipping-form__item">
+            <div
+              className={excludeFields.includes('email') ? 'no-display' : ''}
+            >
               <Field
                 className={`shipping-form__field  ${
                   errors.email ? 'border-bottom-error' : ''
@@ -227,6 +114,12 @@ const ShippingInnerForm = ({
                   <p className="shipping-form__error--item">{errors.email}</p>
                 </div>
               )}
+            </div>
+            <div
+              className={
+                excludeFields.includes('newsletter') ? 'no-display' : ''
+              }
+            >
               <label className="shipping-form__checkbox--outer">
                 <Field
                   className="shipping-form__checkbox"
@@ -242,265 +135,229 @@ const ShippingInnerForm = ({
               </label>
             </div>
           </div>
-        )}
-        {((forExistingUser && addNewAddress) || !forExistingUser) && (
-          <div>
-            <div className="shipping-form__names row">
-              <div className="col-xs-6 reduced-gutter-right">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    type="text"
-                    name="firstname"
-                    placeholder="First Name"
-                    value={values.firstname}
-                    onChange={handleChange}
-                  />
-                  {(errors.firstname || errors.lastname) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.firstname}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-xs-6 reduced-gutter-left">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    type="text"
-                    name="lastname"
-                    placeholder="Last Name"
-                    value={values.lastname}
-                    onChange={handleChange}
-                  />
-                  {(errors.firstname || errors.lastname) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.lastname}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    placeholder="Address"
-                    type="address1"
-                    name="address1"
-                    value={values.address1}
-                    onChange={handleChange}
-                  />
-                  {errors.address1 && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.address1}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    placeholder="Apt, suite, etc."
-                    type="address2"
-                    name="address2"
-                    value={values.address2}
-                    onChange={handleChange}
-                  />
-                  {errors.address2 && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.address2}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="shipping-form__city-postal row">
-              <div className="col-xs-6 reduced-gutter-right">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                    value={values.city}
-                    onChange={handleChange}
-                  />
-                  {(errors.city || errors.postalCode) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.city}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-xs-6 reduced-gutter-left">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    type="text"
-                    name="postalCode"
-                    placeholder="Postal Code"
-                    value={values.postalCode}
-                    onChange={handleChange}
-                  />
-                  {(errors.postalCode || errors.city) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.postalCode}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="shipping-form__names row">
-              <div className="col-xs-6 reduced-gutter-right">
-                <div className="shipping-form__field shipping-form__select-wrapper">
-                  <Field
-                    className="shipping-form__select-inner"
-                    component="select"
-                    name="province"
-                    placeholder="Province"
-                    value={values.province}
-                    onChange={handleChange}
-                  >
-                    <option value="Province" className="no-display">
-                      Province
-                    </option>
-                    <option value="Alberta">Alberta</option>
-                    <option value="British Columbia">British Columbia</option>
-                    <option value="Manitoba">Manitoba</option>
-                    <option value="New Brunswick">New Brunswick</option>
-                    <option value="Newfoundland and Labrador">
-                      Newfoundland and Labrador
-                    </option>
-                    <option value="Northwest Territories">
-                      Northwest Territories
-                    </option>
-                    <option value="Nova Scotia">Alberta</option>
-                    <option value="Nunavut">Nunavut</option>
-                    <option value="Ontario">Ontario</option>
-                    <option value="Prince Edward Island">
-                      Prince Edward Island
-                    </option>
-                    <option value="Quebec">Quebec</option>
-                    <option value="Saskatchewan">Saskatchewan</option>
-                    <option value="Yukon">Yukon</option>
-                  </Field>
-                  {(errors.province || errors.phone) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.province}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="col-xs-6 reduced-gutter-left">
-                <div className="shipping-form__item">
-                  <Field
-                    className="shipping-form__field"
-                    type="text"
-                    name="phone"
-                    placeholder="Phone"
-                    value={values.phone}
-                    onChange={handleChange}
-                  />
-                  {(errors.phone || errors.province) && (
-                    <div className="shipping-form__error">
-                      <p className="shipping-form__error--item">
-                        {errors.phone}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="shipping-form__item shipping-form__country">
-                  <div className="shipping-form__country--flag">
-                    <img
-                      alt="country icon"
-                      src="http://wistberry.imgix.net/images/flags/canada.png"
-                      style={{
-                        width: '3rem',
-                        height: '2rem',
-                        paddingTop: '3px',
-                        display: 'inline-block'
-                      }}
-                    />
-                    <span>Canada</span>
-                  </div>
-
-                  <p>We currently ship to Canada only.</p>
-                </div>
+        </div>
+        <div>
+          <div className="shipping-form__names row">
+            <div className="col-xs-6 reduced-gutter-right">
+              <div className="shipping-form__item">
                 <Field
-                  className="no-display"
+                  className="shipping-form__field"
                   type="text"
-                  name="country"
-                  placeholder="Country"
-                  value={values.country}
+                  name="firstname"
+                  placeholder="First Name"
+                  value={values.firstname}
                   onChange={handleChange}
                 />
-              </div>
-              <div className="shipping-form__default-address">
-                <div className="col-xs-12">
-                  <label className="shipping-form__checkbox--outer">
-                    <Field
-                      className="shipping-form__checkbox"
-                      type="checkbox"
-                      name="defaultShippingAddress"
-                      placeholder="default shipping address"
-                      checked={values.defaultShippingAddress}
-                    />
-                    <p className="shipping-form__checkbox--comment">
-                      Use as default shipping address
+                {(errors.firstname || errors.lastname) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.firstname}
                     </p>
-                  </label>
-                </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="col-xs-6 reduced-gutter-left">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  type="text"
+                  name="lastname"
+                  placeholder="Last Name"
+                  value={values.lastname}
+                  onChange={handleChange}
+                />
+                {(errors.firstname || errors.lastname) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.lastname}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        )}
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  placeholder="Address"
+                  type="address1"
+                  name="address1"
+                  value={values.address1}
+                  onChange={handleChange}
+                />
+                {errors.address1 && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.address1}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  placeholder="Apt, suite, etc."
+                  type="address2"
+                  name="address2"
+                  value={values.address2}
+                  onChange={handleChange}
+                />
+                {errors.address2 && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.address2}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="shipping-form__city-postal row">
+            <div className="col-xs-6 reduced-gutter-right">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                  value={values.city}
+                  onChange={handleChange}
+                />
+                {(errors.city || errors.postalCode) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">{errors.city}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="col-xs-6 reduced-gutter-left">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  type="text"
+                  name="postalCode"
+                  placeholder="Postal Code"
+                  value={values.postalCode}
+                  onChange={handleChange}
+                />
+                {(errors.postalCode || errors.city) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.postalCode}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="shipping-form__names row">
+            <div className="col-xs-6 reduced-gutter-right">
+              <div className="shipping-form__field shipping-form__select-wrapper">
+                <Field
+                  className="shipping-form__select-inner"
+                  component="select"
+                  name="province"
+                  placeholder="Province"
+                  value={values.province}
+                  onChange={handleChange}
+                >
+                  <option value="Province" className="no-display">
+                    Province
+                  </option>
+                  {_.toPairs(provinces).map(([code, name]) => {
+                    return (
+                      <option value={code} key={code}>
+                        {name}
+                      </option>
+                    );
+                  })}
+                </Field>
+                {(errors.province || errors.phone) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">
+                      {errors.province}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="col-xs-6 reduced-gutter-left">
+              <div className="shipping-form__item">
+                <Field
+                  className="shipping-form__field"
+                  type="text"
+                  name="phone"
+                  placeholder="Phone"
+                  value={values.phone}
+                  onChange={handleChange}
+                />
+                {(errors.phone || errors.province) && (
+                  <div className="shipping-form__error">
+                    <p className="shipping-form__error--item">{errors.phone}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="shipping-form__item shipping-form__country">
+                <div className="shipping-form__country--flag">
+                  <img
+                    alt="country icon"
+                    src="http://wistberry.imgix.net/images/flags/canada.png"
+                    style={{
+                      width: '3rem',
+                      height: '2rem',
+                      paddingTop: '3px',
+                      display: 'inline-block'
+                    }}
+                  />
+                  <span>Canada</span>
+                </div>
+
+                <p>We currently ship to Canada only.</p>
+              </div>
+              <Field
+                className="no-display"
+                type="text"
+                name="country"
+                placeholder="Country"
+                value={values.country}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="shipping-form__default-address">
+              <div className="col-xs-12">
+                <label className="shipping-form__checkbox--outer">
+                  <Field
+                    className="shipping-form__checkbox"
+                    type="checkbox"
+                    name="defaultShippingAddress"
+                    placeholder="default shipping address"
+                    checked={values.defaultShippingAddress}
+                  />
+                  <p className="shipping-form__checkbox--comment">
+                    Use as default shipping address
+                  </p>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-xs-12">
             <div className="shipping-form__item">
-              {state.shippingFormOpen &&
-                forExistingUser &&
-                addNewAddress && (
-                  <div>
-                    <SmallButton type="submit" disabled={isSubmitting}>
-                      Add a new address
-                    </SmallButton>
-                    <div
-                      className="shipping-form__cancel-btn"
-                      onClick={toggleAddNewAddress}
-                    >
-                      Cancel
-                    </div>
-                  </div>
-                )}
-              {state.shippingFormOpen &&
-                (!forExistingUser || !addNewAddress) && (
-                  <SmallButton type="submit" disabled={isSubmitting}>
-                    Next
-                  </SmallButton>
-                )}
+              <SmallButton type="submit" disabled={isSubmitting}>
+                {buttonText}
+              </SmallButton>
             </div>
           </div>
         </div>
@@ -509,13 +366,12 @@ const ShippingInnerForm = ({
   );
 };
 
-const mapStateToProps = state => ({
-  cart: state.cart,
-  checkout: state.checkout,
-  isAuthenticated: !!state.auth.isAuthenticated,
-  authUser: state.auth.authUser
-});
-export default connect(
-  mapStateToProps,
-  { startAddShippingAddress, setCheckoutEmail, setNewsletter }
-)(AddressForm);
+AddressForm.propTypes = {
+  show: PropTypes.bool,
+  excludeFields: PropTypes.array,
+  initialValues: PropTypes.object,
+  onSubmit: PropTypes.func, // given the same args as Formik handleSubmit
+  buttonText: PropTypes.string
+};
+
+export default AddressForm;

@@ -75,9 +75,9 @@ const UserSchema = new Schema({
     }
   ],
 
-  newsletter: {
-    type: Boolean
-  }
+  // newsletter: {
+  //   type: Boolean
+  // }
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

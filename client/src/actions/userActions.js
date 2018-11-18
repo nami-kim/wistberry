@@ -19,7 +19,7 @@ export const startSetUser = email => (dispatch, getState) => {
       }
       // If logged in, no localStorage - manage everything from redux state
       localStorage.removeItem('cart');
-      // Extract shippingAddress, BillingInfo, and newsletter from db user and save in checkout redux state
+      // Extract shippingAddress, and BillingInfo from db user and save in checkout redux state
       dispatch(startSetCheckout(user.data))
      
     })

@@ -2,20 +2,22 @@ import {
   ADD_SHIPPING_ADDRESS,
   SET_SELECTED_SHIPPING_ADDRESS,
   SET_SHIPPING_ADDRESS_OPTIONS,
-  SET_BILLING_INFO,
+  SET_BILLING_OPTIONS,
   SET_NEWSLETTER,
   SET_CHECKOUT_EMAIL,
   // EDIT_SHIPPING_ADDRESS,
-  HANDLE_TOKEN
+  HANDLE_TOKEN,
+  RESET_CHECKOUT
 } from '../actions/types';
 
 const initialState = {
   shippingAddressOptions: [],
   selectedShippingAddress: {},
   email: '',
-  newsletter: false,
+  // newsletter: false,
   token: {},
-  billingInfo: []
+  billingOptions: [],
+  selectedBilling: {}
   // orderSummary: {}
 };
 
@@ -29,7 +31,6 @@ export default (state = initialState, action) => {
           action.shippingAddress
         ]
       };
-
     case SET_SELECTED_SHIPPING_ADDRESS:
       return {
         ...state,
@@ -40,26 +41,18 @@ export default (state = initialState, action) => {
         ...state,
         shippingAddressOptions: action.shippingAddressOptions
       };
-    case SET_BILLING_INFO:
+    case SET_BILLING_OPTIONS:
       return {
         ...state,
-        billingInfo: action.billingInfo
-      };
-    case SET_NEWSLETTER:
-      return {
-        ...state,
-        newsletter: action.newsletter
+        billingInfo: action.billingOptions
       };
     case SET_CHECKOUT_EMAIL:
       return {
         ...state,
         email: action.email
       };
-    // case EDIT_SHIPPING_ADDRESS:
-    //   return {
-    //     ...state,
-    //     ...action.updates
-    //   };
+    case RESET_CHECKOUT:
+      return initialState;
     case HANDLE_TOKEN:
       return {
         ...state,

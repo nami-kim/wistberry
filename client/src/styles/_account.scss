@@ -4,7 +4,7 @@
   background-color: $color-primary-blue;
   // account-page__nav
   &__menu-nav {
-    width: 90%;
+    width: 95%;
     height: 400px;
     max-width: 400px;
     min-width: 220px;
@@ -84,12 +84,12 @@
   }
   // account-page__details
   &__details {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     margin-top: 13rem;
     font-size: 1.4rem;
     letter-spacing: 0.01rem;
-    padding: 1rem;
+    // padding: 1rem;
     text-align: left;
     background: $color-white;
     min-height: 400px;
@@ -115,9 +115,8 @@
   }
   &__current-address {
     width: 100%;
-    margin: 1rem auto;
-    border: 1px solid $color-grey-light-4;
-    padding: 1rem;
+    margin: 3rem auto 1rem auto;
+    // padding: 1rem;
   }
 
   &__add-new-address {
@@ -176,7 +175,7 @@
       justify-content: flex-end;
     }
     &__current-address {
-   
+      // padding: 1rem;
     }
   }
 }

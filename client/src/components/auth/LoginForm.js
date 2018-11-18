@@ -17,13 +17,13 @@ class loginInnerForm extends Component {
     }));
   };
   render() {
-    const { title, errors, touched, isSubmitting, type } = this.props;
+    const { title, errors, touched, isSubmitting, formType } = this.props;
 
     return (
       <div>
         <Form
           className={`signup-form ${
-            type === 'userExistsModal' ? 'narrow-width' : ''
+            formType === 'userExistsModal' ? 'narrow-width' : ''
           }`}
         >
           {!this.state.passwordForgotFormOpen && (
@@ -38,7 +38,7 @@ class loginInnerForm extends Component {
                 </p>
               </div>
               <div
-                className={`signup-form__item ${type === 'userExistsModal' &&
+                className={`signup-form__item ${formType === 'userExistsModal' &&
                   'no-display'}`}
               >
                 <label className="signup-form__label" htmlFor="email">
@@ -88,11 +88,11 @@ class loginInnerForm extends Component {
                 </span>
               </div>
               <div className="signup-form__label signup-form__no-account">
-                <p className={`${type === 'userExistsModal' && 'no-display'}`}>
+                <p className={`${formType === 'userExistsModal' && 'no-display'}`}>
                   Don't have an account?
                 </p>
                 <Link
-                  className={`${type === 'userExistsModal' && 'no-display'}`}
+                  className={`${formType === 'userExistsModal' && 'no-display'}`}
                   to="/signup"
                 >
                   <span className="signup-form__no-account--text">Sign up</span>
@@ -135,13 +135,13 @@ export const LoginFormFormik = withFormik({
     password: yup.string().required('Password is required')
   }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    if (props.type === 'loginPage' || 'checkoutOption') {
+    if (props.formType === 'loginPage' || 'checkoutOption') {
       props
         .loginUser(values, props.history)
         .then(() => {
           resetForm();
           setSubmitting(false);
-          props.type === 'loginPage' ? props.history.push('/me/account') : props.history.push('/checkout')
+          props.formType === 'loginPage' ? props.history.push('/me/account') : props.history.push('/checkout')
         })
         .catch(err => {
           setSubmitting(false);

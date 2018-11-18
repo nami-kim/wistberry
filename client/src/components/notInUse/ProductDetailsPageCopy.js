@@ -9,47 +9,6 @@ import {
 } from '../../actions/productActions';
 import { startAddToCart, toggleCartOpen } from '../../actions/cartActions';
 import { connect } from 'react-redux';
-import Icon from '../common/Icon';
-import { ICON_PATHS } from '../common/constants';
-
-const SingleCard = ({ icon, children, className, style, ...rest }) => (
-  <div
-    className={`col-xs-12 col-md-3 ba b--washed-red no-gutter ${className}`}
-    style={{ backgroundColor: 'rgba(255,255,255,0.7)', marginRight: '-1px', marginTop: '-1px', ...style }}
-    {...rest}
-  >
-    <div className="flex flex-column justify-between pa5" style={{ height: '320px' }}>
-      {/* content */}
-      <div className="dark-gray">
-        {children}
-      </div>
-      {/* end: content */}
-
-      {/* icon */}
-      <div className="tr">
-        <Icon
-          width="40"
-          height="40"
-          paths={ICON_PATHS[icon]}
-          pathStyle={{ strokeWidth: '0.2', stroke: '#222' }}
-        // viewBox="0 0 32 32"
-        />
-      </div>
-      {/* end: icon */}
-    </div>
-  </div>
-)
-const DoubleCard = ({ children, className, style, ...rest }) => (
-  <div
-    className={`col-xs-12 col-md-6 ba b--washed-red no-gutter ${className}`}
-    style={{ backgroundColor: 'rgba(255,255,255,0.7)', marginTop: '-1px', ...style }}
-    {...rest}
-  >
-    <div className="pa5" style={{ height: '320px' }}>
-      {children}
-    </div>
-  </div>
-)
 
 class ProductDetailPage extends Component {
   state = {
@@ -247,28 +206,6 @@ class ProductDetailPage extends Component {
       </div>
     ));
 
-    /* More details section */
-    const includedInPackage = [
-      'Plant',
-      'Pot',
-      'Wooden base',
-      'Care instructions',
-      'Free shipping via UPS',
-    ]
-    const potAndBaseImages = [
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-    ]
-    const otherBenefits = [
-      {
-        icon: 'refund',
-        title: '100%, 30-day Moneyback Guarantee',
-        text: ''
-      }
-    ]
-
     return (
       <div>
         <Header productHeader={true} />
@@ -334,92 +271,9 @@ class ProductDetailPage extends Component {
           </div>
         </div>
 
-        {/* <div className="product-banner" />
+        <div className="product-banner" />
         <div className="product-instagram" />
-        <div className="product-review" /> */}
-
-        {/* plant details */}
-        <div className="container-wide bg-lightest-pink f4 pv5">
-          <div className="row">
-            <SingleCard icon="sun">
-              <div className="f3 fw5 mb2">Light: Low</div>
-              <div>Store away from windows</div>
-            </SingleCard>
-            <SingleCard icon="drop2">
-              <div className="f3 fw5 mb2">Water: Low</div>
-              <div>Water 200ml once a week</div>
-            </SingleCard>
-            <DoubleCard>
-              <div className="f3 fw5 mb2">About {plantName}</div>
-              <div>{plantDescription}</div>
-            </DoubleCard>
-          </div>
-          <div className="row">
-            <SingleCard icon="paw">
-              <div className="f3 fw5 mb2">Pet Safe: No</div>
-              <div>Watch this plant around pets - could be mildly toxic if ingested</div>
-            </SingleCard>
-            <SingleCard icon="cube">
-              <div className="f3 fw5 mb2">What's Included</div>
-              <ul className="ml4">
-                {includedInPackage.map(item => (
-                  <li className="mb2" key={item}>{item}</li>
-                ))}
-              </ul>
-            </SingleCard>
-            <DoubleCard>
-              <div className="row" style={{ height: '100%' }}>
-                <div className="col-xs-12 col-md-5">
-                  <div className="f3 fw5 mb2">Plant Height</div>
-                  <ul className="ml4">
-                    <li className="mb2">Table top size</li>
-                    <li className="mb2">1.5 - 2ft including the base</li>
-                  </ul>
-                </div>
-                <div className="col-xs-12 col-md-7">
-                  <div
-                    style={{
-                      background: 'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/interior-design-17.jpg")',
-                      backgroundSize: 'cover',
-                      height: '100%',
-                    }}
-                  />
-                </div>
-              </div>
-            </DoubleCard>
-          </div>
-        </div>
-        {/* end: plant details */}
-
-        {/* premium pots + bases */}
-        <div className="container-narrow f4 pv6">
-          <div className="tc">
-            <div className="f1 lh-title fw4 mb3">Premium pots + hardwood bases</div>
-            <div className="mb5 gray">Our premium pots and hardwood bases are locally crafted and finished to the highest quality.</div>
-          </div>
-          <div className="row">
-            {potAndBaseImages.map((imgSrc, i) => (
-              <div className="col-xs-12 col-md-6" style={{ marginTop: '2.5rem' }}>
-                <div className="flex items-center justify-center pa5" style={{ backgroundColor: '#fafafa' }}>
-                  <img src={imgSrc} style={{ width: '100%' }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* end: premium pots + bases */}
-
-        {/* other benefits */}
-        <div className="container-wide bg-lightest-pink f4 pv5">
-          <div className="row">
-            {otherBenefits.map(({ icon, title, text }, i) => (
-              <div className="col-xs-12 col-md-4"></div>
-            ))}
-          </div>
-        </div>
-        {/* end: other benefits */}
-
-
+        <div className="product-review" />
       </div>
     );
   }

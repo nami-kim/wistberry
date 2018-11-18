@@ -6,8 +6,6 @@ import { ICON_PATHS } from '../common/constants';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AddressForm from '../checkout/AddressForm';
-import { startAddOrEditShippingAddress } from '../../actions/checkoutActions';
-import AddressRadioOptions from '../checkout/shipping/AddressRadioOptions';
 
 class AddressBookPage extends Component {
   state = {
@@ -18,16 +16,18 @@ class AddressBookPage extends Component {
     this.setState(() => ({ editInUse: !this.state.editInUse }));
   toggleAddNewAddress = () =>
     this.setState(() => ({ addNewAddress: !this.state.addNewAddress }));
-  handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-    this.props.startAddOrEditShippingAddress(values, {
-      setAsSelectedShippingAddress: values.defaultShippingAddress
-    });
-    setSubmitting(false);
-    resetForm();
-  };
   render() {
-    
+    //  this.props.user.shippingAddress;
+    // const {
+    //   firstname,
+    //   lastname,
+    //   line1,
+    //   line2,
+    //   city,
+    //   state,
+    //   postal_code,
+    //   country
+    // }
     return (
       <div>
         <Header defaultHeader={true} />
@@ -58,10 +58,24 @@ class AddressBookPage extends Component {
                 <div className="account-page__body">
                   <div className="account-page__order-history">
                     <div className="account-page__current-address">
-                      
-                      <AddressRadioOptions
-                        show={!this.state.addNewAddress}
-                      />
+                      <span className="account-page__edit-icon">
+                        <span>Edit</span>
+                        <Icon
+                          width="21"
+                          height="21"
+                          paths={ICON_PATHS['pencil']}
+                          pathStyle={{
+                            strokeWidth: '.3',
+                            fill: '#999',
+                            stroke: '#999'
+                          }}
+                        />
+                      </span>
+                      <div>Nami Kim</div>
+                      <div>Unit 808</div>
+                      <div>1028 Barclay St.</div>
+                      <div>Vancouver, BC V6Z 3H8</div>
+                      <div>Canada</div>
                     </div>
 
                     <div
@@ -70,22 +84,15 @@ class AddressBookPage extends Component {
                     >
                       + Add New Address
                     </div>
-                    <div className="account-page__new-address-form">
-                      <AddressForm
-                        show={this.state.addNewAddress}
-                        excludeFields={['email', 'newsletter']}
-                        onSubmit={this.handleSubmit}
-                        buttonText="Add a new address"
-                      />
-                    </div>
-                    <div
-                      className={`account-page__add-new-address ${
-                        !this.state.addNewAddress ? 'no-display' : ''
-                      }`}
-                      onClick={this.toggleAddNewAddress}
-                    >
-                      Cancel
-                    </div>
+                    {this.state.addNewAddress && (
+                      <div className="account-page__new-address-form">
+                        <AddressForm
+                          forExistingUser={true}
+                          addNewAddress={true}
+                          toggleAddNewAddress={this.toggleAddNewAddress}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -97,26 +104,8 @@ class AddressBookPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  checkout: state.checkout
-});
+// const mapStateToProps = state => ({
+//   user: state.user
+// });
 
-export default connect(
-  mapStateToProps,
-  { startAddOrEditShippingAddress }
-)(AddressBookPage);
-
-
-// <span className="account-page__edit-icon">
-//   <span>Edit</span>
-//   <Icon
-//     width="21"
-//     height="21"
-//     paths={ICON_PATHS['pencil']}
-//     pathStyle={{
-//       strokeWidth: '.3',
-//       fill: '#999',
-//       stroke: '#999'
-//     }}
-//   />
-// </span>
+export default connect(null)(AddressBookPage);

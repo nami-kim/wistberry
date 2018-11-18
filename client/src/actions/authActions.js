@@ -3,7 +3,7 @@ import { SET_AUTH_USER, UPDATE_USER_PROFILE } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import { startSetUser, resetUser } from './userActions';
 import { resetCart } from './cartActions';
-import { startSetCheckout } from './checkoutActions';
+import { resetCheckout } from './checkoutActions'
 
 import jwt_decode from 'jwt-decode';
 
@@ -92,6 +92,7 @@ export const logoutUser = history => dispatch => {
   dispatch(setAuthUser({}));
   dispatch(resetUser());
   dispatch(resetCart());
+  dispatch(resetCheckout())
   history.push('/login');
 };
 

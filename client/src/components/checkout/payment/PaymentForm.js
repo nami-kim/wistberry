@@ -9,7 +9,7 @@ class PaymentForm extends Component {
       <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
         <div className="example">
           <Elements>
-            <StripeCheckoutForm togglePaymentOpen={this.props.togglePaymentOpen}/>
+            <StripeCheckoutForm togglePaymentFormOpen={this.props.togglePaymentFormOpen}/>
           </Elements>
         </div>
       </StripeProvider>

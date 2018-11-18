@@ -14,7 +14,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   transition: translate(-100%);
-  z-index: 101;
+  z-index: 301;
 
   > * {
     display: flex;
@@ -126,6 +126,7 @@
   display: flex;
   background: $color-white;
   transition: all 0.4s ease;
+  z-index: 201;
 
   &-items {
     width: 100%;
