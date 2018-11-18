@@ -107,7 +107,9 @@ export class HeaderMobile extends Component {
 
     return (
       <div className="show-header-mobile container">
-        {this.state.shopCategoryOpen && <ShopCategory />}
+        {this.state.shopCategoryOpen && (
+          <ShopCategory toggleShopCategory={this.toggleShopCategory} />
+        )}
         <div
           className={`row header ${classProductHeader} ${classReducedHeader}`}
         >

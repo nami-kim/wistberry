@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import ScrollToTop from '../components/ScrollToTop';
 
 import test from '../components/test';
+import Footer from '../components/Footer'
 // General
 import HomePage from '../components/HomePage';
 import AboutPage from '../components/AboutPage';
@@ -93,6 +94,7 @@ const AppRouter = () => (
 
           <PublicRoute component={NotFoundPage} />
         </Switch>
+        <Footer />
       </div>
     </ScrollToTop>
   </Router>

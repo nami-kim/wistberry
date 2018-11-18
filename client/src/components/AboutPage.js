@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Footer from './Footer';
 import { SmallButton } from './utils/Button';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
@@ -163,14 +162,18 @@ const AboutPage = () => {
             <div className="f1 lh-title fw4 mb4">
               Shop our collection today.
             </div>
+            <Link
+              to="/collection/all-plants"
+            >
             <SmallButton style={{ display: 'inline-block', width: 'auto' }}>
               Shop Now
             </SmallButton>
+            </Link>
           </div>
         </div>
       </div>
 
-      <Footer />
+   
     </div>
   );
 };
