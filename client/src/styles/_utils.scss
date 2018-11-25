@@ -110,6 +110,7 @@
   letter-spacing: 0.01rem;
   border: none;
   background: $color-orange-yellow;
+  border: 1px solid transparent;
   color: $color-black;
   padding: 1.6rem;
   // border: 1px solid transparent;
@@ -117,8 +118,34 @@
   transform: all 0.2s ease-in;
   &:hover {
     color: $color-black;
-    background: darken($color-orange-yellow, 14%);
-    // border: 1px solid $color-black;
+    background: $color-white;
+    border: 1px solid $color-black;
+    cursor: pointer;
+  }
+}
+
+.footer-sm-btn {
+  display: inline-block;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid transparent;
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+  color: $color-white;
+  background: #444;
+
+  // &:disabled {
+  //   opacity: 0.65;
+  //   cursor: not-allowed;
+  //   &:hover {
+  //     background: $color-black;
+  //     opacity: 0.65;
+  //     color: white;
+  //   }
+  // }
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $color-black;
+    color: $color-black;
     cursor: pointer;
   }
 }

@@ -25,6 +25,7 @@ class AddressBookPage extends Component {
     });
     setSubmitting(false);
     resetForm();
+    this.toggleAddNewAddress()
   };
   render() {
     

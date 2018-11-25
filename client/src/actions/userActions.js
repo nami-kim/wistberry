@@ -31,7 +31,7 @@ export const startSetUser = email => (dispatch, getState) => {
 // note: we remove cart from user object so there's no duplicate cart in redux state
 export const setUser = user => ({
   type: SET_USER,
-  user: _.omit(user, ['cart', 'password', 'shippingAddressOptions', 'billingOptions', 'newsletter'])
+  user: _.omit(user, ['cart', 'password', 'shippingAddressOptions', 'billingOptions', 'newsletter', 'stripeCustomerId'])
 });
 
 export const resetUser = () => ({

@@ -24,4 +24,10 @@ export const EditButton = ({ children, show = true, ...rest }) => (
   </button>
 );
 
+export const FooterButton = ({ children, show = true, ...rest }) => (
+  <button className={`footer-sm-btn ${show ? '' : 'no-display'}`} {...rest}>
+    {children}
+  </button>
+);
+
 export default Button;

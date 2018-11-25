@@ -28,6 +28,7 @@ import PaymentDetailsPage from '../components/account/PaymentDetailsPage';
 
 // Collections
 import CollectionPage from '../components/collections/CollectionPage';
+import YouMayAlsoLike from '../components/collections/YouMayAlsoLike';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -86,6 +87,7 @@ const AppRouter = () => (
             path="/collection/:collection"
             component={CollectionPage}
           />
+          
           <PublicRoute
             exact
             path="/products/:product"

@@ -8,7 +8,11 @@ import CheckoutReview from './CheckoutReview';
 import ShippingSummary from './shipping/ShippingSummary';
 import ShippingForm from './shipping/ShippingForm';
 import { EditButton } from '../utils/Button';
-import { setSelectedShippingAddress } from '../../actions/checkoutActions';
+import {
+  setSelectedShippingAddress,
+  changeCheckoutView
+} from '../../actions/checkoutActions';
+import _ from 'lodash'
 
 class CheckoutPage extends Component {
   state = {
@@ -18,18 +22,7 @@ class CheckoutPage extends Component {
     addNewAddress: false,
     radioChecked: 0
   };
-  toggleShippingFormOpen = () => {
-    this.setState(() => ({
-      shippingFormOpen: !this.state.shippingFormOpen,
-      paymentFormOpen: !this.state.paymentFormOpen
-    }));
-  };
-  togglePaymentFormOpen = () => {
-    this.setState(() => ({
-      paymentFormOpen: !this.state.paymentFormOpen,
-      orderSummaryFormOpen: !this.state.orderSummaryFormOpen
-    }));
-  };
+
   toggleOrderSummaryFormOpen = () => {
     this.setState(() => ({
       orderSummaryFormOpen: !this.state.orderSummaryFormOpen
@@ -44,12 +37,16 @@ class CheckoutPage extends Component {
     this.props.setSelectedShippingAddress(shippingAddressOptions[index]);
     this.setState(() => ({ radioChecked: index }));
   };
-  handleEditShipping = e => {
-    this.toggleShippingFormOpen();
+  handleEditShipping = () => {
+    this.props.changeCheckoutView('shippingView');
+  };
+  handleEditPayment = () => {
+    this.props.changeCheckoutView('paymentView');
   };
 
   render() {
-    console.log(this.state.shippingFormOpen)
+    console.log(this.state.shippingFormOpen);
+    const { shippingView, paymentView, summaryView } = this.props.checkout.view;
     return (
       <div>
         <Header checkoutHeader={true} />
@@ -61,25 +58,22 @@ class CheckoutPage extends Component {
                   <span className="text-red">01</span> Shipping
                 </div>
                 <div className="checkout__shipping-inner-container">
-                  <div
-                    className={`${
-                      this.state.shippingFormOpen ? '' : 'inactive'
-                    }`}
-                  >
-                    <div className={`checkout__edit-btn ${!this.state.shippingFormOpen ? '': 'no-display'}`}>
+                  <div className={`${shippingView ? '' : 'inactive'}`}>
+                    <div
+                      className={`checkout__edit-btn ${
+                        !shippingView ? '' : 'no-display'
+                      }`}
+                    >
                       <EditButton
-                        show={!this.state.shippingFormOpen}
+                        show={!shippingView}
                         onClick={this.handleEditShipping}
                       >
                         Edit
                       </EditButton>
                     </div>
                   </div>
-                  <ShippingForm
-                    toggleShippingFormOpen={this.toggleShippingFormOpen}
-                    show={this.state.shippingFormOpen}
-                  />
-                  <ShippingSummary show={!this.state.shippingFormOpen} />
+                  <ShippingForm show={shippingView} />
+                  <ShippingSummary show={!shippingView} />
                 </div>
               </div>
             </div>
@@ -90,14 +84,21 @@ class CheckoutPage extends Component {
                   <span className="text-red">02</span> Payment
                 </div>
                 <div className="checkout__payment-inner-container">
-                  <div
-                    className={`${
-                      this.state.paymentFormOpen ? '' : 'inactive'
-                    }`}
-                  />
-                  <PaymentForm
-                    togglePaymentFormOpen={this.togglePaymentFormOpen}
-                  />
+                  <div className={`${paymentView ? '' : 'inactive'}`}>
+                    <div
+                      className={`checkout__edit-btn ${
+                        !paymentView ? '' : 'no-display'
+                      }`}
+                    >
+                      <EditButton
+                        show={!paymentView && !_.isEmpty(this.props.checkout.token)}
+                        onClick={this.handleEditPayment}
+                      >
+                        Edit
+                      </EditButton>
+                    </div>
+                  </div>
+                  <PaymentForm />
                 </div>
               </div>
             </div>
@@ -107,13 +108,9 @@ class CheckoutPage extends Component {
                   <span className="text-red">03</span> Order Summary
                 </div>
                 <div className="checkout__order-summary-inner-container">
-                  <div
-                    className={`${
-                      this.state.orderSummaryFormOpen ? '' : 'inactive'
-                    }`}
-                  />
+                  <div className={`${summaryView ? '' : 'inactive'}`} />
                   <CheckoutReview
-                    toggleOrderSummaryFormOpen={this.toggleOrderSummaryFormOpen}
+                  // toggleOrderSummaryFormOpen={this.toggleOrderSummaryFormOpen}
                   />
                 </div>
               </div>
@@ -133,7 +130,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setSelectedShippingAddress }
+  { setSelectedShippingAddress, changeCheckoutView }
 )(CheckoutPage);
-
-

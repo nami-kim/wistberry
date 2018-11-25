@@ -8,7 +8,7 @@
 .checkout__payment-container,
 .checkout__order-summary-container {
   width: 100%;
-  margin: 6rem auto 0 auto;
+  margin: 8rem auto 0 auto;
 }
 
 .checkout__shipping-inner-container,
@@ -42,9 +42,10 @@
 }
 .checkout__login-view {
   min-height: 100vh;
-  padding-top: 3rem;
+  padding-top: 5rem;
 }
-.checkout__customer-address, .checkout__customer-email {
+.checkout__customer-address,
+.checkout__customer-email {
   overflow: auto;
   font-size: 1.4rem;
   width: 90%;
@@ -54,7 +55,7 @@
   border-radius: 0.2rem;
   background: $color-white;
   &-title {
-    font-weight: 400
+    font-weight: 400;
   }
 }
 
@@ -68,14 +69,51 @@
   margin: 1rem;
   border-bottom: 1px solid $color-grey-light-4;
   padding-bottom: 1.5rem;
+  &-summary {
+    padding-left: 1rem;
+  }
   &-name {
     text-transform: uppercase;
     font-weight: 300;
   }
   &-radio-check {
-    margin-top: 0.5rem;
-    margin-right: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+    background-color: #f1f1f1;
+    color: $color-white;
+    // top: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 7px;
+    outline: none;
+    &:checked::before {
+      position: absolute;
+      font: 1.5rem 'Open Sans', sans-serif;
+      left: 8px;
+      top: 2px;
+      content: '\02143';
+      transform: rotate(40deg);
+    }
+    &:hover {
+      background-color: #414141;
+    }
+    &:checked {
+      background-color: #414141;
+    }
+    label {
+      font: 300 16px/1.7 'Open Sans', sans-serif;
+      color: $color-white;
+      cursor: pointer;
+    }
   }
+}
+.radio-wrapper {
 }
 .checkout__title {
   font-weight: 400;
@@ -88,13 +126,14 @@
 .checkout__btn {
   width: 90%;
   margin: 0 auto;
-
 }
 .checkout__edit-btn {
   width: 90%;
   margin: 30rem auto 0 auto;
 }
-
+.checkout__payment-form {
+  padding-top: 5rem;
+}
 // shipping-form
 .shipping-form {
   width: 90%;
@@ -191,7 +230,6 @@
   &__default-address {
     margin-top: 2rem;
   }
-  
 }
 
 // OrderSummary Starts Here
@@ -284,8 +322,8 @@
     right: 1.2rem;
   }
   .checkout__title {
-    padding-top: 3rem;
-    padding-bottom: 1.8rem;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
   }
   .shipping-form {
     padding-top: 3rem;

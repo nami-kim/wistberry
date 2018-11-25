@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
-import { FooterButton } from './utils/Button';
 
 const Footer = () => {
   const collections = [
@@ -37,7 +36,7 @@ const Footer = () => {
 
   const SocialIcon = ({ icon }) => (
     <div
-      className="flex items-center justify-center ba br-100 b--footer-font-grey mr3"
+      className="flex items-center justify-center ba br-100 b--white mr3"
       style={{ width: '40px', height: '40px' }}
     >
       <Icon
@@ -45,7 +44,7 @@ const Footer = () => {
         height="16"
         className
         paths={ICON_PATHS[icon]}
-        pathStyle={{ fill: '#444' }}
+        pathStyle={{ fill: '#fff' }}
         viewBox="0 0 32 32"
       />
     </div>
@@ -54,37 +53,17 @@ const Footer = () => {
   const socialIcons = ['facebook', 'instagram', 'youtube', 'linkedin'];
 
   return (
-    <footer className="footer-font-grey pv3 f4">
+    <footer className="white pv3 f4">
       {/* top */}
-      <div>
-        <div className="row">
-          {/* email subscription */}
-          <div className="col-xs-12 bg-near-black white tc ttu pv5">
-            <p className="pv2 f3 fw4 tracked">Join Wistberry.com Community</p>
-            <p className="pv1 f4 fw2">
-              Be the first to hear about new products, <br />
-              exclusive offers, and care tips.
-            </p>
-
-            <form className="bg-white center flex justify-between pa2 mt3 f4" style={{ width: '320px' }}>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your E-mail"
-                className="pa3 fw3 ba b--white"
-              />
-              <FooterButton>Submit</FooterButton>
-            </form>
-          </div>
-        </div>
+      <div style={{ backgroundColor: '#424242' }}>
         <div className="container-narrow">
-          <div className="row pt6 pb5">
+          <div className="row pv6">
             {/* collections */}
             <div className="col-xs-12 col-md-5 col-lg-3 mb4">
-              <div className="f3 fw4 mb4">Collections</div>
+              <div className="f3 mb4">Collections</div>
               {collections.map(({ title, url }, i) => (
                 <div className="mb4" key={url}>
-                  <Link to={url} className="footer-font-grey link dim">
+                  <Link to={url} className="moon-gray link dim">
                     {title}
                   </Link>
                 </div>
@@ -94,9 +73,9 @@ const Footer = () => {
 
             {/* about */}
             <div className="col-xs-12 col-md-4 col-lg-2 mb4">
-              <div className="f3 fw4 mb4">About</div>
+              <div className="f3 mb4">About</div>
               <div className="mb4">
-                <Link to="/about" className="footer-font-grey link dim">
+                <Link to="/about" className="moon-gray link dim">
                   Our Story
                 </Link>
               </div>
@@ -105,14 +84,14 @@ const Footer = () => {
 
             {/* support */}
             <div className="col-xs-12 col-md-3 col-lg-2 mb4">
-              <div className="f3 fw4 mb4">Support</div>
+              <div className="f3 mb4">Support</div>
               <div className="mb4">
-                <Link to="/faq" className="footer-font-grey link dim">
+                <Link to="/faq" className="moon-gray link dim">
                   FAQ
                 </Link>
               </div>
               <div className="mb4">
-                <Link to="/contact" className="footer-font-grey link dim">
+                <Link to="/contact" className="moon-gray link dim">
                   Contact us
                 </Link>
               </div>
@@ -121,7 +100,7 @@ const Footer = () => {
 
             {/* others + social media */}
             <div className="col-xs-12 col-md-12 col-lg-4 col-lg-offset-1 mb4">
-              <div className="f3 fw4 mb4">Share the Love</div>
+              <div className="f3 mb4">Share the Love</div>
               <div className="flex items-center">
                 {socialIcons.map((icon, i) => (
                   <SocialIcon icon={icon} key={icon} />
@@ -135,7 +114,7 @@ const Footer = () => {
       {/* end: top */}
 
       {/* bottom */}
-      <div className="pv3">
+      <div className="pv3" style={{ backgroundColor: '#212121' }}>
         <div className="flex justify-center">
           <div className="ph4 light-silver">© {moment().year()}</div>
           {bottomFooter.map(({ title, url }, i) => (

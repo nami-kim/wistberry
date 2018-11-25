@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { SmallButton } from '../../utils/Button';
 import { handleToken } from '../../../actions/checkoutActions';
+import {
+  startAddOrEditBilling,
+  changeCheckoutView
+} from '../../../actions/checkoutActions';
+
+import _ from 'lodash';
 
 class StripeCheckoutForm extends Component {
   constructor(props) {
@@ -13,16 +19,39 @@ class StripeCheckoutForm extends Component {
     };
     this.submit = this.submit.bind(this);
   }
+
   handleChange = e => {
     if (e.error) {
       this.setState(() => ({ error: e.error.message }));
     }
   };
-
+  // handleSubmitForNewUser = (values, { setSubmitting, resetForm }) => {
+  //   this.props
+  //     .startAddOrEditShippingAddress(values, {
+  //       setAsSelectedShippingAddress: true,
+  //       editShippingAddress: !_.isEmpty(
+  //         this.props.checkout.selectedShippingAddress
+  //       )
+  //     })
+  //     .then(() => {
+  //       console.log('handleSumbitForNewUser working');
+  //       setSubmitting(false);
+  //       resetForm();
+  //       this.props.changeCheckoutView('paymentView');
+  //     });
+  // };
   async submit(ev) {
     this.setState(() => ({ error: '' }));
-    this.props.togglePaymentFormOpen()
-    const {firstname, lastname, address1, address2, city, province, postalCode} = this.props.selectedShippingAddress
+    
+    const {
+      firstname,
+      lastname,
+      address1,
+      address2,
+      city,
+      province,
+      postalCode
+    } = this.props.selectedShippingAddress;
     this.props.stripe
       .createToken({
         name: `${firstname} ${lastname}`,
@@ -35,6 +64,8 @@ class StripeCheckoutForm extends Component {
       })
       .then(({ token }) => {
         this.props.handleToken(token);
+        this.props.changeCheckoutView('summaryView');
+       
       })
       .catch(err =>
         this.setState(() => ({
@@ -46,7 +77,6 @@ class StripeCheckoutForm extends Component {
   render() {
     return (
       <div className="shipping-form">
-        
         <div className="shipping-form__delivery">
           <span className="shipping-form__sub-title">Delivery</span>
           <input
@@ -65,6 +95,7 @@ class StripeCheckoutForm extends Component {
             <div className="shipping-form__error--item">{this.state.error}</div>
           </div>
         )}
+
         <div className="shipping-form__comment">
           You can review this order before it's final.
         </div>
@@ -74,11 +105,12 @@ class StripeCheckoutForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedShippingAddress: state.checkout.selectedShippingAddress
-})
+const mapStateToProps = state => ({
+  selectedShippingAddress: state.checkout.selectedShippingAddress,
+  checkout: state.checkout
+});
 
 export default connect(
   mapStateToProps,
-  { handleToken }
+  { handleToken, changeCheckoutView, startAddOrEditBilling }
 )(injectStripe(StripeCheckoutForm));

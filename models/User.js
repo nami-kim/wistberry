@@ -74,6 +74,29 @@ const UserSchema = new Schema({
       defaultShippingAddress: Boolean
     }
   ],
+  stripeCustomerId: {
+    type: String
+  },
+  billingOptions: [
+    {
+      cardId: {
+        type: String
+      },
+      brand: {
+        type: String
+      },
+      exp_month: {
+        type: Number
+      },
+      exp_year: {
+        type: Number
+      },
+      last4: {
+        type: Number
+      },
+      defaultBilling: Boolean
+    }
+  ]
 
   // newsletter: {
   //   type: Boolean

@@ -7,7 +7,9 @@ import {
   SET_CHECKOUT_EMAIL,
   // EDIT_SHIPPING_ADDRESS,
   HANDLE_TOKEN,
-  RESET_CHECKOUT
+  RESET_CHECKOUT,
+  CHANGE_CHECKOUT_VIEW,
+  SET_STRIPE_CUSTOMER_ID
 } from '../actions/types';
 
 const initialState = {
@@ -16,8 +18,10 @@ const initialState = {
   email: '',
   // newsletter: false,
   token: {},
+  stripeCustomerId: '',
   billingOptions: [],
-  selectedBilling: {}
+  selectedBilling: {},
+  view: { shippingView: true, paymentView: false, summaryView: false }
   // orderSummary: {}
 };
 
@@ -41,6 +45,11 @@ export default (state = initialState, action) => {
         ...state,
         shippingAddressOptions: action.shippingAddressOptions
       };
+    case SET_STRIPE_CUSTOMER_ID:
+      return {
+        ...state,
+        stripeCustomerId: action.stripeCustomerId
+      };
     case SET_BILLING_OPTIONS:
       return {
         ...state,
@@ -53,6 +62,15 @@ export default (state = initialState, action) => {
       };
     case RESET_CHECKOUT:
       return initialState;
+    case CHANGE_CHECKOUT_VIEW:
+      return {
+        ...state,
+        view: {
+          shippingView: action.currentView === 'shippingView' ? true : false,
+          paymentView: action.currentView === 'paymentView' ? true : false,
+          summaryView: action.currentView === 'summaryView' ? true : false
+        }
+      };
     case HANDLE_TOKEN:
       return {
         ...state,

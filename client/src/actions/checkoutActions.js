@@ -8,7 +8,9 @@ import {
   SET_SELECTED_BILLING,
   // SET_NEWSLETTER,
   SET_CHECKOUT_EMAIL,
-  RESET_CHECKOUT
+  SET_STRIPE_CUSTOMER_ID,
+  RESET_CHECKOUT,
+  CHANGE_CHECKOUT_VIEW
 } from './types';
 import _ from 'lodash';
 
@@ -57,6 +59,8 @@ export const setSelectedShippingAddress = shippingAddress => ({
   type: SET_SELECTED_SHIPPING_ADDRESS,
   shippingAddress
 });
+
+
 export const startAddOrEditShippingAddress = (shippingAddress, options) => (
   dispatch,
   getState
@@ -108,21 +112,27 @@ export const startAddOrEditShippingAddress = (shippingAddress, options) => (
     return updateShippingAddressInDB.then(({ data: user }) => {
       const { shippingAddressOptions } = user;
       dispatch(setShippingAddressOptions(shippingAddressOptions));
-      dispatch(setCheckoutEmail(authUser.email))
-      signUpForNewsletter(authUser.email, authUser.firstname, authUser.lastname);
+      dispatch(setCheckoutEmail(authUser.email));
+      signUpForNewsletter(
+        authUser.email,
+        authUser.firstname,
+        authUser.lastname
+      );
       if (setAsSelectedShippingAddress) {
         dispatch(setSelectedShippingAddress(shippingAddressOnly));
       }
     });
   } else {
     // If not logged in, there's only one shippingAddressOptions
-    dispatch(setShippingAddressOptions([shippingAddressOnly]));
-
-    if (setAsSelectedShippingAddress) {
-      dispatch(setSelectedShippingAddress(shippingAddressOnly));
-    }
-    dispatch(setCheckoutEmail(email));
-    signUpForNewsletter(email, firstname, lastname);
+    return new Promise((resolve, reject) => {
+      dispatch(setShippingAddressOptions([shippingAddressOnly]));
+      if (setAsSelectedShippingAddress) {
+        dispatch(setSelectedShippingAddress(shippingAddressOnly));
+      }
+      dispatch(setCheckoutEmail(email));
+      signUpForNewsletter(email, firstname, lastname);
+      resolve();
+    });
   }
 };
 
@@ -133,10 +143,7 @@ export const startAddOrEditBilling = (billing, options) => (
   console.log('startAddOrEditBilling running!');
   // const { email, firstname, lastname, newsletter } = billing;
   // const shippingAddressOnly = _.omit(billing, ['email', 'newsletter']);
-  const {
-    setAsSelectedBilling = true,
-    editBilling = false
-  } = options;
+  const { setAsSelectedBilling = true, editBilling = false } = options;
 
   // Reset the default for billingOptions to false
   if (billing.defaultBilling) {
@@ -150,13 +157,13 @@ export const startAddOrEditBilling = (billing, options) => (
   if (isAuthenticated) {
     const updateBillingInDB = editBilling
       ? axios.put('/api/users/me/shipping-address', {
-        email: authUser.email,
-        billing
-      })
+          email: authUser.email,
+          billing
+        })
       : axios.post('/api/users/me/shipping-address', {
-        email: authUser.email,
-        billing
-      });
+          email: authUser.email,
+          billing
+        });
 
     return updateBillingInDB.then(({ data: user }) => {
       const { billingOptions } = user;
@@ -176,20 +183,37 @@ export const startAddOrEditBilling = (billing, options) => (
 };
 
 export const startSetCheckout = user => dispatch => {
+  console.log('startSetCheckout is running')
+  console.log(user)
   const defaultShippingAddress =
-    user.shippingAddressOptions.find(shippingAddress => {
-      return shippingAddress.defaultShippingAddress === true;
-    }) || {};
+    user.shippingAddressOptions.find(
+      shippingAddress => shippingAddress.defaultShippingAddress === true
+    ) || {};
+  const defaultBilling =
+    user.billingOptions.find(billing => billing.defaultBilling === true) || {};
+
   dispatch(setShippingAddressOptions(user.shippingAddressOptions));
   dispatch(setSelectedShippingAddress(defaultShippingAddress));
   dispatch(setBillingOptions(user.billingOptions));
+  dispatch(setSelectedBilling(defaultBilling));
+  dispatch(setStripeCustomerId(user.stripeCustomerId))
   dispatch(setCheckoutEmail(user.email));
 };
+
+export const changeCheckoutView = currentView => ({
+  type: CHANGE_CHECKOUT_VIEW,
+  currentView
+});
 // set shippingAddressOptions when login
 export const setShippingAddressOptions = shippingAddressOptions => ({
   type: SET_SHIPPING_ADDRESS_OPTIONS,
   shippingAddressOptions
 });
+// set stripe customer id
+export const setStripeCustomerId = stripeCustomerId => ({
+  type: SET_STRIPE_CUSTOMER_ID,
+  stripeCustomerId
+})
 // set billingOptions when login
 export const setBillingOptions = billingOptions => ({
   type: SET_BILLING_OPTIONS,
@@ -212,4 +236,3 @@ export const setCheckoutEmail = email => ({
 export const resetCheckout = () => ({
   type: RESET_CHECKOUT
 });
-

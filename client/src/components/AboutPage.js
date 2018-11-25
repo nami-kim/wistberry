@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import { SmallButton } from './utils/Button';
+import { OrangeButton } from './utils/Button';
 import Icon from './common/Icon';
 import { ICON_PATHS } from './common/constants';
 
@@ -165,9 +165,9 @@ const AboutPage = () => {
             <Link
               to="/collection/all-plants"
             >
-            <SmallButton style={{ display: 'inline-block', width: 'auto' }}>
+            <OrangeButton style={{ display: 'inline-block', width: 'auto'}}>
               Shop Now
-            </SmallButton>
+            </OrangeButton>
             </Link>
           </div>
         </div>

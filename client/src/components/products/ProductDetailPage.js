@@ -11,45 +11,8 @@ import { startAddToCart, toggleCartOpen } from '../../actions/cartActions';
 import { connect } from 'react-redux';
 import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
-
-const SingleCard = ({ icon, children, className, style, ...rest }) => (
-  <div
-    className={`col-xs-12 col-md-3 ba b--washed-red no-gutter ${className}`}
-    style={{ backgroundColor: 'rgba(255,255,255,0.7)', marginRight: '-1px', marginTop: '-1px', ...style }}
-    {...rest}
-  >
-    <div className="flex flex-column justify-between pa5" style={{ height: '320px' }}>
-      {/* content */}
-      <div className="dark-gray">
-        {children}
-      </div>
-      {/* end: content */}
-
-      {/* icon */}
-      <div className="tr">
-        <Icon
-          width="40"
-          height="40"
-          paths={ICON_PATHS[icon]}
-          pathStyle={{ strokeWidth: '0.2', stroke: '#222' }}
-        // viewBox="0 0 32 32"
-        />
-      </div>
-      {/* end: icon */}
-    </div>
-  </div>
-)
-const DoubleCard = ({ children, className, style, ...rest }) => (
-  <div
-    className={`col-xs-12 col-md-6 ba b--washed-red no-gutter ${className}`}
-    style={{ backgroundColor: 'rgba(255,255,255,0.7)', marginTop: '-1px', ...style }}
-    {...rest}
-  >
-    <div className="pa5" style={{ height: '320px' }}>
-      {children}
-    </div>
-  </div>
-)
+import { SmallButton } from '../utils/Button';
+import YouMayAlsoLike from '../collections/YouMayAlsoLike'
 
 class ProductDetailPage extends Component {
   state = {
@@ -66,26 +29,26 @@ class ProductDetailPage extends Component {
     currentPlantSku: { id: '', price: '', image: '' }
   };
   handleAddToCartClick = () => {
-    console.log(this.state.currentPlantSku.image)
+    console.log(this.state.currentPlantSku.image);
     const items = [
       {
         type: 'sku',
         parent: this.state.currentPotSku.id,
         description: `Pot: ${this.state.currentPotSku.name} ${
           this.state.currentPotSku.color
-          }`,
+        }`
       },
       {
         type: 'sku',
         parent: this.state.currentBaseSku.id,
         description: `Base: ${this.state.currentBaseSku.name} ${
           this.state.currentBaseSku.material
-          }`,
+        }`
       },
       {
         type: 'sku',
         parent: this.state.currentPlantSku.id,
-        description: this.state.currentPlantProduct.name,
+        description: this.state.currentPlantProduct.name
       }
     ];
     const cartItems = [
@@ -93,16 +56,16 @@ class ProductDetailPage extends Component {
         group: {
           id: `${this.state.currentPlantSku.id}_${
             this.state.currentPotSku.id
-            }_${this.state.currentBaseSku.id}`,
+          }_${this.state.currentBaseSku.id}`,
           plantImage: this.state.currentPlantSku.image,
           plantPrice: this.state.currentPlantSku.price,
           plantName: this.state.currentPlantProduct.name,
           potName: `Pot: ${this.state.currentPotSku.name} ${
             this.state.currentPotSku.color
-            }`,
+          }`,
           baseName: `Base: ${this.state.currentBaseSku.name} ${
             this.state.currentBaseSku.material
-            }`,
+          }`,
           quantity: 1
         },
         items
@@ -129,7 +92,11 @@ class ProductDetailPage extends Component {
     this.setState(() => ({
       currentPlantProduct,
       // currentPlantImage: 0,
-      currentPlantSku: { id: plantSku.id, price: plantSku.price, image: plantSku.image },
+      currentPlantSku: {
+        id: plantSku.id,
+        price: plantSku.price,
+        image: plantSku.image
+      },
       allPotProducts,
       allBaseProducts,
       allPotSkus,
@@ -159,7 +126,7 @@ class ProductDetailPage extends Component {
         <div
           className={`pot-image__box ${
             index === this.state.currentPotSku.index ? 'active' : ''
-            }`}
+          }`}
           key={index}
         >
           <div
@@ -196,7 +163,7 @@ class ProductDetailPage extends Component {
         <div
           className={`base-image__box ${
             index === this.state.currentBaseSku.index ? 'active' : ''
-            }`}
+          }`}
           key={index}
         >
           <div
@@ -234,7 +201,7 @@ class ProductDetailPage extends Component {
       <div
         className={`thumbnail-image-box ${
           index === this.state.currentPlantImage ? 'active' : ''
-          }`}
+        }`}
         key={index}
       >
         <div
@@ -248,29 +215,128 @@ class ProductDetailPage extends Component {
     ));
 
     /* More details section */
+    const plantCare = [
+      {
+        icon: 'sun',
+        title: 'Light: Low',
+        description: 'Store away from windows'
+      },
+      {
+        icon: 'drop2',
+        title: 'Water: Low',
+        description: 'Water 200ml once a week'
+      },
+      {
+        icon: 'paw',
+        title: 'Pet Safe: No',
+        description:
+          'Watch this plant around pets - could be mildly toxic if ingested'
+      }
+    ];
     const includedInPackage = [
       'Plant',
       'Pot',
       'Wooden base',
       'Care instructions',
-      'Free shipping via UPS',
-    ]
+      'Free shipping via UPS'
+    ];
     const potAndBaseImages = [
       'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
       'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
       'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-    ]
+      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png'
+    ];
+    const wistberryBenefits = [
+      {
+        step: 1,
+        imgSrc:
+          'https://s3-us-west-2.amazonaws.com/wistberry/images/test/plant-6.png',
+        title: 'Pick A Plant You Love',
+        text: 'Pick one of our beautiful, near indestructible plants.'
+      },
+      {
+        step: 2,
+        imgSrc:
+          'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
+        title: 'Pick A Premium Pot',
+        text:
+          'Pick a top quality, locally crafted pot in our collection. New collections are coming soon!'
+      },
+      {
+        step: 3,
+        imgSrc:
+          'https://s3-us-west-2.amazonaws.com/wistberry/images/test/plant-8.png',
+        title: 'Potted + Delivered to Your Door',
+        text:
+          "No more trips to collect plants, pots, soil, etc... It's all done for you and delivered to your door."
+      }
+    ];
+    const Benefit = ({ step, imgSrc, title, children, ...rest }) => (
+      <div className="col-xs-12 col-md-4 col-lg-4 mv4">
+        <div className="flex flex-column items-center tc">
+          <div
+            className="flex justify-center items-center ba bw1 br-100 b--white overflow-hidden mb4"
+            style={{ width: '48px', height: '48px' }}
+          >
+            <div className="f1 fw3" style={{ paddingTop: '6px' }}>
+              {step}
+            </div>
+          </div>
+          <div className="f2 ph3">{title}</div>
+          <div className="mt2 ph3 white">{children}</div>
+        </div>
+      </div>
+    );
     const otherBenefits = [
       {
         icon: 'refund',
-        title: '100%, 30-day Moneyback Guarantee',
-        text: ''
+        title: '30-day Moneyback Guarantee',
+        text:
+          "If you're not in love with your plant, you'll receive 100% of your money back. No questions asked."
+      },
+      {
+        icon: 'truck',
+        title: 'Free UPS Shipping & Return',
+        text:
+          'Nationwide free shipping and return included for everyone in Canada.'
+      },
+      {
+        icon: 'lifebuoy',
+        title: 'Expert Help - Forever.',
+        text:
+          "Living with plants don't have to be hard. Get expert help and keep them alive and healthy!"
       }
-    ]
+    ];
+    // const reviews = [
+    //   {
+    //     name: 'John Doe',
+    //     rating: 5,
+    //     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec augue et elit rhoncus pharetra. Mauris interdum hendrerit velit pharetra placerat. Nullam lorem ligula, tempus et lectus sit amet, vehicula lobortis velit.'
+    //   },
+    //   {
+    //     name: 'John Doe',
+    //     rating: 5,
+    //     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec augue et elit rhoncus pharetra. Mauris interdum hendrerit velit pharetra placerat. Nullam lorem ligula, tempus et lectus sit amet, vehicula lobortis velit.'
+    //   },
+    //   {
+    //     name: 'John Doe',
+    //     rating: 5,
+    //     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec augue et elit rhoncus pharetra. Mauris interdum hendrerit velit pharetra placerat. Nullam lorem ligula, tempus et lectus sit amet, vehicula lobortis velit.'
+    //   },
+    //   {
+    //     name: 'John Doe',
+    //     rating: 5,
+    //     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec augue et elit rhoncus pharetra. Mauris interdum hendrerit velit pharetra placerat. Nullam lorem ligula, tempus et lectus sit amet, vehicula lobortis velit.'
+    //   },
+    // ]
+    // const Review = ({name, rating, text}) => (
+    //   <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+    //
+    //   </div>
+    // )
 
     return (
-      <div>
+      <div className="HurmeGeometricSans3">
         <Header productHeader={true} />
         <div className="container-wide">
           <div className="product">
@@ -338,69 +404,77 @@ class ProductDetailPage extends Component {
         <div className="product-instagram" />
         <div className="product-review" /> */}
 
-        {/* plant details */}
-        <div className="container-wide bg-lightest-pink f4 pv5">
+        {/* plant care */}
+        <div
+          className="container-wide f4 pv6"
+          style={{ backgroundColor: '#fafafa' }}
+        >
           <div className="row">
-            <SingleCard icon="sun">
-              <div className="f3 fw5 mb2">Light: Low</div>
-              <div>Store away from windows</div>
-            </SingleCard>
-            <SingleCard icon="drop2">
-              <div className="f3 fw5 mb2">Water: Low</div>
-              <div>Water 200ml once a week</div>
-            </SingleCard>
-            <DoubleCard>
-              <div className="f3 fw5 mb2">About {plantName}</div>
-              <div>{plantDescription}</div>
-            </DoubleCard>
-          </div>
-          <div className="row">
-            <SingleCard icon="paw">
-              <div className="f3 fw5 mb2">Pet Safe: No</div>
-              <div>Watch this plant around pets - could be mildly toxic if ingested</div>
-            </SingleCard>
-            <SingleCard icon="cube">
-              <div className="f3 fw5 mb2">What's Included</div>
-              <ul className="ml4">
-                {includedInPackage.map(item => (
-                  <li className="mb2" key={item}>{item}</li>
-                ))}
-              </ul>
-            </SingleCard>
-            <DoubleCard>
-              <div className="row" style={{ height: '100%' }}>
-                <div className="col-xs-12 col-md-5">
-                  <div className="f3 fw5 mb2">Plant Height</div>
-                  <ul className="ml4">
-                    <li className="mb2">Table top size</li>
-                    <li className="mb2">1.5 - 2ft including the base</li>
-                  </ul>
-                </div>
-                <div className="col-xs-12 col-md-7">
-                  <div
-                    style={{
-                      background: 'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/interior-design-17.jpg")',
-                      backgroundSize: 'cover',
-                      height: '100%',
-                    }}
-                  />
-                </div>
+            <div className="col-xs-12 col-md-5 col-md-offset-1 col-lg-6 col-lg-offset-1">
+              <div className="mb5">
+                <div className="f2 fw4 mb3">About {plantName}</div>
+                <div>{plantDescription}</div>
               </div>
-            </DoubleCard>
+              <div className="mb5">
+                <div className="f2 fw4 mb3">What's Included</div>
+                <ul className="ml4">
+                  {includedInPackage.map(item => (
+                    <li className="mb2" key={item}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mb5">
+                <div className="f2 fw4 mb3">Plant Height</div>
+                <ul className="ml4">
+                  <li className="mb2">Table top size</li>
+                  <li className="mb2">1.5 - 2ft including the base</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-xs-12 col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-1 first-md">
+              {plantCare.map(({ icon, title, description }) => (
+                <div className="bg-green white shadow-1 pa5 mb3 flex flex-column items-center tc">
+                  <Icon
+                    width="56"
+                    height="56"
+                    className="mb2"
+                    paths={ICON_PATHS[icon]}
+                    pathStyle={{ strokeWidth: '0', fill: '#fff' }}
+                  />
+                  <div className="f3 fw4 ph3">{title}</div>
+                  <div className="ph3">{description}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        {/* end: plant details */}
+        {/* end: plant care */}
 
         {/* premium pots + bases */}
-        <div className="container-narrow f4 pv6">
+        <div className="container-wide f4 pv6">
           <div className="tc">
-            <div className="f1 lh-title fw4 mb3">Premium pots + hardwood bases</div>
-            <div className="mb5 gray">Our premium pots and hardwood bases are locally crafted and finished to the highest quality.</div>
+            <div className="f-subheadline lh-title fw4 mb3">
+              Premium Pot + Top Quality Wooden Base
+            </div>
+            <div className="mb5 gray">
+              Our premium ceramic pots are high fired and matte finished; the
+              bases are beautiful dark walnut wood with a soft-touch finish.
+              <br />
+              Locally crafted and hand finished to the highest quality.
+            </div>
           </div>
           <div className="row">
             {potAndBaseImages.map((imgSrc, i) => (
-              <div className="col-xs-12 col-md-6" style={{ marginTop: '2.5rem' }}>
-                <div className="flex items-center justify-center pa5" style={{ backgroundColor: '#fafafa' }}>
+              <div
+                className="col-xs-12 col-md-6"
+                style={{ marginTop: '2.5rem' }}
+              >
+                <div
+                  className="flex items-center justify-center pa5"
+                  style={{ backgroundColor: '#fafafa' }}
+                >
                   <img src={imgSrc} style={{ width: '100%' }} />
                 </div>
               </div>
@@ -409,17 +483,90 @@ class ProductDetailPage extends Component {
         </div>
         {/* end: premium pots + bases */}
 
+        {/* easy */}
+        <div className="container-wide bg-orange-gradient white f4 pv6">
+          <div className="tc">
+            <div className="f-subheadline lh-title fw4 mb4">
+              Houseplants Can Be This Easy.
+            </div>
+          </div>
+          <div className="row">
+            {wistberryBenefits.map(({ step, imgSrc, title, text }, i) => (
+              <Benefit step={step} imgSrc={imgSrc} title={title} key={step}>
+                {text}
+              </Benefit>
+            ))}
+          </div>
+        </div>
+        {/* end: easy */}
+
         {/* other benefits */}
-        <div className="container-wide bg-lightest-pink f4 pv5">
+        <div
+          className="container-wide f4 pv6"
+          style={{ backgroundColor: '#fafafa' }}
+        >
+          <div className="tc">
+            <div className="f-subheadline lh-title fw4 mb4">
+              Love It or Your Money Back.
+            </div>
+          </div>
           <div className="row">
             {otherBenefits.map(({ icon, title, text }, i) => (
-              <div className="col-xs-12 col-md-4"></div>
+              <div className="col-xs-12 col-md-4 mv4">
+                <div className="flex flex-column items-center tc">
+                  <Icon
+                    width="64"
+                    height="64"
+                    className="mb3"
+                    paths={ICON_PATHS[icon]}
+                    pathStyle={{ strokeWidth: '0', fill: '#000' }}
+                  />
+                  <div className="f2 ph3">{title}</div>
+                  <div className="mt2 ph3 mid-gray">{text}</div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
         {/* end: other benefits */}
 
+        {/* reviews */}
+        {/* <div className="container-wide f4 pv6">
+          <div className="tc">
+            <div className="f1 lh-title fw4 mb4">Don't Take Our Word for It</div>
+          </div>
+          <div className="row">
+          </div>
+        </div> */}
+        {/* end: reviews */}
+        {/* other suggestion */}
+        <div className="container-wide f4 pv6">
+          <div className="tc">
+            <div className="f-subheadline lh-title fw4 mb3">
+              You might also like
+              <YouMayAlsoLike collection="easy-care-plants"/>
+            </div>
 
+            
+          </div>
+        </div>
+        {/* end: shop */}
+        {/* shop */}
+        <div className="container-wide f4 pv6">
+          <div className="tc">
+            <div className="f-subheadline lh-title fw4 mb3">
+              Ready to Bring Your Space to Life?
+            </div>
+            <div className="mb2">
+              It's time to breathe some life into your space with greenery!
+            </div>
+            <SmallButton style={{ display: 'inline-block', width: 'auto' }}>
+              Shop Now
+            </SmallButton>
+          </div>
+        </div>
+        {/* end: shop */}
+        
       </div>
     );
   }

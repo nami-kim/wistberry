@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AddressRadioOptions from './AddressRadioOptions';
 import AddressForm from '../AddressForm';
-import { startAddOrEditShippingAddress } from '../../../actions/checkoutActions';
+import { startAddOrEditShippingAddress, changeCheckoutView } from '../../../actions/checkoutActions';
 import { SmallButton } from '../../utils/Button';
 import _ from 'lodash';
 
@@ -17,7 +17,8 @@ class ShippingForm extends Component {
     }));
   };
   handleNextBtn = () => {
-    this.props.toggleShippingFormOpen();
+    this.props.changeCheckoutView('paymentView');
+    console.log('handleNextBtn working');
   };
   handleSubmitForLoggedInUser = (values, { setSubmitting, resetForm }) => {
     this.props.startAddOrEditShippingAddress(values, {
@@ -27,17 +28,22 @@ class ShippingForm extends Component {
     setSubmitting(false);
     resetForm();
     this.showAddNewAddressForm();
+    console.log('handleSumbitForLoggedinUser working');
   };
   handleSubmitForNewUser = (values, { setSubmitting, resetForm }) => {
-    this.props.startAddOrEditShippingAddress(values, {
-      setAsSelectedShippingAddress: true,
-      editShippingAddress: !_.isEmpty(
-        this.props.checkout.selectedShippingAddress
-      )
-    });
-    setSubmitting(false);
-    resetForm();
-    this.props.toggleShippingFormOpen();
+    this.props
+      .startAddOrEditShippingAddress(values, {
+        setAsSelectedShippingAddress: true,
+        editShippingAddress: !_.isEmpty(
+          this.props.checkout.selectedShippingAddress
+        )
+      })
+      .then(() => {
+        console.log('handleSumbitForNewUser working');
+        setSubmitting(false);
+        resetForm();
+        this.props.changeCheckoutView('paymentView');
+      });
   };
   componentDidMount() {}
   render() {
@@ -108,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { startAddOrEditShippingAddress }
+  { startAddOrEditShippingAddress, changeCheckoutView }
 )(ShippingForm);
