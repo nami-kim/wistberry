@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header';
+import { Link } from 'react-router-dom';
 import { OrangeButton } from '../utils/Button';
 import {
   getAllPotProducts,
@@ -12,7 +13,7 @@ import { connect } from 'react-redux';
 import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
 import { SmallButton } from '../utils/Button';
-import YouMayAlsoLike from '../collections/YouMayAlsoLike'
+import YouMayAlsoLike from '../collections/YouMayAlsoLike';
 
 class ProductDetailPage extends Component {
   state = {
@@ -218,16 +219,22 @@ class ProductDetailPage extends Component {
     const plantCare = [
       {
         icon: 'sun',
+        iconSolid: 'sunSolid',
+        iconSolidColor: '#FFF0A9',
         title: 'Light: Low',
         description: 'Store away from windows'
       },
       {
         icon: 'drop2',
+        iconSolid: 'drop2Solid',
+        iconSolidColor: '#CAEAF9',
         title: 'Water: Low',
         description: 'Water 200ml once a week'
       },
       {
         icon: 'paw',
+        iconSolid: 'pawSolid',
+        iconSolidColor: '#D6A787',
         title: 'Pet Safe: No',
         description:
           'Watch this plant around pets - could be mildly toxic if ingested'
@@ -252,7 +259,7 @@ class ProductDetailPage extends Component {
         imgSrc:
           'https://s3-us-west-2.amazonaws.com/wistberry/images/test/plant-6.png',
         title: 'Pick A Plant You Love',
-        text: 'Pick one of our beautiful, near indestructible plants.'
+        text: 'Pick one of our beautiful plants.'
       },
       {
         step: 2,
@@ -412,8 +419,8 @@ class ProductDetailPage extends Component {
           <div className="row">
             <div className="col-xs-12 col-md-5 col-md-offset-1 col-lg-6 col-lg-offset-1">
               <div className="mb5">
-                <div className="f2 fw4 mb3">About {plantName}</div>
-                <div>{plantDescription}</div>
+                <div className="f2 near-black fw4 mb3">About {plantName}</div>
+                <div className="near-black">{plantDescription}</div>
               </div>
               <div className="mb5">
                 <div className="f2 fw4 mb3">What's Included</div>
@@ -432,21 +439,44 @@ class ProductDetailPage extends Component {
                   <li className="mb2">1.5 - 2ft including the base</li>
                 </ul>
               </div>
+              <div className="mb5">
+                <div className="f2 fw4 mb3">Care Guide</div>
+                <ul className="ml4">
+                  <Link to="" className="mid-gray">
+                    <li className="mb2">Learn how to care for {plantName}</li>
+                  </Link>
+                </ul>
+              </div>
             </div>
             <div className="col-xs-12 col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-1 first-md">
-              {plantCare.map(({ icon, title, description }) => (
-                <div className="bg-green white shadow-1 pa5 mb3 flex flex-column items-center tc">
-                  <Icon
-                    width="56"
-                    height="56"
-                    className="mb2"
-                    paths={ICON_PATHS[icon]}
-                    pathStyle={{ strokeWidth: '0', fill: '#fff' }}
-                  />
-                  <div className="f3 fw4 ph3">{title}</div>
-                  <div className="ph3">{description}</div>
-                </div>
-              ))}
+              {plantCare.map(
+                ({ icon, iconSolid, iconSolidColor, title, description }) => (
+                  <div className="bg-white pa5 mb3 flex flex-column items-center tc">
+                    <div
+                      className="relative"
+                      style={{ width: '56px', height: '56px' }}
+                    >
+                      <Icon
+                        width="56"
+                        height="56"
+                        className="absolute mb2"
+                        style={{ top: '0', left: '0', zIndex: '1' }}
+                        paths={ICON_PATHS[icon]}
+                      />
+                      <Icon
+                        width="56"
+                        height="56"
+                        className="absolute mb2"
+                        style={{ top: '4px', left: '4px', zIndex: '0' }}
+                        pathStyle={{ fill: iconSolidColor }}
+                        paths={ICON_PATHS[iconSolid]}
+                      />
+                    </div>
+                    <div className="near-black f3 fw4 ph3">{title}</div>
+                    <div className="mid-gray ph3">{description}</div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -455,12 +485,12 @@ class ProductDetailPage extends Component {
         {/* premium pots + bases */}
         <div className="container-wide f4 pv6">
           <div className="tc">
-            <div className="f-subheadline lh-title fw4 mb3">
+            <div className="f1 lh-title fw4 mb3">
               Premium Pot + Top Quality Wooden Base
             </div>
-            <div className="mb5 gray">
-              Our premium ceramic pots are high fired and matte finished; the
-              bases are beautiful dark walnut wood with a soft-touch finish.
+            <div className="mb5 mid-gray">
+              Our premium ceramic pots are high fired and matte finished. <br />
+              The bases are beautiful dark walnut wood with a soft-touch finish.
               <br />
               Locally crafted and hand finished to the highest quality.
             </div>
@@ -486,7 +516,7 @@ class ProductDetailPage extends Component {
         {/* easy */}
         <div className="container-wide bg-orange-gradient white f4 pv6">
           <div className="tc">
-            <div className="f-subheadline lh-title fw4 mb4">
+            <div className="f1 lh-title fw4 mb4">
               Houseplants Can Be This Easy.
             </div>
           </div>
@@ -506,7 +536,7 @@ class ProductDetailPage extends Component {
           style={{ backgroundColor: '#fafafa' }}
         >
           <div className="tc">
-            <div className="f-subheadline lh-title fw4 mb4">
+            <div className="f1 near-black lh-title fw4 mb4">
               Love It or Your Money Back.
             </div>
           </div>
@@ -519,9 +549,9 @@ class ProductDetailPage extends Component {
                     height="64"
                     className="mb3"
                     paths={ICON_PATHS[icon]}
-                    pathStyle={{ strokeWidth: '0', fill: '#000' }}
+                    pathStyle={{ strokeWidth: '0', fill: '#1d1d1d' }}
                   />
-                  <div className="f2 ph3">{title}</div>
+                  <div className="f2 ph3 near-black">{title}</div>
                   <div className="mt2 ph3 mid-gray">{text}</div>
                 </div>
               </div>
@@ -542,31 +572,34 @@ class ProductDetailPage extends Component {
         {/* other suggestion */}
         <div className="container-wide f4 pv6">
           <div className="tc">
-            <div className="f-subheadline lh-title fw4 mb3">
+            <div className="f1 near-black lh-title fw4 mb3">
               You might also like
-              <YouMayAlsoLike collection="easy-care-plants"/>
+              <YouMayAlsoLike collection="easy-care-plants" />
             </div>
-
-            
           </div>
         </div>
         {/* end: shop */}
         {/* shop */}
         <div className="container-wide f4 pv6">
           <div className="tc">
-            <div className="f-subheadline lh-title fw4 mb3">
+            <div className="f1 near-black lh-title fw4 mb3">
               Ready to Bring Your Space to Life?
             </div>
-            <div className="mb2">
+            <div className="mb4 mid-gray">
               It's time to breathe some life into your space with greenery!
             </div>
-            <SmallButton style={{ display: 'inline-block', width: 'auto' }}>
+            <OrangeButton style={{ display: 'inline-block', width: 'auto' }}>
               Shop Now
-            </SmallButton>
+            </OrangeButton>
+            <div>
+              <img
+                src="http://wistberry.imgix.net/images/illustration/Untitled_Artwork.png"
+                alt=""
+              />
+            </div>
           </div>
         </div>
         {/* end: shop */}
-        
       </div>
     );
   }

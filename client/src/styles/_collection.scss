@@ -57,13 +57,13 @@
   }
   .product__name {
     font-weight: 400;
+    color: rgb(29, 29, 29);
   }
 
   .product__caption {
-    font-size: 1.3rem;
-    color: $color-grey-dark-3;
+    font-size: 1.2rem;
+    color: #555;
     margin-bottom: $font-m;
-    margin-top: $font-xxxs;
     display: flex;
     justify-content: space-between;
     &--1,

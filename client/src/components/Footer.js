@@ -37,7 +37,7 @@ const Footer = () => {
 
   const SocialIcon = ({ icon }) => (
     <div
-      className="flex items-center justify-center ba br-100 b--footer-font-grey mr3"
+      className="flex items-center justify-center ba br-100 b--grey-main mr3"
       style={{ width: '40px', height: '40px' }}
     >
       <Icon
@@ -54,7 +54,7 @@ const Footer = () => {
   const socialIcons = ['facebook', 'instagram', 'youtube', 'linkedin'];
 
   return (
-    <footer className="footer-font-grey pv3 f4">
+    <footer className="grey-main pv3 f4">
       {/* top */}
       <div>
         <div className="row">
@@ -84,7 +84,7 @@ const Footer = () => {
               <div className="f3 fw4 mb4">Collections</div>
               {collections.map(({ title, url }, i) => (
                 <div className="mb4" key={url}>
-                  <Link to={url} className="footer-font-grey link dim">
+                  <Link to={url} className="grey-main link dim">
                     {title}
                   </Link>
                 </div>
@@ -96,7 +96,7 @@ const Footer = () => {
             <div className="col-xs-12 col-md-4 col-lg-2 mb4">
               <div className="f3 fw4 mb4">About</div>
               <div className="mb4">
-                <Link to="/about" className="footer-font-grey link dim">
+                <Link to="/about" className="grey-main link dim">
                   Our Story
                 </Link>
               </div>
@@ -107,12 +107,12 @@ const Footer = () => {
             <div className="col-xs-12 col-md-3 col-lg-2 mb4">
               <div className="f3 fw4 mb4">Support</div>
               <div className="mb4">
-                <Link to="/faq" className="footer-font-grey link dim">
+                <Link to="/faq" className="grey-main link dim">
                   FAQ
                 </Link>
               </div>
               <div className="mb4">
-                <Link to="/contact" className="footer-font-grey link dim">
+                <Link to="/contact" className="grey-main link dim">
                   Contact us
                 </Link>
               </div>

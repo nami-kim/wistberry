@@ -69,7 +69,7 @@ const AboutPage = () => {
         <div className="row middle-md">
           <div className="col-xs-12 col-md-6">
             <div className="pb5 ph2">
-              <div className="f-headline lh-solid fw5">
+              <div className="f-headline near-black lh-solid fw5">
                 <div>Keep in touch with nature.</div>
                 <div className="mt4">Even at home.</div>
               </div>
@@ -99,7 +99,7 @@ const AboutPage = () => {
         <div className="row middle-sm">
           <div className="col-xs-12 col-sm-7 col-lg-7">
             <div className="pb5 ph3">
-              <div className="f1 lh-title fw4">Our story</div>
+              <div className="f1 lh-title near-black fw4">Our story</div>
               <div className="mt4 mid-gray">
                 <div>
                   One of our greatest joys in life is walking our dogs in
@@ -141,12 +141,12 @@ const AboutPage = () => {
       <div className="container-narrow mt6">
         <div className="row">
           <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-            <div className="f1 lh-title fw4 tc pa4">
+            <div className="f1 near-black lh-title fw4 tc pa4">
               We help you bring the nature indoors by making it easy to own
               houseplants.{' '}
             </div>
           </div>
-          <div className="col-xs-12">
+          <div className="col-xs-12 near-black">
             {benefits.map(({ step, imgSrc, title, text }, i) => (
               <Benefit step={step} imgSrc={imgSrc} title={title} key={step}>
                 {text}
@@ -159,7 +159,7 @@ const AboutPage = () => {
       <div className="container-narrow mv6">
         <div className="row center-xs">
           <div className="col-xs-12 col-md-8">
-            <div className="f1 lh-title fw4 mb4">
+            <div className="f1 near-black lh-title fw4 mb4">
               Shop our collection today.
             </div>
             <Link
