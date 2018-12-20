@@ -4,7 +4,7 @@
   "description": "Plants Business",
   "main": "server.js",
   "engines": {
-    "node": "10.10.0"
+    "node": "11.4.0"
   },
   "scripts": {
     "client-install": "npm install --prefix client",
