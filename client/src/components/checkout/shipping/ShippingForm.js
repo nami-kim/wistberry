@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AddressRadioOptions from './AddressRadioOptions';
 import AddressForm from '../AddressForm';
-import { startAddOrEditShippingAddress, changeCheckoutView } from '../../../actions/checkoutActions';
+import {
+  startAddOrEditShippingAddress,
+  changeCheckoutView
+} from '../../../actions/checkoutActions';
 import { SmallButton } from '../../utils/Button';
 import _ from 'lodash';
 
@@ -17,7 +20,12 @@ class ShippingForm extends Component {
     }));
   };
   handleNextBtn = () => {
-    this.props.changeCheckoutView('paymentView');
+    if (_.isEmpty(this.props.checkout.token)) {
+      this.props.changeCheckoutView('paymentView');
+    } else {
+      this.props.changeCheckoutView('summaryView');
+    }
+
     console.log('handleNextBtn working');
   };
   handleSubmitForLoggedInUser = (values, { setSubmitting, resetForm }) => {
@@ -42,7 +50,11 @@ class ShippingForm extends Component {
         console.log('handleSumbitForNewUser working');
         setSubmitting(false);
         resetForm();
-        this.props.changeCheckoutView('paymentView');
+        if (_.isEmpty(this.props.checkout.token)) {
+          this.props.changeCheckoutView('paymentView');
+        } else {
+          this.props.changeCheckoutView('summaryView');
+        }
       });
   };
   componentDidMount() {}

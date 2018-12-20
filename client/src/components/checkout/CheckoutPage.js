@@ -6,13 +6,14 @@ import Header from '../Header';
 import PaymentForm from './payment/PaymentForm';
 import CheckoutReview from './CheckoutReview';
 import ShippingSummary from './shipping/ShippingSummary';
+import PaymentSummary from './payment/PaymentSummary';
 import ShippingForm from './shipping/ShippingForm';
 import { EditButton } from '../utils/Button';
 import {
   setSelectedShippingAddress,
   changeCheckoutView
 } from '../../actions/checkoutActions';
-import _ from 'lodash'
+import _ from 'lodash';
 
 class CheckoutPage extends Component {
   state = {
@@ -91,14 +92,17 @@ class CheckoutPage extends Component {
                       }`}
                     >
                       <EditButton
-                        show={!paymentView && !_.isEmpty(this.props.checkout.token)}
+                        show={
+                          !paymentView && !_.isEmpty(this.props.checkout.token)
+                        }
                         onClick={this.handleEditPayment}
                       >
                         Edit
                       </EditButton>
                     </div>
                   </div>
-                  <PaymentForm />
+                  <PaymentForm show={paymentView} />
+                  <PaymentSummary show={!paymentView} />
                 </div>
               </div>
             </div>

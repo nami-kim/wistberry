@@ -23,20 +23,7 @@ module.exports = passport => {
     })
   );
 
-  // passport.use(
-  //   new GoogleStrategy(
-  //     {
-  //       clientID: keys.googleClientID,
-  //       clientSecret: keys.googleClientSecret,
-  //       callbackURL: 'api/auth/google/callback'
-  //     },
-  //     (accessToken, refreshToken, profile, done) => {
-  //       console.log('access Token', accessToken);
-  //       console.log('refresh token', refreshToken);
-  //       console.log('profile', profile);
-  //     }
-  //   )
-  // );
+  
 };
 
 

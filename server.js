@@ -9,7 +9,6 @@ const skus = require('./routes/api/skus');
 const billing = require('./routes/api/billing');
 const order = require('./routes/api/order');
 const users = require('./routes/api/users');
-const auth = require('./routes/api/auth');
 
 const app = express();
 
@@ -42,7 +41,6 @@ app.use('/api/skus', skus);
 app.use('/api/billing', billing);
 app.use('/api/order', order);
 app.use('/api/users', users);
-app.use('/api/auth', auth);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {

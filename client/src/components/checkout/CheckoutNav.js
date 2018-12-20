@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import OrderSummary from './OrderSummary';
+import { connect } from 'react-redux';
 import Icon from '../common/Icon';
 import { ICON_PATHS } from '../common/constants';
 
@@ -8,7 +9,15 @@ class CheckoutShipping extends Component {
     orderSummaryOpen: false
   };
   render() {
-    const { checkoutStep } = this.props;
+    const { checkoutStep, cart } = this.props;
+    const cartTotal = (
+      cart.reduce(
+        (prev, { group }) => prev + group.plantPrice * group.quantity,
+        0
+      ) / 100
+    ).toFixed(0);
+    const cartItemTotal = cart.length
+    const item = cartItemTotal > 0 ? 'items' : 'item'
     return (
       <div className="checkout-options__nav">
         <div className="row">
@@ -77,10 +86,10 @@ class CheckoutShipping extends Component {
                 }
               >
                 <div className="checkout-options__order-summary--qty">
-                  1 Item
+                  {cartItemTotal} {item}
                 </div>
                 <div className="checkout-options__order-summary--total">
-                  Order Total $140.00 CAD
+                  Order Total ${cartTotal} CAD
                   <div className="checkout-options__order-summary--icon">
                     <Icon
                       width="15"
@@ -112,4 +121,7 @@ class CheckoutShipping extends Component {
   }
 }
 
-export default CheckoutShipping;
+const mapStateToProps = state => ({
+  cart: state.cart.cart
+});
+export default connect(mapStateToProps)(CheckoutShipping);

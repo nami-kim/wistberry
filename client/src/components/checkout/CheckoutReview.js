@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import Icon from '../common/Icon';
-import { ICON_PATHS } from '../common/constants';
 import { toggleCartOpen } from '../../actions/cartActions';
 import { SmallButton } from '../utils/Button';
 import { submitToken } from '../../actions/checkoutActions';
@@ -12,29 +10,27 @@ import OrderSummary from './OrderSummary';
 // fetchItemsInCart
 
 class CheckoutReview extends Component {
-  submit = () => {
-    const { token } = this.props;
+  submitOrder = () => {
+    const { checkout, cartItems } = this.props;
+    const { selectedShippingAddress, email, token } = checkout
+    const { firstname, lastname, address1, address2, city, postalCode, province, country} = selectedShippingAddress
     console.log(token);
 
     const order = {
       currency: 'cad',
-      items: [
-        {
-          type: 'sku',
-          parent: 'sku_Dfd8fekKmrtZTU'
-        }
-      ],
+      items: cartItems,
       shipping: {
-        name: 'Jenny Rosen',
+        name: `${firstname} ${lastname}`,
         address: {
-          line1: 'Unit 808',
-          city: 'Vancouver',
-          state: 'ON',
+          line1: {address1},
+          line2: {address2},
+          city: {city},
+          state: {province},
           country: 'CA',
-          postal_code: 'V6E 0B1'
+          postal_code: {postalCode}
         }
       },
-      email: 'jenny.rosen@example.com'
+      email: {email}
     };
     submitToken(token.id, order)
       .then(orderResult => console.log('order has been completed', orderResult))
@@ -48,14 +44,15 @@ class CheckoutReview extends Component {
           <OrderSummary />
         </div>
 
-        <SmallButton onClick={this.submit}>Complete Order</SmallButton>
+        <SmallButton onClick={this.submitOrder}>Complete Order</SmallButton>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  token: state.checkout.token
+  checkout: state.checkout,
+  cartItems: state.cart.cart.items
 });
 
 export default connect(

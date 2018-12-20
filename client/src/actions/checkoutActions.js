@@ -46,7 +46,7 @@ export const submitToken = (token, order) => {
   //   email: 'jenny.rosen@example.com'
   // };
   return axios
-    .post('/api/billing/stripe', { token, order })
+    .post('/api/billing/stripe/charge', { token, order })
     .then(res => console.log(res.data));
 };
 

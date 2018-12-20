@@ -12,7 +12,7 @@ class ShippingSummary extends Component {
     return null;
   };
   render() {
-    const { selectedShippingAddress, email, paymentInfo } = this.props.checkout;
+    const { selectedShippingAddress, email } = this.props.checkout;
     const {
       firstname,
       lastname,

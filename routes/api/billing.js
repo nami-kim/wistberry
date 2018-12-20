@@ -12,7 +12,7 @@ router.post('/stripe/card', async (req, res) => {});
 // Creates a stripe customer & Create an order & Charge the order to the customer
 router.post('/stripe/charge', async (req, res) => {
   try {
-    await User.findOne({ stripeCustomerId: req.body.customerId });
+    const user = await User.findOne({ stripeCustomerId: req.body.customerId });
     let customer_id;
     if (user) {
       customer_id = user.stripe_customer_id;
