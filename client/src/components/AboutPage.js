@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import { OrangeButton } from './utils/Button';
-import Icon from './common/Icon';
-import { ICON_PATHS } from './common/constants';
 
 const AboutPage = () => {
   const Benefit = ({ step, imgSrc, title, children, ...rest }) => (
