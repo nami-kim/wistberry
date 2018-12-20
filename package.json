@@ -40,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/nami-kim/wistberry/issues"
   },
-  "homepage": "https://github.com/nami-kim/wistberry#readme"
+  "homepage": "https://github.com/nami-kim/wistberry#readme",
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
+  }
 }
