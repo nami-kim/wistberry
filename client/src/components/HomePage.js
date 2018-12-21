@@ -40,7 +40,7 @@ export class HomePage extends Component {
           'https://s3-us-west-2.amazonaws.com/wistberry/images/test/plant-illustration-1.png',
         title: 'Pick a plant',
         text:
-          'Pick from a selection of beautiful, healthy plants we source from a local nursery',
+          'Pick from a selection of beautiful, healthy plants we source from a local nursery.',
         imgStyle: { width: '80%', marginLeft: '-50px' }
       },
       {
@@ -49,16 +49,16 @@ export class HomePage extends Component {
           'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-illustration-1.png',
         title: 'Pick a pot',
         text:
-          'A growing selection of premium locally crafted post for your soon-to-be green companion',
+          'A growing selection of premium locally crafted pots for your plants.',
         imgStyle: { width: '45%', paddingTop: '40px' }
       },
       {
         step: 3,
         imgSrc:
           'https://s3-us-west-2.amazonaws.com/wistberry/images/test/plant-illustration-2.png',
-        title: 'Get it delivered to your door',
+        title: 'Enjoy the potted plants delivered to your door for free!',
         text:
-          'We plant it in a nutrient fortified soil, pot i, pack it securely and ship it to your door via UPS',
+          'We plant it in a nutrient fortified soil, pot and package it securely, and ship it to your door via UPS',
         imgStyle: { width: '60%', marginLeft: '15px', paddingTop: '30px' }
       }
     ];
@@ -142,21 +142,12 @@ export class HomePage extends Component {
           </div>
           {/* end: hero */}
 
-          {/* full width content */}
-          <div className="mt7">
-            <img
-              src="https://wistberry.imgix.net/images/products/toastandhoney/main2.jpg"
-              style={{ width: '100%' }}
-            />
-          </div>
-          {/* end: full width content */}
-
           {/* how to */}
           <div className="container-narrow mt6">
             <div className="row">
               <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                 <div className="f1 lh-title fw4 tc pa4">
-                  Wistberry sends potted plants right to your door.
+                  Wistberry sends stylish potted plants right to your door.
                 </div>
               </div>
               <div className="col-xs-12">
@@ -180,49 +171,60 @@ export class HomePage extends Component {
           <div className="container-wide pt6">
             <div className="row">
               <div className="col-xs-12 col-sm-6">
-                <div
-                  className="aspect-ratio aspect-ratio--8x5 overflow-hidden"
-                  style={{ zIndex: '1' }}
-                >
+                <Link to="/collection/most-popular-plants">
                   <div
-                    className="aspect-ratio--object"
-                    style={{
-                      background:
-                        'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/plants-stylish-1.jpg")',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center center'
-                    }}
-                  />
-                </div>
-                <div className="f3 bold mt3">Keep it stylish</div>
+                    className="aspect-ratio aspect-ratio--8x5 overflow-hidden"
+                    style={{ zIndex: '1' }}
+                  >
+                    <div
+                      className="aspect-ratio--object"
+                      style={{
+                        background:
+                          'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/plants-stylish-1.jpg")',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center'
+                      }}
+                    />
+                  </div>
+                </Link>
+                <div className="f3 fw4 bold mt3 ttu">Keep it stylish</div>
                 <div className="f4 mid-gray">
-                  Complete your space with stylish plants.
+                  Complete your space with our beautiful plants.
                 </div>
-                <Link to="/collection/most-popular-plants" className="f4">
+
+                <Link
+                  to="/collection/most-popular-plants"
+                  className="f4 no-underline link green dim"
+                >
                   Shop the collection&nbsp;&rarr;
                 </Link>
               </div>
               <div className="col-xs-12 col-sm-6">
-                <div
-                  className="aspect-ratio aspect-ratio--8x5 overflow-hidden"
-                  style={{ zIndex: '1' }}
-                >
+                <Link to="/collection/easy-care-plants">
                   <div
-                    className="aspect-ratio--object"
-                    style={{
-                      background:
-                        'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/plants-beginner-1.jpg")',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center center'
-                    }}
-                  />
-                </div>
-                <div className="f3 bold mt3">New to houseplants?</div>
+                    className="aspect-ratio aspect-ratio--8x5 overflow-hidden"
+                    style={{ zIndex: '1' }}
+                  >
+                    <div
+                      className="aspect-ratio--object"
+                      style={{
+                        background:
+                          'url("https://s3-us-west-2.amazonaws.com/wistberry/images/test/plants-beginner-1.jpg")',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center'
+                      }}
+                    />
+                  </div>
+                </Link>
+                <div className="f3 fw4 bold mt3 ttu">New to houseplants?</div>
                 <div className="f4 mid-gray">
-                  There's first time for everything. Here's few indestructible
-                  ones to begin with.
+                  There's first time for everything. Here are some easy care
+                  plants to begin with.
                 </div>
-                <Link to="/collection/easy-care-plants" className="f4">
+                <Link
+                  to="/collection/easy-care-plants"
+                  className="f4 no-underline link green dim"
+                >
                   Shop easy care plants&nbsp;&rarr;
                 </Link>
               </div>

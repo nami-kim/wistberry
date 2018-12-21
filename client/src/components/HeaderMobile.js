@@ -179,7 +179,7 @@ export class HeaderMobile extends Component {
                   </Link>
                 </div>
                 <Link to="/about">About</Link>
-                <Link to="/blog">Blog</Link>
+                <Link to="/FAQPage">FAQ</Link>
 
                 {!isAuthenticated && <Link to="/signup">Sign up</Link>}
                 {!isAuthenticated && <Link to="/login">Log in</Link>}

@@ -248,10 +248,9 @@ class ProductDetailPage extends Component {
       'Free shipping via UPS'
     ];
     const potAndBaseImages = [
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png',
-      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-2.png'
+      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-4.jpg',
+      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-3.jpg',
+      'https://s3-us-west-2.amazonaws.com/wistberry/images/test/pot-5.jpg'
     ];
     const wistberryBenefits = [
       {
@@ -498,13 +497,10 @@ class ProductDetailPage extends Component {
           <div className="row">
             {potAndBaseImages.map((imgSrc, i) => (
               <div
-                className="col-xs-12 col-md-6"
+                className="col-xs-12 col-md-4"
                 style={{ marginTop: '2.5rem' }}
               >
-                <div
-                  className="flex items-center justify-center pa5"
-                  style={{ backgroundColor: '#fafafa' }}
-                >
+                <div className="flex items-center justify-center">
                   <img src={imgSrc} style={{ width: '100%' }} />
                 </div>
               </div>

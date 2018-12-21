@@ -107,7 +107,7 @@ const Footer = () => {
             <div className="col-xs-12 col-md-3 col-lg-2 mb4">
               <div className="f3 fw4 mb4">Support</div>
               <div className="mb4">
-                <Link to="/faq" className="grey-main link dim">
+                <Link to="/FAQPage" className="grey-main link dim">
                   FAQ
                 </Link>
               </div>

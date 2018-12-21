@@ -11,7 +11,7 @@ import AboutPage from '../components/AboutPage';
 import TermsOfUse from '../components/TermsOfUse';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import Contact from '../components/Contact';
-import Quiz from '../components/Quiz';
+import FAQPage from '../components/FAQPage';
 import GetStarted from '../components/GetStarted';
 import BlogPage from '../components/BlogPage';
 
@@ -51,7 +51,7 @@ const AppRouter = () => (
           <PublicRoute exact path="/" component={HomePage} />
           <PublicRoute exact path="/about" component={AboutPage} />
           <PublicRoute path="/contact" component={Contact} />
-          <PublicRoute path="/quiz" component={Quiz} />
+          <PublicRoute path="/FAQPage" component={FAQPage} />
           <PublicRoute path="/get-started" component={GetStarted} />
           <PublicRoute path="/blog" component={BlogPage} />
           

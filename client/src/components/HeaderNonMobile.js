@@ -95,7 +95,7 @@ export class HeaderNonMobile extends Component {
             </Link>
             <div className={`${checkoutHeader && 'no-display'}`}>
               <Link to="/about">About</Link>
-              <Link to="/blog">Blog</Link>
+              <Link to="/FAQPage">FAQ</Link>
             </div>
           </div>
           <div className="col-xs-2 header__section--middle">
