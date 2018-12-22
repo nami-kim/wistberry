@@ -394,12 +394,14 @@ class ProductDetailPage extends Component {
                   </div>
                 </div>
                 <div className="product-detail__form">
-                  <OrangeButton
-                    className="orangeyellow-lg-btn"
-                    onClick={this.handleAddToCartClick}
-                  >
-                    Add To Cart
-                  </OrangeButton>
+                  <Link to="/collection/all-plants">
+                    <OrangeButton
+                      className="orangeyellow-lg-btn"
+                      onClick={this.handleAddToCartClick}
+                    >
+                      Add To Cart
+                    </OrangeButton>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -584,12 +586,14 @@ class ProductDetailPage extends Component {
             <div className="mb4 mid-gray">
               It's time to breathe some life into your space with greenery!
             </div>
-            <OrangeButton style={{ display: 'inline-block', width: 'auto' }}>
-              Shop Now
-            </OrangeButton>
+            <Link to="/collection/all-plants">
+              <OrangeButton style={{ display: 'inline-block', width: 'auto' }}>
+                Shop Now
+              </OrangeButton>
+            </Link>
             <div>
               <img
-                src="http://wistberry.imgix.net/images/illustration/Untitled_Artwork.png"
+                src="https://s3-us-west-2.amazonaws.com/wistberry/images/illustration/wistberry-decoration-inspiration.png"
                 alt=""
               />
             </div>

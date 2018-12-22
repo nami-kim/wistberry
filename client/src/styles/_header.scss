@@ -1,6 +1,6 @@
 // header mobile styles
 .header {
-  height: 6.3rem;
+  height: 7.2rem;
   position: fixed;
   left: 0;
   right: 0;
@@ -62,7 +62,7 @@
 }
 
 .header__logo {
-  min-width: 16rem;
+  min-width: 17rem;
 }
 
 .header__icon {
@@ -92,7 +92,7 @@
 
 .reducedHeaderOnScroll {
   background-color: $color-white;
-  height: 6.2rem;
+  height: 6.8rem;
   box-shadow: $shadow-light;
   transition: all 0.25s ease-in;
 
@@ -139,7 +139,7 @@
       text-decoration: none;
       font-size: 1.4rem;
       font-weight: 400;
-      padding: 1.5rem 2rem;
+      padding: 2rem;
       text-transform: uppercase;
       letter-spacing: 0.12rem;
       text-align: left;
@@ -181,7 +181,7 @@
   }
 
   .reducedHeaderOnScroll {
-    height: 6.6rem;
+    height: 6.8rem;
     .header__logo {
       min-width: 17rem;
     }
@@ -189,7 +189,7 @@
 }
 @media only screen and (min-width: $md-viewport) {
   .header {
-    height: 9rem;
+    height: 9.6rem;
     font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 0.1rem;
@@ -234,19 +234,19 @@
   }
 
   .header__logo {
-    min-width: 22rem;
+    min-width: 24rem;
   }
 
   .reducedHeaderOnScroll {
-    height: 7rem;
+    height: 8rem;
     .header__logo {
-      min-width: 20rem;
+      min-width: 22rem;
     }
   }
 }
 @media only screen and (min-width: $lg-viewport) {
   .header {
-    height: 11.2rem;
+    height: 11.4rem;
     font-size: 1.26rem;
     font-weight: 400;
     letter-spacing: 0.14rem;
@@ -281,7 +281,7 @@
   }
 
   .reducedHeaderOnScroll {
-    height: 8rem;
+    height: 8.6rem;
     .header__logo {
       min-width: 24rem;
     }

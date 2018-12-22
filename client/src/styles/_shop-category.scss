@@ -1,22 +1,13 @@
 .shop-category {
   background: $color-white;
-  // background: #212121;
-  // background: #fcf9f8;
-  // background: rgb(246, 246, 246);
-  // background: $color-primary-pink;
-  // border: 1px solid $color-grey-dark-4;
-  padding-top: 15rem;
-  position: fixed;
+  position: absolute;
   right: 0;
   left: 0;
 
-  top: 0;
-  z-index: 99;
+  z-index: 201;
   a {
     text-decoration: none;
     color: $color-black;
-    
-    
   }
   &__collection {
     display: flex;
@@ -24,7 +15,6 @@
     align-items: center;
     margin-bottom: 1rem;
     background: white;
-    // border: 1px solid $color-grey-light-4;
     border-radius: 0.5rem;
     box-shadow: $shadow-all-light;
     overflow: hidden;
@@ -32,11 +22,9 @@
   &__title {
     letter-spacing: 0.01rem;
     font-size: 1.4rem;
-    // text-transform: uppercase;
     color: $color-primary-grey;
     font-weight: 400;
     padding: 1.3rem;
-    
   }
   &__icon {
     display: flex;
@@ -58,6 +46,10 @@
  .shop-category {
     padding-left: 7rem;
     padding-right: 7rem;
+    padding-top: 15rem;
+    position: fixed;
+    top: 0;
+    
   }
 }
 @media only screen and (min-width: $lg-viewport) {

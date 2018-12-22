@@ -75,16 +75,15 @@ export class HomePage extends Component {
         <div>
           {/* hero */}
           <div
-            className="container-wide"
-            style={{ marginTop: '10rem', height: 'calc(100vh - 10rem)' }}
+            className="container-wide vh-100-ns mt5"
           >
             <div className="row middle-md" style={{ height: '100%' }}>
-              <div className="col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-                <div className="pb5 ph4">
+              <div className="col-xs-12 col-sm-6 col-lg-5 col-lg-offset-1">
+                <div className="pb5-ns ph4">
                   <div className="f-headline lh-solid fw5 relative">
-                    <div>Brighten your life with plants.</div>
+                    <div className="pv0-l pt6">Brighten your life with plants.</div>
                     <div
-                      className="absolute"
+                      className="dn db-ns absolute"
                       style={{
                         zIndex: '-1',
                         bottom: '-450px',
@@ -99,7 +98,7 @@ export class HomePage extends Component {
                       />
                     </div>
                     <div
-                      className="absolute"
+                      className="dn db-ns absolute"
                       style={{
                         zIndex: '-1',
                         bottom: '-350px',
@@ -121,7 +120,7 @@ export class HomePage extends Component {
                 </div>
               </div>
               <div
-                className="col-xs-12 col-md-6 col-lg-5 tc"
+                className="col-xs-12 col-sm-6 col-lg-5 tc"
                 style={{
                   marginLeft: 'auto',
                   marginRight: 'auto',

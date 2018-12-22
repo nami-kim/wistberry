@@ -21,9 +21,9 @@ class CollectionPage extends Component {
       'all-plants':
         'http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg',
       'pet-safe-plants':
-        'http://wistberry.imgix.net/images/products/hero/orangewall.jpg',
+        'http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg',
       'most-popular-plants':
-        'http://wistberry.imgix.net/images/products/hero/orangewall.jpg',
+        'http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg',
       'easy-care-plants':
         'http://wistberry.imgix.net/images/products/hero/plantonpink2.jpg'
     };
@@ -36,7 +36,7 @@ class CollectionPage extends Component {
       'most-popular-plants':
         'Our most popular, top-selling plants of the season',
       'easy-care-plants':
-        'These laidback plants can handle neglect and thrive in small spaces'
+        'These laid-back plants can handle neglect and thrive in small spaces'
     };
     return (
       <div>

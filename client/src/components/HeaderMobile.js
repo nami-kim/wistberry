@@ -107,9 +107,7 @@ export class HeaderMobile extends Component {
 
     return (
       <div className="show-header-mobile container">
-        {this.state.shopCategoryOpen && (
-          <ShopCategory toggleShopCategory={this.toggleShopCategory} />
-        )}
+        
         <div
           className={`row header ${classProductHeader} ${classReducedHeader}`}
         >
@@ -176,6 +174,9 @@ export class HeaderMobile extends Component {
                         }}
                       />
                     </span>
+                    {this.state.shopCategoryOpen && (
+                      <ShopCategory toggleShopCategory={this.toggleShopCategory} />
+                    )}
                   </Link>
                 </div>
                 <Link to="/about">About</Link>
@@ -185,6 +186,38 @@ export class HeaderMobile extends Component {
                 {!isAuthenticated && <Link to="/login">Log in</Link>}
                 {isAuthenticated && <Link to="/me/account">Account</Link>}
                 <Link to="/contact">Contact</Link>
+                <div className="f-headline lh-solid fw5 relative">
+                  <div
+                    className="absolute"
+                    style={{
+                      zIndex: '-1',
+                      bottom: '-300px',
+                      left: '100px',
+                      transform: 'rotate(45deg)',
+                      opacity: '0.4'
+                    }}
+                  >
+                    <img
+                      src="https://s3-us-west-2.amazonaws.com/wistberry/images/test/leaf-1.png"
+                      style={{ width: '60%' }}
+                    />
+                  </div>
+                  <div
+                    className="absolute"
+                    style={{
+                      zIndex: '-1',
+                      bottom: '-250px',
+                      left: '0px',
+                      transform: 'rotate(-20deg)',
+                      opacity: '0.4'
+                    }}
+                  >
+                    <img
+                      src="https://s3-us-west-2.amazonaws.com/wistberry/images/test/leaf-2.png"
+                      style={{ width: '60%' }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
