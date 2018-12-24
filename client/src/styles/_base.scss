@@ -70,4 +70,11 @@ button {
   font-weight: 300;
 }
 
+input[type=text],
+input[type=email],
+input[type=password],
+textarea {
+    -webkit-appearance: none;
+}
+
 

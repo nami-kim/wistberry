@@ -56,10 +56,9 @@ const Footer = () => {
   return (
     <footer className="grey-main pv3 f4">
       {/* top */}
-      <div>
-        <div className="row">
+        <div className="flex-column items-center">
           {/* email subscription */}
-          <div className="col-xs-12 bg-near-black white tc ttu pv5">
+          <div className="bg-near-black white tc ttu pv5">
             <p className="pv2 f3 fw4 tracked">Join Wistberry.com Community</p>
             <p className="pv1 f4 fw2">
               Be the first to hear about new products, <br />
@@ -76,7 +75,6 @@ const Footer = () => {
               <FooterButton>Submit</FooterButton>
             </form>
           </div>
-        </div>
         <div className="container-narrow">
           <div className="row pt6 pb5">
             {/* collections */}
