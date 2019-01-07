@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const fs = require('fs');
 
 const path = require('path');
 const products = require('./routes/api/products');
@@ -24,7 +25,11 @@ mongoose.set('useCreateIndex', true);
 mongoose
   .connect(
     db,
-    { useNewUrlParser: true }
+    {
+      ssl: true,
+      sslValidate: true,
+      useNewUrlParser: true
+    }
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
